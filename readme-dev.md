@@ -1,0 +1,77 @@
+## Development Setup
+
+Assumptions:
+ - You are a Python developer
+ - You have at least basic Odoo development knowledge
+
+Pre-requisites:
+
+Assuming you are using Ubuntu 18.04 for development (or similar)
+
+ - Python `setuptools` - (`sudo apt-get install python3-setuptools`)
+ - Python `wheel` - (`pip3 install wheel`)
+ 
+
+ 1. Get Odoo 13 one of 2 ways (choose just one, unless you know what you are doing):
+    - Clone the Odoo **13** source code to a directory of your choice. You can use the following script to do this.
+    Be sure to read the [source code](https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)
+    if you have security concerns. Just run the this command from a directory where you want to download the source code
+    (be sure to choose Odoo **13** when prompted):    
+    `source <(curl -s https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)`
+    - Install Odoo 13 using the .deb installer file - just run `install-odoo-debian.sh`
+ 
+ 2. Setup your Python 3.6 virtual environment by running the following in the root directory of the project:  
+    `python3 -m venv ./venv`
+ 
+ 3. Activate the Python 3 virtual environment:  
+    `source ./venv/bin/activate`
+ 
+ 4. Install the Odoo requirements into the virtual environment:
+    `pip3 install -r <path-where-you-cloned-odoo-13>/requirements.txt`
+    
+ 5. Copy `debug-odoo.conf.dist` to `debug-odoo.conf` and update it so that `data_dir` and `addons_path`
+    are correct paths for your file system.
+  
+ 6. Run `./docker/start-postgres.sh` and `./docker/start-traefik.sh`. Then start debugging Odoo in your IDE.
+    
+ 7. Finally, from the `./ui/` folder, run `quasar dev` to start Quasar in development mode. Now (using Chrome),
+    http://ui.13.localhost gets you into the custom UI app and http://server.13.localhost will get you into Odoo 13.
+    Direct access to Odoo 13 via http://localhost:8069 will also work for that. *Note:* If the external Odoo modules
+    are not installed, then its custom UI obviously will not work, so make sure to install them first.
+    
+**Note:** if you install Odoo from the installer AND THEN you try to run it from source, you will probably get an error
+indicating that port 8069 is already in use. This is because the installer starts Odoo running as a service so the
+port will already be occupied.
+
+---
+
+### Debugging with a JetBrains IDE
+
+After setting up your environment, you should be able to just run the `odoo-bin` run/debug configuration that is already
+[provided with this project](./.idea/runConfigurations/odoo_bin.xml), AFTER you correct the "Script path" and "Parameters"
+"Working directory" and "Python Interpreter" so that they are correct for your environment. Note, the Python Interpreter
+MUST point to the Python binary in the project's Python virtual environment.
+
+---
+
+**Recommended Tools**
+
+- IDE: [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Pycharm](https://www.jetbrains.com/pycharm/)
+- Python Shell: [IPython](https://ipython.readthedocs.io/en/stable/install/index.html)
+
+The IPython shell is especially useful with [odoo-rpc-client](https://github.com/katyukha/odoo-rpc-client)
+for testing your class methods that are accessible over Odoo's built-in JSON-RPC API.
+
+The `requirements.txt` file already includes `odoo-rpc-client`. Assuming you are using the default login with
+the demo database, within an IPython shell, type the following:
+
+    from odoo_rpc_client import Client
+    odoo = Client(host='127.0.0.1', dbname='demo', user='admin', pwd='admin', protocol='json-rpc')
+
+Now you can start using the Odoo JSON-RPC API, for example:
+
+    odoo['res.partner'].browse(1).email
+
+... which results in:
+    
+    Out[6]: 'info@yourcompany.example.com'

@@ -1,0 +1,43 @@
+api:
+  insecure: true
+  dashboard: true
+
+providers:
+  file:
+    directory: "/etc/traefik/"
+    watch: true
+
+log:
+  level: INFO
+
+entryPoints:
+  web:
+    address: ":80"
+  traefik:
+    address: ":8080"
+
+http:
+  routers:
+    odoo:
+      rule: "Host(`server.odoo.localhost`)"
+      service: "odoo"
+    odoochat:
+      rule: "Host(`server.odoo.localhost`) && PathPrefix(`/longpolling`)"
+      service: odoochat
+    quasar:
+      rule: "Host(`ui.odoo.localhost`)"
+      service: quasar
+
+  services:
+    odoo:
+      loadBalancer:
+        servers:
+          - url: "http://odoo13:8069"
+    odoochat:
+      loadBalancer:
+        servers:
+          - url: "http://odoo13:8072"
+    quasar:
+      loadBalancer:
+        servers:
+          - url: "http://quasar:8081"

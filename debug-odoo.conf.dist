@@ -1,0 +1,16 @@
+[options]
+data_dir = ~/git/<what-ever-path>/odoo-dev-ez/docker/var-lib-odoo
+addons_path = ~/git/<what-ever-path>/odoo-dev-ez/addons,~/git/odoo/13/addons
+admin_passwd = odoo
+
+workers = 1
+max_cron_threads = 0
+list_db = True
+db_name = demo
+db_host = localhost
+db_user = odoo
+db_password = odoo
+
+# high limits are for development only
+cpu_time_limit = 10000000
+limit_time_real = 10000000
