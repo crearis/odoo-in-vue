@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
-
+mkdir -p ./addons  # for 1st run
 
 rm_tmp_unzip () {
   rm -rf ./tmp_unzip > /dev/null 2>&1
@@ -23,6 +23,7 @@ get_repo_code () {
 }
 
 cp_repo_dir () {
+
   rm -rf ./addons/$2
   mv ./tmp_unzip/$1 ./addons/$2
 }
