@@ -1,0 +1,11 @@
+.idea
+!.idea/runConfigurations/odoo_bin.xml
+ui/node_modules
+venv/*
+13
+tmp_unzip
+addons/*
+docker/pg-data/*
+docker/var-lib-odoo/*
+odoo.deb
+debug-odoo.conf
