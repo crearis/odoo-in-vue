@@ -2,18 +2,25 @@ import axios from 'axios'
 
 export default {
   host: '',
-  dbName: '',
-  Client (host, dbName) {
+  Client (host) {
     this.host = host
-    this.dbName = dbName
     return this
   },
-  call (methodStr, modelStr, fieldsArr = [], domainArr = [], argsArr = [], contextObj = {}) {
+
+  rpc (path, params) {
     return axios.post(
-      this.host,
+      this.host + path,
+      { jsonrpc: '2.0', params: params },
+      {
+        headers: { 'content-type': 'application/json' }
+      })
+  },
+
+  call (path, methodStr, modelStr, fieldsArr = [], domainArr = [], argsArr = [], contextObj = {}) {
+    return axios.post(
+      this.host + path,
       {
         jsonrpc: '2.0',
-        method: 'call',
         params: {
           methodStr,
           model: modelStr,
@@ -29,5 +36,9 @@ export default {
         withCredentials: true
       }
     )
+  },
+
+  login (path, db, login, password) {
+    return this.rpc(path, { db: db, login: login, password: password })
   }
 }

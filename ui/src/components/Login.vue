@@ -91,7 +91,18 @@ export default {
   },
   methods: {
     onSubmit () {
-      Server.doLogin(this.database, this.login, this.password)
+      this.authenticating = true
+      Server.getSessionId(this.database, this.login, this.password)
+        .then(r => {
+          if (r) {
+            console.log('logged in and session_id captured')
+          }
+        })
+        .catch(e => {
+          console.log('login', e)
+          this.authenticationError = 'Login failed.'
+        })
+      this.authenticating = false
     },
     onReset () {
       this.login = ''

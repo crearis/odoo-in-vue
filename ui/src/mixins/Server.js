@@ -16,56 +16,43 @@ import OdooRpc from './OdooRpc'
 const HostnameParts = location.hostname.split('.')
 const ServerHost = 'server.' + HostnameParts[1] + '.' + HostnameParts[2]
 const ServerUrlBase = 'http://' + ServerHost
-const ServerUrlSpaSupport = ServerUrlBase + '/spa-support'
-
-// OdooRpc.init(ServerUrlBase)
+const ServerPathSpaSupport = '/spa-support'
+const ServerUrlSpaSupport = ServerUrlBase + ServerPathSpaSupport
+const Odoo = OdooRpc.Client(ServerUrlBase)
 
 /** EXPORT SECTION: */
 
 export default {
-  constants: {
-    ServerHost: ServerHost,
-    ServerUrlBase: ServerUrlBase,
-    ServerUrlSpaSupport: ServerUrlSpaSupport
-  },
-  urls: {
-    utility (path) {
-      return ServerUrlSpaSupport + '/utility' + path
-    }
-  },
-
+  /*
+  Return the health of the server.
+  Requires the spa_support Odoo module installed
+   */
   getHealth () {
-    axios.get(this.urls.utility('/health'))
+    axios.get(ServerUrlSpaSupport + '/utility/health')
       .then(r => {
         console.log('server health ok')
       }).catch(e => {
         console.log('server health:', e)
       })
   },
-
-  doLogin (db, login, password) {
-    const data = { jsonrpc: '2.0', method: 'call', params: { db: db, login: login, password: password } }
-    axios.post(
-      this.constants.ServerUrlSpaSupport + '/web/session/authenticate',
-      data,
-      {
-        headers: { 'content-type': 'application/json' }
-      })
+  /*
+  Authenticates against the Odoo server. If OK, stores the session_id in a cookie and profile in Vuex.
+  Requires the spa_support Odoo module installed
+   */
+  getSessionId (db, login, password) {
+    return Odoo.login(ServerPathSpaSupport + '/web/session/authenticate', db, login, password)
       .then(r => {
-        if (r.data.result) {
+        if (r.status === 200) {
           if (r.data.result.ok) {
-            store.commit('setSessionId', {
-              id: r.data.result.session_id,
-              domain: HostnameParts[1] + '.' + HostnameParts[2]
-            })
+            Cookies.set('session_id', r.data.result.session_id)
             store.commit('setSessionProfile', r.data.result.profile)
             return true
           }
-        } else {
-          return false
         }
+      }).catch(e => {
+        console.log(e)
+        return false
       })
-      .catch(e => { return false })
   },
 
   hasSession () {
