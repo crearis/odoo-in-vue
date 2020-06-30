@@ -15,7 +15,7 @@ Assuming you are using Ubuntu 18.04 for development (or similar)
  1. Get Odoo 13 one of 2 ways (choose just one, unless you know what you are doing):
     - Clone the Odoo **13** source code to a directory of your choice. You can use the following script to do this.
     Be sure to read the [source code](https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)
-    if you have security concerns. Just run the this command from a directory where you want to download the source code
+    if you have security concerns. Just run the this command in a directory where you want to download the source code
     (be sure to choose Odoo **13** when prompted):    
     `source <(curl -s https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)`
     - Install Odoo 13 using the .deb installer file - just run `install-odoo-debian.sh`
