@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     doAuthOK () {
-      console.log('authorized!')
+      window.location.href = '/vue/#/main'
     }
   }
 }

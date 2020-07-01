@@ -2,38 +2,31 @@ import axios from 'axios'
 
 export default {
   host: '',
-  Client (host) {
-    this.host = host
+  Client () {
     return this
   },
 
   rpc (path, params) {
+    console.log('rpc:', location.hostname + path)
     return axios.post(
-      this.host + path,
+      path,
       { jsonrpc: '2.0', params: params },
       {
-        headers: { 'content-type': 'application/json' }
+        headers: { 'content-type': 'application/json' },
+        withCredentials: true
       })
   },
 
-  call (path, methodStr, modelStr, fieldsArr = [], domainArr = [], argsArr = [], contextObj = {}) {
-    return axios.post(
-      this.host + path,
+  search_read (modelStr, fieldsArr = [], domainArr = [], sort = '', limit = 80, contextObj = {}) {
+    return this.rpc(
+      '/web/dataset/search_read',
       {
-        jsonrpc: '2.0',
-        params: {
-          methodStr,
-          model: modelStr,
-          args: argsArr,
-          kwargs: {
-            domain: domainArr,
-            fields: fieldsArr,
-            context: contextObj
-          }
-        }
-      },
-      {
-        withCredentials: true
+        model: modelStr,
+        fields: fieldsArr,
+        domain: domainArr,
+        sort: sort,
+        limit: limit,
+        context: contextObj
       }
     )
   },

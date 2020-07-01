@@ -65,7 +65,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
     'no-multiple-empty-lines': 0,
-    'skipBlankLines': true,
+    'skipBlankLines': 0,
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'

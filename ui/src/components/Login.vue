@@ -2,7 +2,7 @@
   <div class="q-pa-sm row items-start q-gutter-sm">
     <q-dialog v-model="confirm" persistent>
       <q-card style="width: 400px">
-        <q-card-section v-if="!authenticating">
+        <q-card-section v-if="authenticating">
           <div>
             <q-form
               @submit.prevent="onSubmit"
@@ -82,7 +82,7 @@ export default {
       database: 'demo',
       isPwd: true,
       confirm: true,
-      authenticating: false,
+      authenticating: true,
       authenticationError: ''
     }
   },
@@ -91,18 +91,16 @@ export default {
   },
   methods: {
     onSubmit () {
-      this.authenticating = true
       Server.getSessionId(this.database, this.login, this.password)
         .then(r => {
           if (r) {
             console.log('logged in and session_id captured')
+            this.authenticating = false
+            this.$emit('authOK')
+          } else {
+            this.authenticationError = 'Login failed.'
           }
         })
-        .catch(e => {
-          console.log('login', e)
-          this.authenticationError = 'Login failed.'
-        })
-      this.authenticating = false
     },
     onReset () {
       this.login = ''

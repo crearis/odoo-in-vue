@@ -19,13 +19,13 @@ entryPoints:
 http:
   routers:
     odoo:
-      rule: "Host(`server.odoo.localhost`)"
+      rule: "Host(`odoo.localhost`)"
       service: "odoo"
     odoochat:
-      rule: "Host(`server.odoo.localhost`) && PathPrefix(`/longpolling`)"
+      rule: "Host(`odoo.localhost`) && PathPrefix(`/longpolling`)"
       service: odoochat
     quasar:
-      rule: "Host(`ui.odoo.localhost`)"
+      rule: "Host(`odoo.localhost`) && PathPrefix(`/vue`)"
       service: quasar
 
   services:

@@ -13,12 +13,7 @@ import { store } from '../store'
 import { Cookies } from 'quasar'
 import OdooRpc from './OdooRpc'
 
-const HostnameParts = location.hostname.split('.')
-const ServerHost = 'server.' + HostnameParts[1] + '.' + HostnameParts[2]
-const ServerUrlBase = 'http://' + ServerHost
-const ServerPathSpaSupport = '/spa-support'
-const ServerUrlSpaSupport = ServerUrlBase + ServerPathSpaSupport
-const Odoo = OdooRpc.Client(ServerUrlBase)
+const Odoo = OdooRpc.Client()
 
 /** EXPORT SECTION: */
 
@@ -28,7 +23,7 @@ export default {
   Requires the spa_support Odoo module installed
    */
   getHealth () {
-    axios.get(ServerUrlSpaSupport + '/utility/health')
+    axios.get('/spa-support/utility/health')
       .then(r => {
         console.log('server health ok')
       }).catch(e => {
@@ -40,17 +35,15 @@ export default {
   Requires the spa_support Odoo module installed
    */
   getSessionId (db, login, password) {
-    return Odoo.login(ServerPathSpaSupport + '/web/session/authenticate', db, login, password)
+    return Odoo.login('/spa-support/web/session/authenticate', db, login, password)
       .then(r => {
-        if (r.status === 200) {
-          if (r.data.result.ok) {
-            Cookies.set('session_id', r.data.result.session_id)
-            store.commit('setSessionProfile', r.data.result.profile)
-            return true
-          }
+        if (r.data.result.ok) {
+          Cookies.set('session_id', r.data.result.session_id)
+          store.commit('setSessionProfile', r.data.result.profile)
+          return true
         }
+        return false
       }).catch(e => {
-        console.log(e)
         return false
       })
   },
@@ -60,6 +53,13 @@ export default {
   },
 
   getProjects () {
-    OdooRpc.call('search_read', 'project.project')
+    OdooRpc.search_read(
+      'project.project',
+      ['id', 'name']
+    ).then(r => {
+      console.log(r)
+    }).catch(e => {
+      console.log(e)
+    })
   }
 }
