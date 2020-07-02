@@ -52,6 +52,11 @@ After setting up your environment, you should be able to just run the `odoo-bin`
 "Working directory" and "Python Interpreter" so that they are correct for your environment. Note, the Python Interpreter
 MUST point to the Python binary in the project's Python virtual environment.
 
+If you get the following error when debugging: `greenlet.error: cannot switch to a different thread` and the long-polling
+port is not working, then look at this: https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994  
+Its a simple fix.
+
+
 ---
 
 **Recommended Tools**

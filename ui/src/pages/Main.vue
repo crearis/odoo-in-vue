@@ -1,18 +1,16 @@
 <template>
-  <q-page class="flex flex-center">
-    <List v-mo/>
-  </q-page>
+  <QTable v-bind:data="projects" v-bind:title="Projects"/>
 </template>
 
 <script>
 
-import List from 'components/List.vue'
+import QTable from 'components/sub/QTable.vue'
 import Server from '../mixins/Server'
 
 export default {
   name: 'PageMain',
   components: {
-    List
+    QTable
   },
   data () {
     return {
@@ -30,7 +28,7 @@ export default {
       'name'
     ).then(r => {
       if (r.data.result.length) {
-        this.projects = r.data.result
+        this.projects = r.data.result.records
       }
     })
   }
