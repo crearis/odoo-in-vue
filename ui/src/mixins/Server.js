@@ -122,5 +122,46 @@ export default {
       console.log('fields2QTableColConfig', e)
       return false
     })
+  },
+  /*
+  "Search-Read with Column Config"
+  Return data from Odoo with column config for QTable.
+  Does an Odoo search_read then does Server.fields2QTableColConfig.
+  Returns object:
+  {
+    data: {},   // the data from the DB
+    cc: []      // the column config for QTable
+  }
+  "ccUseStoreBool" means "Column Config [loading] Uses [Vuex] Store? (true/false)"
+   */
+  search_read_with_CC (modelStr, fieldsArr = [], domainArr = [], sort = '', limit = 80, contextObj = {}, ccUseStoreBool = true) {
+    const result = { data: {}, cc: [] }
+    return this.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
+      .then(r => {
+        if (r) {
+          // if we can get the column config ..
+          result.cc = r
+
+          // then we can get the data
+          return Odoo.search_read(
+            modelStr,
+            fieldsArr,
+            domainArr,
+            sort,
+            limit,
+            contextObj
+          ).then(r => {
+            if (r.data.error) {
+              console.log(r.data.error)
+              return false
+            } else {
+              result.data = r.data.result.records
+            }
+            return result
+          })
+        } else {
+          return false
+        }
+      })
   }
 }

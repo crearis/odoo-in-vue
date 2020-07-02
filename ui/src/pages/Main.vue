@@ -23,24 +23,13 @@ export default {
   },
   mounted () {
     Server.redirectIfNotAuthenticated()
-
-    const projectFields = ['id', 'name', 'active', 'date_start']
-    Server.fields2QTableColConfig('project.project', projectFields)
-      .then(r => {
-        if (r) {
-          console.log('called Server.fields2QTableColConfig', r)
-          this.projectsColumns = r
-        }
-      })
-    Server.Odoo.search_read(
+    Server.search_read_with_CC(
       'project.project',
-      projectFields,
-      [],
-      'name'
+      ['id', 'name', 'date_start', 'active']
     ).then(r => {
-      if (r.data.result.length) {
-        this.projects = r.data.result.records
-        console.log(r.data.result)
+      if (r.data.length) {
+        this.projects = r.data
+        this.projectsColumns = r.cc
       }
     })
   }
