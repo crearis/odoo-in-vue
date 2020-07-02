@@ -12,7 +12,7 @@ export default {
   Ref: https://github.com/odoo/odoo/blob/13.0/odoo/http.py#L536
    */
   rpc (path, params) {
-    console.log('rpc:', path)
+    // console.log('rpc:', path)
     return axios.post(
       path,
       { jsonrpc: '2.0', params: params, method: 'call' },

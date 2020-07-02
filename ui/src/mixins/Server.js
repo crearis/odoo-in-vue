@@ -23,7 +23,7 @@ export default {
   getHealth () {
     return axios.get('/spa-support/utility/health')
       .then(r => {
-        console.log('server health ok')
+        // console.log('server health ok')
       }).catch(e => {
         console.log('server health:', e)
       })
@@ -37,7 +37,7 @@ export default {
       .then(r => {
         console.log(r)
         if (r.data.result.db === db) {
-          console.log('auth OK')
+          // console.log('auth OK')
           store.commit('setSessionProfile', r.data.result)
           return true
         }
@@ -52,7 +52,6 @@ export default {
   hasAuthenticatedSession () {
     return Odoo.search_count('res.partner')
       .then(r => {
-        console.log('hasAuthenticatedSession', r)
         if (r.status === 200) {
           if (r.data.result) {
             return true
@@ -65,7 +64,9 @@ export default {
         return false
       })
   },
-
+  /*
+  Call to check if user is authenticated. Redirects to login is user is not.
+   */
   redirectIfNotAuthenticated () {
     this.hasAuthenticatedSession()
       .then(r => {
@@ -76,5 +77,50 @@ export default {
         }
         console.log('session_id OK; wont redirect')
       })
+  },
+  /*
+  "Fields to QTable Column Config"
+  Gets models field info from Odoo and converts it to a basic QTable column config
+   */
+  fields2QTableColConfig (model, fieldsArr, useStore = true) {
+    if (useStore) {
+      // return it from Vuex if its there
+      if (store.state.qtable.columnConfig[model]) {
+        return store.state.qtable.columnConfig[model]
+      }
+    }
+    // else get it, store it, return it
+    return Odoo.search_read(
+      'ir.model.fields',
+      ['name', 'field_description'],
+      [['model', '=', model], ['name', 'in', fieldsArr]],
+      '',
+      200
+    ).then(r => {
+      if (r.data.result.records.length) {
+        const result = []
+        fieldsArr.forEach(function (fieldName) {
+          r.data.result.records.forEach(function (fieldInfo) {
+            if (fieldInfo.name === fieldName) {
+              result.push({
+                name: fieldName,
+                field: fieldName,
+                label: fieldInfo.field_description,
+                align: 'left'
+              })
+            }
+          })
+        })
+        if (useStore) {
+          // save the column config in Vuex
+          store.commit('setColumnConfig', { name: model, data: result })
+        }
+        return result
+      }
+      return false
+    }).catch(e => {
+      console.log('fields2QTableColConfig', e)
+      return false
+    })
   }
 }

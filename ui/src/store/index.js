@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import session from './session.js'
+import qtable from './qtable.js'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ let store = null
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      session
+      session,
+      qtable
     },
 
     // enable strict mode (adds overhead!)
