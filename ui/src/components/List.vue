@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import Server from '../mixins/Server'
 import Error from './ErrorForModals.vue'
 import WorkingSpinner from './WorkingSpinner'
 
@@ -32,15 +31,10 @@ export default {
   data () {
     return {
       working: false,
-      errorStr: ''
+      errorStr: '',
+      records: {},
+      length: 0
     }
-  },
-  mounted () {
-    Server.getProjects().then(r => {
-      console.log(r)
-    })
-  },
-  methods: {
   }
 }
 </script>

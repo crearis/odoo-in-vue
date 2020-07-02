@@ -20,9 +20,8 @@ export default {
     }
   },
   mounted () {
-    if (!Server.hasSession()) {
-      console.log('not logged in')
-    }
+    Server.hasAuthenticatedSession()
+      .then(r => { if (r) { this.doAuthOK() } })
   },
   methods: {
     doAuthOK () {

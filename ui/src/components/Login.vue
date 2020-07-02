@@ -87,14 +87,13 @@ export default {
     }
   },
   mounted () {
-    Server.getHealth()
+    // Server.getHealth()
   },
   methods: {
     onSubmit () {
       Server.getSessionId(this.database, this.login, this.password)
         .then(r => {
           if (r) {
-            console.log('logged in and session_id captured')
             this.authenticating = false
             this.$emit('authOK')
           } else {
