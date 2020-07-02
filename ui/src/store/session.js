@@ -1,13 +1,11 @@
 const state = {
-  session: {
-    profile: {}
-  }
+  profile: {}
 }
 
 
 const mutations = {
   setSessionProfile: (state, data) => {
-    state.session.profile = data
+    state.profile = data
   }
 }
 
