@@ -72,7 +72,7 @@ export default {
       .then(r => {
         if (!r) {
           // Cookies.remove('session_id')
-          window.location.href = '/vue/#/'
+          window.location.href = '/#/'
           return
         }
         console.log('session_id OK; wont redirect')
@@ -92,7 +92,7 @@ export default {
     // else get it, store it, return it
     return Odoo.search_read(
       'ir.model.fields',
-      ['name', 'field_description'],
+      ['name', 'field_description', 'ttype', 'relation', 'relation_field', 'help'],
       [['model', '=', model], ['name', 'in', fieldsArr]],
       '',
       200
@@ -105,6 +105,10 @@ export default {
               result.push({
                 name: fieldName,
                 field: fieldName,
+                type: fieldInfo.ttype,
+                relation: fieldInfo.relation,
+                relationField: fieldInfo.relation_field,
+                help: fieldInfo.help,
                 label: fieldInfo.field_description,
                 align: 'left'
               })

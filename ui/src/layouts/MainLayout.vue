@@ -30,7 +30,7 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          Links
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -61,46 +61,34 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'Docs',
-          caption: 'quasar.dev',
+          title: 'Dashboard',
+          caption: 'Dashboard',
+          icon: 'dashboard',
+          link: '/vue/#/main'
+        },
+        {
+          title: 'Contacts',
+          caption: 'All Contacts',
+          icon: 'people',
+          link: '/vue/#/contacts'
+        },
+        {
+          title: 'Projects',
+          caption: 'All Projects',
+          icon: 'grading',
+          link: '/vue/#/projects'
+        },
+        {
+          title: 'Wiki',
+          caption: 'Online Wiki',
           icon: 'school',
-          link: 'https://quasar.dev'
+          link: 'https://gitlab.com/sylnsr/odoo-dev-ez/-/wikis/home'
         },
         {
-          title: 'Github',
-          caption: 'github.com/quasarframework',
+          title: 'GitLab',
+          caption: 'Project source on GitLab',
           icon: 'code',
-          link: 'https://github.com/quasarframework'
-        },
-        {
-          title: 'Discord Chat Channel',
-          caption: 'chat.quasar.dev',
-          icon: 'chat',
-          link: 'https://chat.quasar.dev'
-        },
-        {
-          title: 'Forum',
-          caption: 'forum.quasar.dev',
-          icon: 'record_voice_over',
-          link: 'https://forum.quasar.dev'
-        },
-        {
-          title: 'Twitter',
-          caption: '@quasarframework',
-          icon: 'rss_feed',
-          link: 'https://twitter.quasar.dev'
-        },
-        {
-          title: 'Facebook',
-          caption: '@QuasarFramework',
-          icon: 'public',
-          link: 'https://facebook.quasar.dev'
-        },
-        {
-          title: 'Quasar Awesome',
-          caption: 'Community Quasar projects',
-          icon: 'favorite',
-          link: 'https://awesome.quasar.dev'
+          link: 'https://gitlab.com/sylnsr/odoo-dev-ez'
         }
       ]
     }

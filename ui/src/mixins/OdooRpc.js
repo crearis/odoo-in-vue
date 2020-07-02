@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export default {
-  host: '',
   Client () {
     return this
   },

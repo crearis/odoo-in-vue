@@ -34,10 +34,9 @@ Assuming you are using Ubuntu 18.04 for development (or similar)
   
  6. Run `./docker/start-postgres.sh` and `./docker/start-traefik.sh`. Then start debugging Odoo in your IDE.
     
- 7. Finally, from the `./ui/` folder, run `quasar dev` to start Quasar in development mode. Now (using Chrome),
-    http://ui.13.localhost gets you into the custom UI app and http://server.13.localhost will get you into Odoo 13.
-    Direct access to Odoo 13 via http://localhost:8069 will also work for that. *Note:* If the external Odoo modules
-    are not installed, then its custom UI obviously will not work, so make sure to install them first.
+ 7. Finally, from the `./ui/` folder, run `quasar dev` to start Quasar in development mode. Now going to,
+    http://localhost/vue gets you into the custom UI app and http://localhost/web will get you into Odoo 13.
+    Direct access to Odoo 13 via http://localhost:8069 will also work for that.
     
 **Note:** if you install Odoo from the installer AND THEN you try to run it from source, you will probably get an error
 indicating that port 8069 is already in use. This is because the installer starts Odoo running as a service so the

@@ -5,13 +5,9 @@ If this is your first time running the script enter `y`. The stack requires thos
 You will also be prompted if you want to reset `docker` folder data and if you want to preserve your
 demo data, choose `n`.
 
-Once the stack is running, using Chrome browser go to `http://server.odoo.localhost` and login to the
-demo database with `admin` for both the username and password.
+Once the stack is running, you can access the Odoo UI from http://localhost and the VueJS UI from
+http://localhost/vue
 
-**If** you are using any browser other than Chrome, you will need to add an entry in your hosts
-file to point host `server.odoo.localhost` to `127.0.0.1`. As of the time of writing this documentation,
-Chrome is the only browser that will always automatically
-[treat .localhost as the loopback address.](https://codereview.chromium.org/938093003)
 
 Once logged in, go to the main menu and click `Apps` and install the `fm_base` module. This will
 install the base module for this project and load all its dependencies. **Because there are a lot
