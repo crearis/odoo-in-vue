@@ -62,7 +62,7 @@ export default {
       essentialLinks: [
         {
           title: 'Dashboard',
-          caption: 'Dashboard',
+          caption: 'Your Dashboard',
           icon: 'dashboard',
           link: '/vue/#/main'
         },
@@ -80,7 +80,7 @@ export default {
         },
         {
           title: 'Calendar',
-          caption: 'Calendar',
+          caption: 'Company Calendar',
           icon: 'event',
           link: '/vue/#/calendar'
         },
