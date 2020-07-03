@@ -8,6 +8,7 @@
 import axios from 'axios'
 import { store } from '../store'
 import OdooRpc from './OdooRpc'
+import Utilities from './Utilities'
 
 const Odoo = OdooRpc.Client()
 
@@ -99,69 +100,20 @@ export default {
   },
 
   /*
-  "Fields to QTable Column Config"
-  Gets models field info from Odoo and converts it to a basic QTable column config
-   */
-  fields2QTableColConfig (model, fieldsArr, useStore = true) {
-    if (useStore) {
-      // return it from Vuex if its there
-      if (store.state.qtable.columnConfig[model]) {
-        return store.state.qtable.columnConfig[model]
-      }
-    }
-    // else get it, store it, return it
-    return Odoo.search_read(
-      'ir.model.fields',
-      [['model', '=', model], ['name', 'in', fieldsArr]],
-      ['name', 'field_description', 'ttype', 'relation', 'relation_field', 'help'],
-      '',
-      200
-    ).then(r => {
-      if (r.data.result.records.length) {
-        const result = []
-        fieldsArr.forEach(function (fieldName) {
-          r.data.result.records.forEach(function (fieldInfo) {
-            if (fieldInfo.name === fieldName) {
-              result.push({
-                name: fieldName,
-                field: fieldName,
-                type: fieldInfo.ttype,
-                relation: fieldInfo.relation,
-                relationField: fieldInfo.relation_field,
-                help: fieldInfo.help,
-                label: fieldInfo.field_description,
-                align: 'left'
-              })
-            }
-          })
-        })
-        if (useStore) {
-          // save the column config in Vuex
-          store.commit('setColumnConfig', { name: model, data: result })
-        }
-        return result
-      }
-      return false
-    }).catch(e => {
-      console.log('fields2QTableColConfig', e)
-      return false
-    })
-  },
+  "Search-Read (with Column Config)"
+  Gets field info from Odoo for a model and converts it to QTable column config data,
+  then does Odoo.search_read for Odoo data.
 
-  /*
-  "Search-Read with Column Config"
-  Return data from Odoo with column config for QTable.
-  Does an Odoo search_read then does Server.fields2QTableColConfig.
-  Returns object:
+  Returns Object:
   {
     data: {},   // the data from the DB
     cc: []      // the column config for QTable
   }
-  "ccUseStoreBool" means "Column Config [loading] Uses [Vuex] Store? (true/false)"
+  "ccUseStoreBool" means "Column Config [loading] Uses [Vuex] Store? (TRUE/false)"
    */
-  search_read_with_CC (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80, contextObj = {}, ccUseStoreBool = true) {
+  search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80, contextObj = {}, ccUseStoreBool = true) {
     const result = { data: {}, cc: [] }
-    return this.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
+    return Utilities.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
       .then(r => {
         if (r) {
           // if we can get the column config ..

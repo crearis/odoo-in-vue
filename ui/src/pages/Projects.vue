@@ -1,6 +1,6 @@
 <template>
   <Table v-if="projects.length"
-         title="My Projects"
+         title="Projects"
          v-bind:data="projects"
          v-bind:columns="projectsColumns"
   />
@@ -27,9 +27,10 @@ export default {
   mounted () {
     Server.redirectIfNotAuthenticated()
       .then(r => {
+        console.log('uid', store.state.session.profile.uid)
         Server.search_read(
           'project.project',
-          [['user_id', '=', store.state.session.profile.uid]],
+          [], // 'user', '=', store.state.session.profile.uid
           ['id', 'name', 'partner_id', 'date_start', 'active']
         ).then(r => {
           if (r.data.length) {

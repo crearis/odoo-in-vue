@@ -30,7 +30,7 @@
           header
           class="text-grey-8"
         >
-          Links
+          Nav Menu
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -82,13 +82,15 @@ export default {
           title: 'Wiki',
           caption: 'Online Wiki',
           icon: 'school',
-          link: 'https://gitlab.com/sylnsr/odoo-dev-ez/-/wikis/home'
+          link: 'https://gitlab.com/sylnsr/odoo-dev-ez/-/wikis/home',
+          target: '_blank'
         },
         {
           title: 'GitLab',
           caption: 'Project source on GitLab',
           icon: 'code',
-          link: 'https://gitlab.com/sylnsr/odoo-dev-ez'
+          link: 'https://gitlab.com/sylnsr/odoo-dev-ez',
+          target: '_blank'
         }
       ]
     }
