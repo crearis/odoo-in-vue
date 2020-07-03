@@ -90,13 +90,6 @@ export default {
           icon: 'school',
           link: 'https://gitlab.com/sylnsr/odoo-dev-ez/-/wikis/home',
           target: '_blank'
-        },
-        {
-          title: 'GitLab',
-          caption: 'Project source on GitLab',
-          icon: 'code',
-          link: 'https://gitlab.com/sylnsr/odoo-dev-ez',
-          target: '_blank'
         }
       ]
     }
