@@ -75,8 +75,14 @@ export default {
         {
           title: 'Projects',
           caption: 'All Projects',
-          icon: 'grading',
+          icon: 'build',
           link: '/vue/#/projects'
+        },
+        {
+          title: 'Calendar',
+          caption: 'Calendar',
+          icon: 'event',
+          link: '/vue/#/calendar'
         },
         {
           title: 'Wiki',

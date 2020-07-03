@@ -1,8 +1,8 @@
 <template>
-  <Table v-if="projects.length"
-         title="Projects"
-         v-bind:data="projects"
-         v-bind:columns="projectsColumns"
+  <Table v-if="data.length"
+         title="Calendar"
+         v-bind:data="data"
+         v-bind:columns="dataColumns"
   />
 </template>
 
@@ -11,28 +11,28 @@ import Server from '../mixins/Server'
 import Table from 'components/q/Table.vue'
 
 export default {
-  name: 'PageProjects',
+  name: 'PageCalendar',
   components: {
     Table
   },
   data () {
     return {
       errorMessage: '',
-      projects: {},
-      projectsColumns: []
+      data: {},
+      dataColumns: []
     }
   },
   mounted () {
     Server.redirectIfNotAuthenticated()
       .then(r => {
         Server.search_read(
-          'project.project',
+          'calendar.event',
           [], // 'user', '=', store.state.session.profile.uid
-          ['id', 'name', 'partner_id', 'date_start', 'active']
+          ['name', 'start', 'stop', 'partner_ids', 'location', 'duration']
         ).then(r => {
           if (r.data.length) {
-            this.projects = r.data
-            this.projectsColumns = r.cc
+            this.data = r.data
+            this.dataColumns = r.cc
           }
         })
       })
