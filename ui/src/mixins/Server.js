@@ -17,6 +17,17 @@ export default {
   Odoo: Odoo,
 
   /*
+  Log a message or an error
+   */
+  log (value, error = null) {
+    const level = error === null ? '[info] ' : '[error] '
+    console.log(level, value)
+    if (error !== null) {
+      console.log(error)
+    }
+  },
+
+  /*
   Return the health of the server.
   Requires the spa_support Odoo module installed
    */
@@ -28,6 +39,7 @@ export default {
         console.log('server health:', e)
       })
   },
+
   /*
   Authenticates against the Odoo server. If OK, stores the session_id in a cookie and profile in Vuex.
   Requires the spa_support Odoo module installed
@@ -35,9 +47,7 @@ export default {
   getSessionId (db, login, password) {
     return Odoo.authenticate(db, login, password)
       .then(r => {
-        console.log(r)
         if (r.data.result.db === db) {
-          // console.log('auth OK')
           store.commit('setSessionProfile', r.data.result)
           return true
         }
@@ -46,15 +56,24 @@ export default {
         return false
       })
   },
+
   /*
-  Returns a promise for an Odoo RPC query if the user has a session, else false
+  Returns a promise for an Odoo RPC query if the user has a session, else false.
+  Also, it will refresh the users profile data from the server.
    */
   hasAuthenticatedSession () {
     return Odoo.search_count('res.partner')
       .then(r => {
         if (r.status === 200) {
           if (r.data.result) {
-            return true
+            // make sure that we have fresh profile data in the store
+            return Odoo.rpc('/web/session/get_session_info')
+              .then(r => {
+                store.commit('setSessionProfile', r.data.result)
+                return true
+              }).catch(e => {
+                this.log('hasAuthenticatedSession', e)
+              })
           }
         }
         return false
@@ -64,20 +83,21 @@ export default {
         return false
       })
   },
+
   /*
   Call to check if user is authenticated. Redirects to login is user is not.
    */
   redirectIfNotAuthenticated () {
-    this.hasAuthenticatedSession()
+    return this.hasAuthenticatedSession()
       .then(r => {
         if (!r) {
-          // Cookies.remove('session_id')
-          window.location.href = '/#/'
+          window.location.href = '/vue/#/'
           return
         }
         console.log('session_id OK; wont redirect')
       })
   },
+
   /*
   "Fields to QTable Column Config"
   Gets models field info from Odoo and converts it to a basic QTable column config
@@ -92,8 +112,8 @@ export default {
     // else get it, store it, return it
     return Odoo.search_read(
       'ir.model.fields',
-      ['name', 'field_description', 'ttype', 'relation', 'relation_field', 'help'],
       [['model', '=', model], ['name', 'in', fieldsArr]],
+      ['name', 'field_description', 'ttype', 'relation', 'relation_field', 'help'],
       '',
       200
     ).then(r => {
@@ -127,6 +147,7 @@ export default {
       return false
     })
   },
+
   /*
   "Search-Read with Column Config"
   Return data from Odoo with column config for QTable.
@@ -138,7 +159,7 @@ export default {
   }
   "ccUseStoreBool" means "Column Config [loading] Uses [Vuex] Store? (true/false)"
    */
-  search_read_with_CC (modelStr, fieldsArr = [], domainArr = [], sort = '', limit = 80, contextObj = {}, ccUseStoreBool = true) {
+  search_read_with_CC (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80, contextObj = {}, ccUseStoreBool = true) {
     const result = { data: {}, cc: [] }
     return this.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
       .then(r => {
@@ -149,8 +170,8 @@ export default {
           // then we can get the data
           return Odoo.search_read(
             modelStr,
-            fieldsArr,
             domainArr,
+            fieldsArr,
             sort,
             limit,
             contextObj

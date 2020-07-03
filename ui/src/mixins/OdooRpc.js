@@ -10,7 +10,7 @@ export default {
   Note, we don't use `method` in `data` because Odoo just ignores it
   Ref: https://github.com/odoo/odoo/blob/13.0/odoo/http.py#L536
    */
-  rpc (path, params) {
+  rpc (path, params = {}) {
     // console.log('rpc:', path)
     return axios.post(
       path,
@@ -45,7 +45,7 @@ export default {
   /*
   Ref: https://www.odoo.com/documentation/13.0/webservices/odoo.html#search-and-read
    */
-  search_read (modelStr, fieldsArr = [], domainArr = [], sort = '', limit = 80, contextObj = {}) {
+  search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80, contextObj = {}) {
     return this.rpc(
       '/web/dataset/search_read',
       {
