@@ -67,6 +67,12 @@ export default {
           link: '/vue/#/main'
         },
         {
+          title: 'Calendar',
+          caption: 'Company Calendar',
+          icon: 'event',
+          link: '/vue/#/calendar'
+        },
+        {
           title: 'Contacts',
           caption: 'All Contacts',
           icon: 'people',
@@ -77,12 +83,6 @@ export default {
           caption: 'All Projects',
           icon: 'build',
           link: '/vue/#/projects'
-        },
-        {
-          title: 'Calendar',
-          caption: 'Company Calendar',
-          icon: 'event',
-          link: '/vue/#/calendar'
         },
         {
           title: 'Wiki',
