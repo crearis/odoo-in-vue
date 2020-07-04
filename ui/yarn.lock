@@ -1036,6 +1036,21 @@
   resolved "https://registry.yarnpkg.com/@quasar/fastclick/-/fastclick-1.1.4.tgz#21ed3e9a4387dcb43022a08af4ef08a5f1abf159"
   integrity sha512-i9wbyV4iT+v4KhtHJynUFhH5LiEPvAEgSnwMqPN4hf/8uRe82nDl5qP5agrp2el1h0HzyBpbvHaW7NB0BPrtvA==
 
+"@quasar/quasar-app-extension-qcalendar@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qcalendar/-/quasar-app-extension-qcalendar-2.1.2.tgz#440e2039a74bc43cb27769ce8aa56af51d24f61f"
+  integrity sha512-YKItJVlnREuiXbvuVohjBlyH7+ABptcwjTIkG1ze5yx1RmXJtUb0oiCgxHiJsLQ4YKyaZcZm2OFhV2CZi2+OKQ==
+  dependencies:
+    "@quasar/quasar-ui-qcalendar" "^2.1.2"
+
+"@quasar/quasar-ui-qcalendar@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-ui-qcalendar/-/quasar-ui-qcalendar-2.1.2.tgz#deb0b7fc0c0a13f794ee89d0bc57e0b850e87001"
+  integrity sha512-i/NQDS1NPxcsnusURpCdxH07sl6ISZhnGc2qqwkRqOzG0BlDeY4TpKJ18Ayc2HNzCNWPkeh/FeEefvXcz1YNDw==
+  dependencies:
+    q-colorize-mixin "^1.0.6"
+    q-theme-mixin "^1.0.1"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -7336,6 +7351,16 @@ punycode@^2.1.0, punycode@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+q-colorize-mixin@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/q-colorize-mixin/-/q-colorize-mixin-1.0.6.tgz#7430062989a5d5d5e0ade4380942a41b2250f8f9"
+  integrity sha512-P7EtExeYuLX+imWGHU36nzUKjZPgzHkAjqXdtsOmbDtxys53mHydwcKB7hzkmnjZtfHSa0vg61Mu2u7kJCmX8Q==
+
+q-theme-mixin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/q-theme-mixin/-/q-theme-mixin-1.0.1.tgz#472434a724e2e308567dc928ac9f69944a4ec2f6"
+  integrity sha512-rfvSy3p6QY8lgiuGEG+hMu64ovoL+8zcsPIAebL2zOqDGjuetyNIDvr6t8/AxjRMAQj8FaoOp58Z83IkDeUsjg==
 
 q@^1.1.2:
   version "1.5.1"

@@ -1,10 +1,10 @@
 <template>
-  <q-table v-if="data.length"
-           :title="title"
-           :data="data"
-           :columns="columns"
-           :row-key="rowKey"
-           form
+  <q-table
+    v-if="data.length"
+    :title="title"
+    :data="data"
+    :columns="columns"
+    :row-key="rowKey"
   />
 </template>
 
