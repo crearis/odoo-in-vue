@@ -28,7 +28,6 @@ export default {
       required: false
     },
     miniMode: {
-      type: String,
       default: 'auto',
       required: false
     }

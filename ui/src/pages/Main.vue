@@ -67,17 +67,15 @@ export default {
         })
         // my events
         Server.search_read(
-          'project.project',
+          'calendar.event',
           [
             ['user_id', '=', store.state.session.profile.uid],
             ['active', '=', true]
           ],
-          ['id', 'name', 'date_start'],
-          'date_start, name'
+          ['id', 'name', 'start', 'stop']
         ).then(r => {
           if (r.data.length) {
-            this.projects = r.data
-            this.projectsColumns = r.cc
+            this.events = r.data
           }
         })
       })
