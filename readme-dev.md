@@ -63,15 +63,17 @@ Its a simple fix.
 - IDE: [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Pycharm](https://www.jetbrains.com/pycharm/)
 - Python Shell: [IPython](https://ipython.readthedocs.io/en/stable/install/index.html)
 
-The IPython shell is especially useful with [odoo-rpc-client](https://github.com/katyukha/odoo-rpc-client)
+The [IPython](https://ipython.org/) shell is especially useful with [odoo-rpc-client](https://github.com/katyukha/odoo-rpc-client)
 for testing your class methods that are accessible over Odoo's built-in JSON-RPC API.
 
-The `requirements.txt` file already includes `odoo-rpc-client`. Assuming you are using the default login with
-the demo database, within an IPython shell, type the following:
+The `requirements.txt` file already includes `odoo-rpc-client`. So assuming you:
+ 1. are using the default login with the demo database
+ 2. have the virtual environment (venv) activated
+ 
+... just type the following in your CLI:
 
-    from odoo_rpc_client import Client
-    odoo = Client(host='127.0.0.1', dbname='demo', user='admin', pwd='admin', protocol='json-rpc')
-
+    ipython -i connect.py
+    
 Now you can start using the Odoo JSON-RPC API, for example:
 
     odoo['res.partner'].browse(1).email
