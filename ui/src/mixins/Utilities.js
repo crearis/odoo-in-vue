@@ -117,7 +117,7 @@ export default {
     data.forEach(item => {
       retVal.push({
         title: item.name,
-        date: item.start,
+        date: item.start.split(' ')[0],
         details: item.description ? item.description : ''
       })
     })

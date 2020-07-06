@@ -147,8 +147,8 @@ export default {
    */
   getCalendarEventsData (start, end, userId = 0) {
     const domain = [
-      ['start_date', '>=', Utilities.Date.getYMDString(start)],
-      ['stop_date', '<=', Utilities.Date.getYMDString(end)]
+      ['start', '>=', Utilities.Date.getYMDString(start) + ' 00:00:00.000000'],
+      ['stop', '<=', Utilities.Date.getYMDString(end) + ' 23:59:59.999999']
     ]
     // add user_id filter if needed
     if (userId !== 0) {
