@@ -140,5 +140,29 @@ export default {
           return false
         }
       })
+  },
+
+  /*
+  Returns a standard format of data from calendar.events model to be used with QCalendar component
+   */
+  getCalendarEventsData (start, end, userId = 0) {
+    const domain = [
+      ['start_date', '>=', Utilities.Date.getYMDString(start)],
+      ['stop_date', '<=', Utilities.Date.getYMDString(end)]
+    ]
+    // add user_id filter if needed
+    if (userId !== 0) {
+      domain.push(['user_id', '=', userId])
+    }
+    return this.search_read(
+      'calendar.event',
+      domain,
+      ['name', 'start', 'description', 'state', 'stop']
+    ).then(r => {
+      if (r.data.length) {
+        return Utilities.calendarEvents2QCalendar(r.data)
+      }
+      return []
+    })
   }
 }

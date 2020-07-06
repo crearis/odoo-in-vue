@@ -1,6 +1,7 @@
 import { store } from 'src/store'
 import Odoo from './OdooRpc.js'
 
+
 export default {
   /*
   Creates a short and simple hash of a string
@@ -17,6 +18,34 @@ export default {
       hash = hash & hash // Convert to 32bit integer
     }
     return hash
+  },
+
+  /*
+  Date functions
+   */
+  Date: {
+    currentMonthFirstDay () {
+      const date = new Date()
+      return new Date(date.getFullYear(), date.getMonth(), 1)
+    },
+    currentMonthLastDay () {
+      const date = new Date()
+      return new Date(date.getFullYear(), date.getMonth() + 1, 0)
+    },
+    currentWeekFirstDay () {
+      const date = new Date()
+      return new Date(date.getFullYear(), date.getMonth(), 1)
+    },
+    currentWeekLastDay () {
+      const date = new Date()
+      return new Date(date.getFullYear(), date.getMonth() + 1, 0)
+    },
+    getYMDString (date) {
+      const y = date.getFullYear()
+      const m = date.getMonth() + 1
+      const d = date.getDate()
+      return `${y}-${m}-${d}`
+    }
   },
 
   /*
@@ -78,5 +107,21 @@ export default {
       console.log('fields2QTableColConfig', e)
       return false
     })
+  },
+
+  /*
+  Convert Odoo data from calendar.events model to data for q/Calendar.vue component
+   */
+  calendarEvents2QCalendar (data) {
+    const retVal = []
+    data.forEach(item => {
+      retVal.push({
+        title: item.name,
+        date: item.start,
+        details: item.description ? item.description : ''
+      })
+    })
+    console.log(retVal)
+    return retVal
   }
 }

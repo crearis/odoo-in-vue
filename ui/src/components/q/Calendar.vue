@@ -16,9 +16,6 @@ export default {
     QCalendar
   },
   props: {
-    data: {
-      type: Array
-    },
     viewMode: {
       type: String,
       default: 'week'
