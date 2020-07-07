@@ -55,5 +55,4 @@ rm_tmp_unzip
 
 get_repo_code "https://github.com/odoo-ce-modules/13" "master"
 cp_repo_dir 13-master/tagged_notes tagged_notes
-cp_repo_dir 13-master/spa_support spa_support
 rm_tmp_unzip

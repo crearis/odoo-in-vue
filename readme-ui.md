@@ -15,13 +15,6 @@ The VueJS interface is build using Quasar and Quasar CLI is required.
  - Axios for async queries
  - Project uses JSON-RPC to communicate with the Odoo backend
  - Server interfacing is managed as a mixin
- - Design goals
-   - Manage as much as possible from within a matter (reduced clicks)
-   - Be as intuitive as possible - minimal training should be necessary
- - SPA UI priority over Odoo parity (UI features in the SPA might not exist in the Odoo UI)
-   - Eliminated maintaining UI features in two places
-   - Focuses UI development priority on the SPA and deliverable of MVP
-   - Keep Odoo usage focused on model design and server side functionality
 
 ---
 
