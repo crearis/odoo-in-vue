@@ -4,7 +4,9 @@
     :view="viewMode"
     locale="en-us"
     :mini-mode="miniMode"
+    :weekdays="[1, 2, 3, 4, 5, 6, 0]"
   >
+    <!-- MONTH view template -->
     <template #day="{ date }">
       <template v-for="(event, index) in getEventsByDate(date)">
         <q-badge
@@ -17,6 +19,21 @@
         </q-badge>
       </template>
     </template>
+
+    <!-- WEEK view template -->
+    <template #day-body="{ date, timeStartPos, timeDurationHeight }">
+      <template v-for="(event, index) in getEventsByDate(date)">
+        <q-badge
+          :key="index"
+          class="q-calendar-day-event justify-center"
+          :class="weekViewBadgeClasses(event, 'body')"
+          :style="weekViewBadgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
+        >
+          <span class="ellipsis" :data="event.time + '/' + event.duration">{{ event.title }}</span>
+        </q-badge>
+      </template>
+    </template>
+
   </q-calendar>
 </template>
 
@@ -53,9 +70,56 @@ export default {
         this.events.forEach(event => { if (event.date === matchDate) { returns.push(event) } })
       }
       return returns
+    },
+    weekViewBadgeClasses (event, type) {
+      const cssColor = event.bgcolor
+      const isHeader = type === 'header'
+      return {
+        [`text-white bg-${event.bgcolor}`]: !cssColor,
+        'full-width': !isHeader && (!event.side || event.side === 'full'),
+        'left-side': !isHeader && event.side === 'left',
+        'right-side': !isHeader && event.side === 'right'
+      }
+    },
+    weekViewBadgeStyles (event, type, timeStartPos, timeDurationHeight) {
+      const s = {}
+      if (timeStartPos) {
+        s.top = Math.round(timeStartPos(event.time)) + 'px'
+      }
+      if (timeDurationHeight) {
+        s.height = Math.round(timeDurationHeight(event.duration)) + 'px'
+      }
+      s['align-items'] = 'flex-start'
+      return s
     }
   }
 }
 </script>
 
-<style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
+<style src="@quasar/quasar-ui-qcalendar/dist/index.css" />
+<style>
+.calendar-container {
+  position: relative
+}
+
+.q-calendar-day-event {
+  width: 100%;
+  position: absolute;
+  font-size: 12px;
+}
+
+.full-width {
+  left: 0;
+  width: 100%
+}
+
+.left-side {
+  left: 0;
+  width: 49.75%
+}
+
+.right-side {
+  left: 50.25%;
+  width: 49.75%
+}
+</style>

@@ -110,18 +110,20 @@ export default {
   },
 
   /*
-  Convert Odoo data from calendar.events model to data for q/Calendar.vue component
+  Convert Odoo data from calendar.events model to data for QCalendar (Quasar) component
    */
   calendarEvents2QCalendar (data) {
     const retVal = []
     data.forEach(item => {
       retVal.push({
         title: item.name,
+        details: item.description ? item.description : '',
         date: item.start.split(' ')[0],
-        details: item.description ? item.description : ''
+        // this data is used for week and day view
+        time: item.start.split(' ')[1].substr(0, 5),
+        duration: item.duration * 60
       })
     })
-    console.log(retVal)
     return retVal
   }
 }

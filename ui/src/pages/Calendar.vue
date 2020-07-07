@@ -12,7 +12,7 @@
         <q-btn stretch flat @click="changeViewMode('list')">List</q-btn>
       </q-btn-group>
       <q-space />
-      <q-btn-group v-if="!viewMode">
+      <q-btn-group v-if="viewMode !== 'list'">
         <q-btn flat icon="arrow_left" />
         <q-separator vertical />
         <q-btn flat>Today</q-btn>
@@ -46,7 +46,7 @@ import Server from '../mixins/Server'
 import Utilities from '../mixins/Utilities'
 import Table from 'components/q/Table.vue'
 import Calendar from 'components/q/Calendar.vue'
-import { store } from '../store'
+// import { store } from '../store'
 
 
 export default {
@@ -98,7 +98,6 @@ export default {
       Server.getCalendarEventsData(
         this.calendarDataStart,
         this.calendarDataEnd
-        // store.state.session.profile.uid
       ).then(r => {
         this.calendarData = r
       })
@@ -108,8 +107,9 @@ export default {
         .then(r => {
           Server.search_read(
             'calendar.event',
-            [['user_id', '=', store.state.session.profile.uid]],
-            ['name', 'start', 'stop', 'location', 'duration']
+            [],
+            ['name', 'display_start', 'user_id', 'location', 'duration'],
+            'start'
           ).then(r => {
             if (r.data.length) {
               this.listData = r.data

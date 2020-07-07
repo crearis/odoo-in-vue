@@ -157,7 +157,7 @@ export default {
     return this.search_read(
       'calendar.event',
       domain,
-      ['name', 'start', 'description', 'state', 'stop']
+      ['name', 'start', 'description', 'state', 'stop', 'duration', 'show_as', 'active', 'privacy', 'allday']
     ).then(r => {
       if (r.data.length) {
         return Utilities.calendarEvents2QCalendar(r.data)
