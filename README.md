@@ -1,6 +1,6 @@
-# Odoo Dev EZ
+# Odoo In Vue
 
-Odoo Dev EZ is a repo that assists with developing typical business apps with Odoo 13. It already includes some free
+Odoo In Vue is a repo that assists with developing typical business apps with Odoo. It already includes some free
 add-ons modules from the Odoo community.
 
 It also includes a very simple VueJS app that connects to the Odoo server through its RPC API. The VueJS app uses the
