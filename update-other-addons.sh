@@ -48,7 +48,7 @@ cp_repo_sub_dir project_task_add_very_high $SD
 rm_tmp_unzip
 
 
-get_repo_code "https://github.com/odoogap/project_tools" "13.0"
+get_repo_code "https://github.com/sylnsr/project_tools" "13.0"
 cp_repo_dir project_tools-13.0/project_ledger project_ledger
 rm_tmp_unzip
 
