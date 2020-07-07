@@ -3,10 +3,9 @@
 Assumptions:
  - You are a Python developer
  - You have at least basic Odoo development knowledge
+ - You are using Ubuntu 18.04 for development (or similar)
 
 Pre-requisites:
-
-Assuming you are using Ubuntu 18.04 for development (or similar)
 
  - Python `setuptools` - (`sudo apt-get install python3-setuptools`)
  - Python `wheel` - (`pip3 install wheel`)
