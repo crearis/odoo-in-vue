@@ -20,13 +20,13 @@
       </template>
     </template>
 
-    <!-- WEEK view template -->
+    <!-- WEEK / DAY view template -->
     <template #day-body="{ date, timeStartPos, timeDurationHeight }">
       <template v-for="(event, index) in getEventsByDate(date)">
         <q-badge
           :key="index"
-          class="q-calendar-day-event justify-center"
-          :class="weekViewBadgeClasses(event, 'body')"
+          class="justify-center"
+          :class="weekViewBadgeClasses(event, 'body') + ' ' + `q-calendar-day-event-${viewMode}-mode`"
           :style="weekViewBadgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
         >
           <span class="ellipsis" :data="event.time + '/' + event.duration">{{ event.title }}</span>
@@ -102,8 +102,14 @@ export default {
   position: relative
 }
 
-.q-calendar-day-event {
-  width: 100%;
+.q-calendar-day-event-week-mode {
+  width: 50%;
+  position: absolute;
+  font-size: 12px;
+}
+
+.q-calendar-day-event-day-mode {
+  width: 20%;
   position: absolute;
   font-size: 12px;
 }
