@@ -25,8 +25,8 @@
       <template v-for="(event, index) in getEventsByDate(date)">
         <q-badge
           :key="index"
-          class="justify-center"
-          :class="weekViewBadgeClasses(event, 'body') + ' ' + `q-calendar-day-event-${viewMode}-mode`"
+          class="justify-center text-black"
+          :class="weekViewBadgeClasses(event, 'body')"
           :style="weekViewBadgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
         >
           <span class="ellipsis" :data="event.time + '/' + event.duration">{{ event.title }}</span>
@@ -72,13 +72,13 @@ export default {
       return returns
     },
     weekViewBadgeClasses (event, type) {
-      const cssColor = event.bgcolor
       const isHeader = type === 'header'
       return {
-        [`text-white bg-${event.bgcolor}`]: !cssColor,
-        'full-width': !isHeader && (!event.side || event.side === 'full'),
         'left-side': !isHeader && event.side === 'left',
-        'right-side': !isHeader && event.side === 'right'
+        'right-side': !isHeader && event.side === 'right',
+        // 'full-width': !isHeader && (!event.side || event.side === 'full'),
+        [`q-calendar-day-event-${this.viewMode}-mode`]: !isHeader,
+        'q-calendar-day': !isHeader
       }
     },
     weekViewBadgeStyles (event, type, timeStartPos, timeDurationHeight) {
@@ -98,8 +98,13 @@ export default {
 
 <style src="@quasar/quasar-ui-qcalendar/dist/index.css" />
 <style>
-.calendar-container {
-  position: relative
+/*.calendar-container {*/
+/*  position: relative*/
+/*}*/
+
+.q-calendar-day {
+  opacity: 0.7;
+  border: thin solid #1D1D1D;
 }
 
 .q-calendar-day-event-week-mode {
