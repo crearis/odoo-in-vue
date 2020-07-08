@@ -4,7 +4,7 @@
         <div class="row text-center">
           <div class="q-pa-sm q-pr-sm q-gutter-md"
                style="min-width: 400px; max-width: 500px; overflow: hidden;">
-            <div>My Projects</div>
+            <div class="my-title">My Projects</div>
             <Table
               v-if="projects.length"
               v-bind:data="projects"
@@ -13,7 +13,7 @@
           </div>
           <div class="q-pa-sm q-gutter-md"
                style="min-width: 400px; max-width: 500px; overflow: hidden;">
-            <div>My Events</div>
+            <div class="my-title">My Events</div>
             <Calendar
               viewMode="month"
               v-bind:events="calendarData"
@@ -23,6 +23,17 @@
               <template></template>
             </Calendar>
           </div>
+        </div>
+      </q-card-section>
+
+      <q-card-section>
+        <div>
+            <div class="q-mb-sm my-title">My Tasks</div>
+            <Table
+              v-if="tasks.length"
+              v-bind:data="tasks"
+              v-bind:columns="tasksColumns"
+              ></Table>
         </div>
       </q-card-section>
     </q-card>
@@ -49,7 +60,9 @@ export default {
       projectsColumns: [],
       calendarData: [],
       calendarDataStart: false,
-      calendarDataEnd: false
+      calendarDataEnd: false,
+      tasks: [],
+      tasksColumns: []
     }
   },
   mounted () {
@@ -57,6 +70,7 @@ export default {
       .then(r => {
         this.setProjectData()
         this.setCalendarData()
+        this.setTaskData()
       })
   },
   methods: {
@@ -86,7 +100,34 @@ export default {
       ).then(r => {
         this.calendarData = r
       })
+    },
+    setTaskData () {
+      Server.search_read(
+        'project.task',
+        [
+          ['user_id', '=', store.state.session.profile.uid],
+          ['stage_id', '=', 5]
+        ],
+        [
+          'name',
+          'project_id',
+          'date_deadline',
+          'stage_id'
+        ],
+        'date_deadline'
+      ).then(r => {
+        if (r.data.length) {
+          this.tasks = r.data
+          this.tasksColumns = r.cc
+        }
+      })
     }
   }
 }
 </script>
+<style>
+.my-title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+</style>
