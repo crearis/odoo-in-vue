@@ -25,7 +25,7 @@
       <template v-for="(event, index) in getEventsByDate(date)">
         <q-badge
           :key="index"
-          class="justify-center text-black"
+          class="text-black"
           :class="weekViewBadgeClasses(event, 'body')"
           :style="weekViewBadgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
         >
@@ -106,6 +106,15 @@ export default {
   opacity: 0.7;
   border: thin solid #1D1D1D;
 }
+
+.q-calendar-day:hover {
+  opacity: 1;
+  border: none;
+  color: white!important;
+  z-index: 9999999!important;
+}
+.q-calendar-day-event-week-mode:hover { width: 100%; }
+.q-calendar-day-event-day-mode:hover { width: 50%; }
 
 .q-calendar-day-event-week-mode {
   width: 50%;
