@@ -9,3 +9,4 @@ docker/pg-data/*
 docker/var-lib-odoo/*
 odoo.deb
 debug-odoo.conf
+__pycache__
