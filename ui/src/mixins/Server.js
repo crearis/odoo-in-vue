@@ -161,7 +161,6 @@ export default {
       ['name', 'start', 'description', 'state', 'stop', 'duration', 'show_as', 'active', 'privacy', 'allday']
     ).then(r => {
       try {
-        console.log(r)
         if (r.data.length) {
           return Utilities.calendarEvents2QCalendar(r.data)
         }
