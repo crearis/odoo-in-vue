@@ -43,9 +43,9 @@
 
 <script>
 import Server from '../mixins/Server'
-import Utilities from '../mixins/Utilities'
 import Table from 'components/q/Table.vue'
 import Calendar from 'components/q/Calendar.vue'
+import { date } from 'quasar'
 // import { store } from '../store'
 
 
@@ -81,18 +81,22 @@ export default {
       }
     },
     setCalendarData (mode) {
+      const d = this.calendarSelectedDate
+      let sow = d // start of week
       switch (mode) {
         case 'month':
-          this.calendarDataStart = Utilities.Date.currentMonthFirstDay()
-          this.calendarDataEnd = Utilities.Date.currentMonthLastDay()
+          this.calendarDataStart = date.startOfDate(d, 'month')
+          this.calendarDataEnd = date.endOfDate(d, 'month')
           break
         case 'day':
-          this.calendarDataStart = Utilities.Date.currentMonthFirstDay()
-          this.calendarDataEnd = Utilities.Date.currentMonthLastDay()
+          this.calendarDataStart = d
+          this.calendarDataEnd = d
           break
         case 'week':
-          this.calendarDataStart = Utilities.Date.currentMonthFirstDay()
-          this.calendarDataEnd = Utilities.Date.currentMonthLastDay()
+          sow = date.subtractFromDate(d, { days: date.getDayOfWeek(d) - 1 })
+          sow = new Date(sow.getFullYear(), sow.getMonth(), sow.getDate())
+          this.calendarDataStart = sow
+          this.calendarDataEnd = date.addToDate(sow, { days: 6 })
           break
       }
       Server.getCalendarEventsData(
