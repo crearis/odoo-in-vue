@@ -116,29 +116,30 @@ export default {
     return Utilities.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
       .then(r => {
         if (r) {
-          // if we can get the column config ..
+          // if we can get the column config:
           result.cc = r
-
-          // then we can get the data
-          return Odoo.search_read(
-            modelStr,
-            domainArr,
-            fieldsArr,
-            sort,
-            limit,
-            contextObj
-          ).then(r => {
-            if (r.data.error) {
-              console.log(r.data.error)
-              return false
-            } else {
-              result.data = r.data.result.records
-            }
-            return result
-          })
         } else {
-          return false
+          // if cant get the column config:
+          result.cc = false
+          this.log('failed to get column config for ', modelStr)
         }
+        // get the data
+        return Odoo.search_read(
+          modelStr,
+          domainArr,
+          fieldsArr,
+          sort,
+          limit,
+          contextObj
+        ).then(r => {
+          if (r.data.error) {
+            console.log(r.data.error)
+            return []
+          } else {
+            result.data = r.data.result.records
+          }
+          return result
+        })
       })
   },
 
@@ -159,8 +160,13 @@ export default {
       domain,
       ['name', 'start', 'description', 'state', 'stop', 'duration', 'show_as', 'active', 'privacy', 'allday']
     ).then(r => {
-      if (r.data.length) {
-        return Utilities.calendarEvents2QCalendar(r.data)
+      try {
+        console.log(r)
+        if (r.data.length) {
+          return Utilities.calendarEvents2QCalendar(r.data)
+        }
+      } catch (e) {
+        console.log(e, r)
       }
       return []
     })
