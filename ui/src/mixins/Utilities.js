@@ -24,22 +24,6 @@ export default {
   Date functions
    */
   Date: {
-    currentMonthFirstDay () {
-      const date = new Date()
-      return new Date(date.getFullYear(), date.getMonth(), 1)
-    },
-    currentMonthLastDay () {
-      const date = new Date()
-      return new Date(date.getFullYear(), date.getMonth() + 1, 0)
-    },
-    currentWeekFirstDay () {
-      const date = new Date()
-      return new Date(date.getFullYear(), date.getMonth(), 1)
-    },
-    currentWeekLastDay () {
-      const date = new Date()
-      return new Date(date.getFullYear(), date.getMonth() + 1, 0)
-    },
     getYMDString (date) {
       const y = date.getFullYear()
       const m = date.getMonth() + 1

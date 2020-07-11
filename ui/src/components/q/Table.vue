@@ -1,11 +1,19 @@
 <template>
-  <q-table
-    v-if="data.length"
-    :title="title"
-    :data="data"
-    :columns="columns"
-    :row-key="rowKey"
-  />
+  <div>
+    <q-table
+      v-if="data.length"
+      :title="title"
+      :data="data"
+      :columns="columns"
+      :row-key="rowKey"
+    />
+    <div v-else class="align-middle align-center q-pb-lg q-mb-lg">
+      <q-btn color="primary">
+        <q-icon left size="2em" name="find_in_page" />
+        <div style="font-size: 0.75em">No data to show</div>
+      </q-btn>
+    </div>
+  </div>
 </template>
 
 <script>

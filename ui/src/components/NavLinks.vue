@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'EssentialLink',
+  name: 'NavLinks',
   props: {
     title: {
       type: String,

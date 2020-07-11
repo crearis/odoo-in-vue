@@ -32,8 +32,8 @@
         >
           Nav Menu
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
+        <NavLinks
+          v-for="link in navLinks"
           :key="link.title"
           v-bind="link"
         />
@@ -47,19 +47,18 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import NavLinks from 'components/NavLinks.vue'
 
 export default {
   name: 'MainLayout',
-
   components: {
-    EssentialLink
+    NavLinks
   },
 
   data () {
     return {
       leftDrawerOpen: false,
-      essentialLinks: [
+      navLinks: [
         {
           title: 'Dashboard',
           caption: 'Your Dashboard',
@@ -83,6 +82,12 @@ export default {
           caption: 'All Projects',
           icon: 'build',
           link: '/vue/#/projects'
+        },
+        {
+          title: 'Projects Tasks',
+          caption: 'All Project Tasks',
+          icon: 'build',
+          link: '/vue/#/tasks'
         },
         {
           title: 'Wiki',

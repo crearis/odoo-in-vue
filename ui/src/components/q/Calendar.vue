@@ -1,5 +1,6 @@
 <template>
   <q-calendar
+    enable-outside-days
     :v-model="selectedDate"
     :view="viewMode"
     locale="en-us"
@@ -39,6 +40,7 @@
 
 <script>
 import { QCalendar } from '@quasar/quasar-ui-qcalendar'
+import { date } from 'quasar'
 
 export default {
   components: {
@@ -92,6 +94,23 @@ export default {
       s['align-items'] = 'flex-start'
       return s
     }
+  },
+  /*
+  Helper function to calculate next/previous ... day, week and month dates.
+  Params: [
+    date: a date object
+    interval: must be one of: 'day', 'week' or 'month'
+    previous: must be false (bool) to return previous period else returns next by default
+  ]
+   */
+  getPrevOrNext (fromDate, interval, next = true) {
+    let options = {}
+    if (interval === 'week') {
+      options = { days: (next ? 7 : -7) }
+    } else {
+      options = { [`${interval}`]: (next ? 1 : -1) }
+    }
+    return date.addToDate(fromDate, options)
   }
 }
 </script>

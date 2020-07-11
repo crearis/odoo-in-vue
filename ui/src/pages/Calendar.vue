@@ -13,15 +13,17 @@
       </q-btn-group>
       <q-space />
       <q-btn-group v-if="viewMode !== 'list'">
-        <q-btn flat icon="arrow_left" />
+        <q-btn flat icon="arrow_left" @click="changeViewSelectedDate('prev')"/>
         <q-separator vertical />
-        <q-btn flat>Today</q-btn>
+        <q-btn flat  @click="changeViewSelectedDate('today')">Today</q-btn>
         <q-separator vertical />
-        <q-btn flat icon="arrow_right" />
+        <q-btn flat icon="arrow_right"  @click="changeViewSelectedDate('next')"/>
       </q-btn-group>
     </q-card-actions>
 
-    <q-separator spaced />
+    <q-card-section>
+      <div v-if="viewMode !== 'list'">{{ getDisplayDate() }}</div>
+    </q-card-section>
 
     <q-card-section>
       <Calendar
@@ -46,7 +48,6 @@ import Server from '../mixins/Server'
 import Table from 'components/q/Table.vue'
 import Calendar from 'components/q/Calendar.vue'
 import { date } from 'quasar'
-// import { store } from '../store'
 
 
 export default {
@@ -80,6 +81,18 @@ export default {
         this.setCalendarData(mode)
       }
     },
+    changeViewSelectedDate (change) {
+      if (change === 'today') {
+        this.calendarSelectedDate = new Date()
+      } else {
+        this.calendarSelectedDate = Calendar.getPrevOrNext(
+          this.calendarSelectedDate,
+          this.viewMode,
+          change === 'next'
+        )
+      }
+      this.setCalendarData(this.viewMode)
+    },
     setCalendarData (mode) {
       const d = this.calendarSelectedDate
       let sow = d // start of week
@@ -99,6 +112,7 @@ export default {
           this.calendarDataEnd = date.addToDate(sow, { days: 6 })
           break
       }
+      Calendar.selectedDate = this.calendarSelectedDate
       Server.getCalendarEventsData(
         this.calendarDataStart,
         this.calendarDataEnd
@@ -121,6 +135,16 @@ export default {
             }
           })
         })
+    },
+    getDisplayDate () {
+      if (this.viewMode === 'list') { return '' }
+      if (this.viewMode === 'day') { return date.formatDate(this.calendarSelectedDate, 'D MMMM YYYY') }
+      if (this.viewMode === 'month') { return date.formatDate(this.calendarSelectedDate, 'MMMM YYYY') }
+      return (
+        date.formatDate(this.calendarDataStart, 'MMMM YYYY') +
+        ', ' +
+        date.formatDate(this.calendarDataStart, 'D') + ' to ' + date.formatDate(this.calendarDataEnd, 'D')
+      )
     }
   }
 }

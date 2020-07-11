@@ -2,15 +2,16 @@
     <q-card>
       <q-card-section>
         <div class="row text-center">
+
           <div class="q-pa-sm q-pr-sm q-gutter-md"
                style="min-width: 400px; max-width: 500px; overflow: hidden;">
             <div class="my-title">My Projects</div>
             <Table
-              v-if="projects.length"
               v-bind:data="projects"
               v-bind:columns="projectsColumns"
             />
           </div>
+
           <div class="q-pa-sm q-gutter-md"
                style="min-width: 400px; max-width: 500px; overflow: hidden;">
             <div class="my-title">My Events</div>
@@ -23,6 +24,7 @@
               <template></template>
             </Calendar>
           </div>
+
         </div>
       </q-card-section>
 
@@ -44,7 +46,7 @@ import Server from '../mixins/Server'
 import Table from 'components/q/Table.vue'
 import Calendar from 'components/q/Calendar.vue'
 import { store } from '../store'
-import Utilities from '../mixins/Utilities'
+import { date } from 'quasar'
 
 
 export default {
@@ -56,7 +58,7 @@ export default {
   data () {
     return {
       errorMessage: '',
-      projects: {},
+      projects: [],
       projectsColumns: [],
       calendarData: [],
       calendarDataStart: false,
@@ -91,8 +93,9 @@ export default {
       })
     },
     setCalendarData () {
-      this.calendarDataStart = Utilities.Date.currentMonthFirstDay()
-      this.calendarDataEnd = Utilities.Date.currentMonthLastDay()
+      const d = new Date()
+      this.calendarDataStart = date.startOfDate(d, 'month')
+      this.calendarDataEnd = date.endOfDate(d, 'month')
       Server.getCalendarEventsData(
         this.calendarDataStart,
         this.calendarDataEnd,
