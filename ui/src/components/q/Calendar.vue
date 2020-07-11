@@ -1,6 +1,7 @@
 <template>
   <q-calendar
     ref="calendar"
+    enable-outside-days
     v-model="selectedDate"
     :view="viewMode"
     locale="en-us"
@@ -8,8 +9,8 @@
     :weekdays="[1, 2, 3, 4, 5, 6, 0]"
   >
     <!-- MONTH view template -->
-    <template #day="{ date }">
-      <template v-for="(event, index) in getEventsByDate(date)">
+    <template #day="{ timestamp }">
+      <template v-for="(event, index) in getEventsByDate(timestamp.date)">
         <q-badge
           :key="index"
           style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
@@ -22,8 +23,8 @@
     </template>
 
     <!-- WEEK / DAY view template -->
-    <template #day-body="{ date, timeStartPos, timeDurationHeight }">
-      <template v-for="(event, index) in getEventsByDate(date)">
+    <template #day-body="{ timestamp, timeStartPos, timeDurationHeight }">
+      <template v-for="(event, index) in getEventsByDate(timestamp.date)">
         <q-badge
           :key="index"
           class="text-black"
@@ -69,7 +70,6 @@ export default {
   },
   methods: {
     getEventsByDate (matchDate) {
-      // console.log('matchDate:', matchDate)
       const returns = []
       if (typeof this.events === 'object') {
         this.events.forEach(event => { if (event.date === matchDate) { returns.push(event) } })
