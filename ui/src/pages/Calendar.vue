@@ -22,7 +22,7 @@
     </q-card-actions>
 
     <q-card-section>
-      <div v-if="viewMode !== 'list'">future</div>
+      <div v-if="viewMode !== 'list'">{{ getDisplayDate() }}</div>
     </q-card-section>
 
     <q-card-section>
@@ -85,8 +85,7 @@ export default {
       this.setCalendarData()
     },
     setCalendarData (mode = this.viewMode) {
-      const parts = this.$refs.calendar.selectedDate.split('-')
-      const d = new Date(parts[0], parts[1] - 1, parts[2])
+      const d = this.$refs.calendar ? this.$refs.calendar.getSelectedDate() : new Date()
       let sow = d // start of week
       switch (mode) {
         case 'month':
@@ -126,6 +125,18 @@ export default {
             }
           })
         })
+    },
+    getDisplayDate () {
+      try {
+        const sd = this.$refs.calendar.getSelectedDate()
+        if (this.viewMode === 'list') { return '' }
+        if (this.viewMode === 'month' || this.viewMode === 'day') { return date.formatDate(sd, 'MMMM YYYY') }
+        return (
+          date.formatDate(this.calendarDataStart, 'MMMM YYYY') +
+          ', ' +
+          date.formatDate(this.calendarDataStart, 'D') + ' to ' + date.formatDate(this.calendarDataEnd, 'D')
+        )
+      } catch {}
     }
   }
 }

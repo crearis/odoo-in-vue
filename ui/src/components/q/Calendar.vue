@@ -104,6 +104,11 @@ export default {
       } else {
         this.$refs.calendar.move(amount)
       }
+    },
+    getSelectedDate () {
+      const parts = this.selectedDate.split('-')
+      const retval = new Date(parts[0], parts[1] - 1, parts[2])
+      return retval
     }
   }
 }
