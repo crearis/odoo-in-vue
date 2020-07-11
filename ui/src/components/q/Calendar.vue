@@ -1,7 +1,7 @@
 <template>
   <q-calendar
-    enable-outside-days
-    :v-model="selectedDate"
+    ref="calendar"
+    v-model="selectedDate"
     :view="viewMode"
     locale="en-us"
     :mini-mode="miniMode"
@@ -40,7 +40,6 @@
 
 <script>
 import { QCalendar } from '@quasar/quasar-ui-qcalendar'
-import { date } from 'quasar'
 
 export default {
   components: {
@@ -51,10 +50,6 @@ export default {
       type: String,
       default: 'week'
     },
-    selectedDate: {
-      type: Date,
-      required: true
-    },
     miniMode: {
       default: 'auto',
       required: false
@@ -63,10 +58,18 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      selectedDate: ''
+    }
+  },
   created () {
+    const dt = new Date()
+    this.selectedDate = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`
   },
   methods: {
     getEventsByDate (matchDate) {
+      // console.log('matchDate:', matchDate)
       const returns = []
       if (typeof this.events === 'object') {
         this.events.forEach(event => { if (event.date === matchDate) { returns.push(event) } })
@@ -93,24 +96,15 @@ export default {
       }
       s['align-items'] = 'flex-start'
       return s
+    },
+    move (amount = 0) {
+      if (amount === 0) {
+        const dt = new Date()
+        this.selectedDate = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`
+      } else {
+        this.$refs.calendar.move(amount)
+      }
     }
-  },
-  /*
-  Helper function to calculate next/previous ... day, week and month dates.
-  Params: [
-    date: a date object
-    interval: must be one of: 'day', 'week' or 'month'
-    previous: must be false (bool) to return previous period else returns next by default
-  ]
-   */
-  getPrevOrNext (fromDate, interval, next = true) {
-    let options = {}
-    if (interval === 'week') {
-      options = { days: (next ? 7 : -7) }
-    } else {
-      options = { [`${interval}`]: (next ? 1 : -1) }
-    }
-    return date.addToDate(fromDate, options)
   }
 }
 </script>

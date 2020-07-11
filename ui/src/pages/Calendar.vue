@@ -13,23 +13,23 @@
       </q-btn-group>
       <q-space />
       <q-btn-group v-if="viewMode !== 'list'">
-        <q-btn flat icon="arrow_left" @click="changeViewSelectedDate('prev')"/>
+        <q-btn flat icon="arrow_left" @click="moveCalendar(-1)"/>
         <q-separator vertical />
-        <q-btn flat  @click="changeViewSelectedDate('today')">Today</q-btn>
+        <q-btn flat  @click="moveCalendar(0)">Today</q-btn>
         <q-separator vertical />
-        <q-btn flat icon="arrow_right"  @click="changeViewSelectedDate('next')"/>
+        <q-btn flat icon="arrow_right"  @click="moveCalendar(1)"/>
       </q-btn-group>
     </q-card-actions>
 
     <q-card-section>
-      <div v-if="viewMode !== 'list'">{{ getDisplayDate() }}</div>
+      <div v-if="viewMode !== 'list'">future</div>
     </q-card-section>
 
     <q-card-section>
       <Calendar
+        ref="calendar"
         v-if="viewMode !== 'list'"
         v-bind:viewMode="viewMode"
-        v-bind:selectedDate="calendarSelectedDate"
         v-bind:events="calendarData"
         />
     </q-card-section>
@@ -63,7 +63,6 @@ export default {
       calendarData: [],
       listData: [],
       listDataColumns: [],
-      calendarSelectedDate: new Date(),
       calendarDataStart: null,
       calendarDataEnd: null
     }
@@ -81,20 +80,13 @@ export default {
         this.setCalendarData(mode)
       }
     },
-    changeViewSelectedDate (change) {
-      if (change === 'today') {
-        this.calendarSelectedDate = new Date()
-      } else {
-        this.calendarSelectedDate = Calendar.getPrevOrNext(
-          this.calendarSelectedDate,
-          this.viewMode,
-          change === 'next'
-        )
-      }
-      this.setCalendarData(this.viewMode)
+    moveCalendar (change) {
+      this.$refs.calendar.move(change)
+      this.setCalendarData()
     },
-    setCalendarData (mode) {
-      const d = this.calendarSelectedDate
+    setCalendarData (mode = this.viewMode) {
+      const parts = this.$refs.calendar.selectedDate.split('-')
+      const d = new Date(parts[0], parts[1] - 1, parts[2])
       let sow = d // start of week
       switch (mode) {
         case 'month':
@@ -112,7 +104,6 @@ export default {
           this.calendarDataEnd = date.addToDate(sow, { days: 6 })
           break
       }
-      Calendar.selectedDate = this.calendarSelectedDate
       Server.getCalendarEventsData(
         this.calendarDataStart,
         this.calendarDataEnd
@@ -135,16 +126,6 @@ export default {
             }
           })
         })
-    },
-    getDisplayDate () {
-      if (this.viewMode === 'list') { return '' }
-      if (this.viewMode === 'day') { return date.formatDate(this.calendarSelectedDate, 'D MMMM YYYY') }
-      if (this.viewMode === 'month') { return date.formatDate(this.calendarSelectedDate, 'MMMM YYYY') }
-      return (
-        date.formatDate(this.calendarDataStart, 'MMMM YYYY') +
-        ', ' +
-        date.formatDate(this.calendarDataStart, 'D') + ' to ' + date.formatDate(this.calendarDataEnd, 'D')
-      )
     }
   }
 }
