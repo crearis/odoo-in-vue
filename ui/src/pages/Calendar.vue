@@ -12,6 +12,10 @@
         <q-btn stretch flat @click="changeViewMode('list')">List</q-btn>
       </q-btn-group>
       <q-space />
+      <q-banner>
+        <div v-if="viewMode !== 'list'">{{ getDisplayDate() }}</div>
+      </q-banner>
+      <q-space />
       <q-btn-group v-if="viewMode !== 'list'">
         <q-btn flat icon="arrow_left" @click="moveCalendar(-1)"/>
         <q-separator vertical />
@@ -21,11 +25,7 @@
       </q-btn-group>
     </q-card-actions>
 
-    <q-card-section>
-      <div v-if="viewMode !== 'list'">{{ getDisplayDate() }}</div>
-    </q-card-section>
-
-    <q-card-section>
+    <q-card-section class="q-pa-none q-card--bordered">
       <Calendar
         ref="calendar"
         v-if="viewMode !== 'list'"
@@ -128,15 +128,10 @@ export default {
     },
     getDisplayDate () {
       try {
-        const sd = this.$refs.calendar.getSelectedDate()
-        if (this.viewMode === 'list') { return '' }
-        if (this.viewMode === 'month' || this.viewMode === 'day') { return date.formatDate(sd, 'MMMM YYYY') }
-        return (
-          date.formatDate(this.calendarDataStart, 'MMMM YYYY') +
-          ', ' +
-          date.formatDate(this.calendarDataStart, 'D') + ' to ' + date.formatDate(this.calendarDataEnd, 'D')
-        )
-      } catch {}
+        return date.formatDate(this.$refs.calendar.getSelectedDate(), 'MMMM YYYY')
+      } catch {
+        return ''
+      }
     }
   }
 }

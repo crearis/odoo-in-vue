@@ -29,6 +29,27 @@ export default {
       const m = date.getMonth() + 1
       const d = date.getDate()
       return `${y}-${m}-${d}`
+    },
+    /*
+    start1st: start of first event
+    end1st: end of first event
+    start2nd: start of second event
+    end2nd: end of second event
+     */
+    isOverlap (start1st, end1st, start2nd, end2nd) {
+      // 1st event starts on or after 2nd but before 2nd event ends
+      if (start1st >= start2nd) {
+        if (start1st < end2nd) {
+          return true
+        }
+      }
+      // 1st even starts before 2nd but ends after start of 2nd
+      if (start1st < start2nd) {
+        if (end1st > start2nd) {
+          return true
+        }
+      }
+      return false
     }
   },
 
@@ -105,7 +126,8 @@ export default {
         date: item.start.split(' ')[0],
         // this data is used for week and day view
         time: item.start.split(' ')[1].substr(0, 5),
-        duration: item.duration * 60
+        duration: item.duration * 60,
+        overlaps: 0
       })
     })
     return retVal

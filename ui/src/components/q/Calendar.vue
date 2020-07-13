@@ -41,6 +41,7 @@
 
 <script>
 import { QCalendar } from '@quasar/quasar-ui-qcalendar'
+import Utilities from '../../mixins/Utilities'
 
 export default {
   components: {
@@ -71,27 +72,51 @@ export default {
   methods: {
     getEventsByDate (matchDate) {
       const returns = []
+      const overlaps = []
+      let counter = 0
       if (typeof this.events === 'object') {
-        this.events.forEach(event => { if (event.date === matchDate) { returns.push(event) } })
+        this.events.forEach(event => {
+          if (event.date === matchDate) {
+            event.number = counter++
+            returns.push(event)
+          }
+        })
       }
+      // look for time overlaps
+      for (let i1 = 0; i1 < returns.length; ++i1) {
+        const start1 = Date.parse(returns[i1].date + ' ' + returns[i1].time)
+        const end1 = Math.round(start1 + (returns[i1].duration * 60000))
+        overlaps[i1] = 0
+        for (let i2 = 0; i2 < returns.length; ++i2) {
+          if (i1 !== i2) {
+            const start2 = Date.parse(returns[i2].date + ' ' + returns[i2].time)
+            const end2 = Math.round(start2 + (returns[i2].duration * 60000))
+            if (Utilities.Date.isOverlap(start1, end1, start2, end2)) {
+              overlaps[i1] = overlaps[i1] + 1
+            }
+          }
+        }
+      }
+      overlaps.forEach((o, i) => { returns[i].overlaps = o })
+      console.log(returns)
       return returns
     },
+
     weekViewBadgeClasses (event, type) {
       const isHeader = type === 'header'
       return {
-        'left-side': !isHeader && event.side === 'left',
-        'right-side': !isHeader && event.side === 'right',
-        // 'full-width': !isHeader && (!event.side || event.side === 'full'),
         [`q-calendar-day-event-${this.viewMode}-mode`]: !isHeader,
         'q-calendar-day': !isHeader
       }
     },
     weekViewBadgeStyles (event, type, timeStartPos, timeDurationHeight) {
       const s = {}
-      if (timeStartPos) {
-        s.top = Math.round(timeStartPos(event.time)) + 'px'
-      }
+      if (timeStartPos) { s.top = Math.round(timeStartPos(event.time)) + 'px' }
       if (timeDurationHeight) {
+        if (type === 'body' && event.overlaps > 0) {
+          s.left = Math.round(event.number * (this.viewMode === 'day' ? 10 : event.overlaps * 3)) + '%'
+          s.width = Math.round(80 / event.overlaps) + '%'
+        }
         s.height = Math.round(timeDurationHeight(event.duration)) + 'px'
       }
       s['align-items'] = 'flex-start'
@@ -130,34 +155,20 @@ export default {
   border: none;
   color: white!important;
   z-index: 9999999!important;
+  min-width: 200px!important;
 }
-.q-calendar-day-event-week-mode:hover { width: 100%; }
-.q-calendar-day-event-day-mode:hover { width: 50%; }
 
 .q-calendar-day-event-week-mode {
   width: 50%;
   position: absolute;
   font-size: 12px;
+  z-index: 999999!important;
 }
 
 .q-calendar-day-event-day-mode {
-  width: 20%;
+  max-width: 50%;
   position: absolute;
   font-size: 12px;
-}
-
-.full-width {
-  left: 0;
-  width: 100%
-}
-
-.left-side {
-  left: 0;
-  width: 49.75%
-}
-
-.right-side {
-  left: 50.25%;
-  width: 49.75%
+  z-index: 999999!important;
 }
 </style>
