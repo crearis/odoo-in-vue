@@ -90,10 +90,10 @@ export default {
           link: '/vue/#/tasks'
         },
         {
-          title: 'Wiki',
-          caption: 'Online Wiki',
-          icon: 'school',
-          link: 'https://gitlab.com/sylnsr/odoo-dev-ez/-/wikis/home',
+          title: 'Issues',
+          caption: 'Report any issues',
+          icon: 'bug_report',
+          link: 'https://gitlab.com/sylnsr/odoo-in-vue/-/issues',
           target: '_blank'
         }
       ]

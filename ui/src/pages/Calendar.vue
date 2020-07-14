@@ -116,7 +116,7 @@ export default {
           Server.search_read(
             'calendar.event',
             [],
-            ['name', 'display_start', 'user_id', 'location', 'duration'],
+            ['name', 'display_start', 'user_id', 'location', 'duration', 'allday'],
             'start'
           ).then(r => {
             if (r.data.length) {

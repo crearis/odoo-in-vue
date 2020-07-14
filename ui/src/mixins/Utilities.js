@@ -127,7 +127,8 @@ export default {
         // this data is used for week and day view
         time: item.start.split(' ')[1].substr(0, 5),
         duration: item.duration * 60,
-        overlaps: 0
+        overlaps: 0,
+        allday: item.allday
       })
     })
     return retVal

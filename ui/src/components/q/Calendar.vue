@@ -26,14 +26,39 @@
     <template #day-body="{ timestamp, timeStartPos, timeDurationHeight }">
       <template v-for="(event, index) in getEventsByDate(timestamp.date)">
         <q-badge
+          v-if="!event.allday"
           :key="index"
           class="text-black"
+          multi-line
           :class="weekViewBadgeClasses(event, 'body')"
           :style="weekViewBadgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
         >
-          <span class="ellipsis" :data="event.time + '/' + event.duration">{{ event.title }}</span>
+          <span class="ellipsis">
+              {{ event.title }}
+          </span>
         </q-badge>
       </template>
+    </template>
+
+    <!-- header view template -->
+    <template #day-header="{ timestamp }">
+      <div class="row justify-center">
+        <template v-for="(event, index) in eventsMap[timestamp.date]">
+          <div
+            v-if="event.allday && index === 0"
+            class="q-calendar-allday"
+            :key="index + '-header'">All day events:</div>
+          <q-badge
+            multi-line
+            v-if="event.allday"
+            :key="index"
+            :style="weekViewBadgeStyles(event, 'header')"
+            class="q-pa-xs q-mb-xs q-calendar-header"
+          >
+            <span class="">{{ event.title }}</span>
+          </q-badge>
+        </template>
+      </div>
     </template>
 
   </q-calendar>
@@ -69,6 +94,13 @@ export default {
     const dt = new Date()
     this.selectedDate = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`
   },
+  computed: {
+    eventsMap () {
+      const map = {}
+      this.events.forEach((event) => (map[event.date] = map[event.date] || []).push(event))
+      return map
+    }
+  },
   methods: {
     getEventsByDate (matchDate) {
       const returns = []
@@ -98,7 +130,6 @@ export default {
         }
       }
       overlaps.forEach((o, i) => { returns[i].overlaps = o })
-      console.log(returns)
       return returns
     },
 
@@ -109,19 +140,30 @@ export default {
         'q-calendar-day': !isHeader
       }
     },
+
     weekViewBadgeStyles (event, type, timeStartPos, timeDurationHeight) {
       const s = {}
-      if (timeStartPos) { s.top = Math.round(timeStartPos(event.time)) + 'px' }
-      if (timeDurationHeight) {
-        if (type === 'body' && event.overlaps > 0) {
-          s.left = Math.round(event.number * (this.viewMode === 'day' ? 10 : event.overlaps * 3)) + '%'
-          s.width = Math.round(80 / event.overlaps) + '%'
+      if (type === 'header') {
+        if (this.viewMode === 'week') {
+          s.width = '100%'
+        } else {
+          s['margin-right'] = '5px'
         }
-        s.height = Math.round(timeDurationHeight(event.duration)) + 'px'
+        s.cursor = 'pointer'
+      } else {
+        if (timeStartPos) { s.top = Math.round(timeStartPos(event.time)) + 'px' }
+        if (timeDurationHeight) {
+          if (event.overlaps > 0) {
+            s.left = Math.round(event.number * (this.viewMode === 'day' ? 10 : event.overlaps * 3)) + '%'
+            s.width = Math.round(80 / event.overlaps) + '%'
+          }
+          s.height = Math.round(timeDurationHeight(event.duration)) + 'px'
+        }
+        s['align-items'] = 'flex-start'
       }
-      s['align-items'] = 'flex-start'
       return s
     },
+
     move (amount = 0) {
       if (amount === 0) {
         const dt = new Date()
@@ -130,6 +172,7 @@ export default {
         this.$refs.calendar.move(amount)
       }
     },
+
     getSelectedDate () {
       const parts = this.selectedDate.split('-')
       const retval = new Date(parts[0], parts[1] - 1, parts[2])
@@ -150,12 +193,16 @@ export default {
   border: thin solid #1D1D1D;
 }
 
+.q-calendar-header:hover {
+  overflow: unset!important;
+}
+
 .q-calendar-day:hover {
   opacity: 1;
   border: none;
   color: white!important;
   z-index: 9999999!important;
-  min-width: 200px!important;
+  min-width: 100px!important;
 }
 
 .q-calendar-day-event-week-mode {
@@ -166,9 +213,17 @@ export default {
 }
 
 .q-calendar-day-event-day-mode {
-  max-width: 50%;
+  max-width: 200px;
   position: absolute;
   font-size: 12px;
   z-index: 999999!important;
+}
+
+.q-calendar-allday {
+  color: #000000;
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding-left: 10px;
 }
 </style>
