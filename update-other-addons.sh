@@ -50,6 +50,7 @@ rm_tmp_unzip
 
 get_repo_code "https://github.com/sylnsr/project_tools" "13.0"
 cp_repo_dir project_tools-13.0/project_ledger project_ledger
+cp_repo_dir project_tools-13.0/project_contact project_contact
 rm_tmp_unzip
 
 
