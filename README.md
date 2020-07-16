@@ -16,7 +16,7 @@ by itself to get a basis for the Vue project, if you already have your Odoo deve
 
 These are the external modules that are downloaded to this project when running the `update-other-addons.sh` script.
 
- - [project_category](https://github.com/OCA/project/tree/13.0/project_category): For categorization of projects
+ - [project_category](https://github.com/OCA/project/tree/13.0/project_category): For categorization of projects (formally named Project Types)
  - [project_contact](https://github.com/sylnsr/project_tools/tree/13.0/project_contact): Contextually link contacts to projects
  - [project_key](https://github.com/OCA/project/tree/13.0/project_key): Unique project key generation
  - [project_ledger](https://github.com/sylnsr/project_tools/tree/13.0/project_ledger): Adds project ledger features
