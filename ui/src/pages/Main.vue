@@ -14,7 +14,7 @@
 
           <div class="q-pa-sm q-gutter-md"
                style="min-width: 400px; max-width: 500px; overflow: hidden;">
-            <div class="my-title">My Events</div>
+            <div class="my-title">My Deadlines</div>
             <Calendar
               viewMode="month"
               v-bind:events="calendarData"
@@ -96,7 +96,7 @@ export default {
       const d = new Date()
       this.calendarDataStart = date.startOfDate(d, 'month')
       this.calendarDataEnd = date.endOfDate(d, 'month')
-      Server.getCalendarEventsData(
+      Server.getTaskEventData(
         this.calendarDataStart,
         this.calendarDataEnd,
         store.state.session.profile.uid

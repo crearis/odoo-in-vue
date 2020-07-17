@@ -103,7 +103,7 @@ export default {
           this.calendarDataEnd = date.addToDate(sow, { days: 6 })
           break
       }
-      Server.getCalendarEventsData(
+      Server.getTaskEventData(
         this.calendarDataStart,
         this.calendarDataEnd
       ).then(r => {

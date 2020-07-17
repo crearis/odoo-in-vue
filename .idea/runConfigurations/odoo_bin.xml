@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="odoo-bin" type="PythonConfigurationType" factoryName="Python" singleton="false" nameIsGenerated="true">
+  <configuration default="false" name="odoo-bin" type="PythonConfigurationType" factoryName="Python" singleton="true" nameIsGenerated="true">
     <module name="odoo-dev-ez" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
@@ -8,7 +8,7 @@
     </envs>
     <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python3" />
     <option name="WORKING_DIRECTORY" value="$USER_HOME$/Projects/git/odoo/13" />
-    <option name="IS_MODULE_SDK" value="false" />
+    <option name="IS_MODULE_SDK" value="true" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />

@@ -41,7 +41,7 @@ get_repo_code "https://github.com/OCA/project" "13.0"
 cp_repo_sub_dir project_category $SD
 cp_repo_sub_dir project_key $SD
 cp_repo_sub_dir project_status $SD
-cp_repo_sub_dir project_task_code $SD
+cp_repo_sub_dir project_tag $SD
 cp_repo_sub_dir project_task_dependency $SD
 cp_repo_sub_dir project_task_material $SD
 cp_repo_sub_dir project_task_add_very_high $SD

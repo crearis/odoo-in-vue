@@ -158,11 +158,39 @@ export default {
     return this.search_read(
       'calendar.event',
       domain,
-      ['name', 'start', 'description', 'state', 'stop', 'duration', 'show_as', 'active', 'privacy', 'allday']
+      ['name', 'start', 'description', 'duration', 'active', 'allday']
     ).then(r => {
       try {
         if (r.data.length) {
           return Utilities.calendarEvents2QCalendar(r.data)
+        }
+      } catch (e) {
+        console.log(e, r)
+      }
+      return []
+    })
+  },
+
+  /*
+  Returns a standard format of data from project.task model to be used with QCalendar component
+   */
+  getTaskEventData (start, end, userId = 0) {
+    const domain = [
+      ['date_deadline', '>=', Utilities.Date.getYMDString(start) + ' 00:00:00.000000'],
+      ['date_deadline', '<=', Utilities.Date.getYMDString(end) + ' 23:59:59.999999']
+    ]
+    // add user_id filter if needed
+    if (userId !== 0) {
+      domain.push(['user_id', '=', userId])
+    }
+    return this.search_read(
+      'project.task',
+      domain,
+      ['name', 'date_deadline', 'description', 'duration_deadline', 'active', 'time_deadline', 'duration_deadline']
+    ).then(r => {
+      try {
+        if (r.data.length) {
+          return Utilities.taskEvents2QCalendar(r.data)
         }
       } catch (e) {
         console.log(e, r)

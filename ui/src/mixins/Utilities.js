@@ -132,5 +132,38 @@ export default {
       })
     })
     return retVal
+  },
+
+  /*
+  Convert Odoo data from project.task model to data for QCalendar (Quasar) component.
+  Depends on the project_task_plan module for additional fields.
+   */
+  taskEvents2QCalendar (data) {
+    const retVal = []
+    data.forEach(item => {
+      const durationHours = 0
+      let durationMinutes = 0
+      // not an all day event and duration is provided:
+      if (item.time_deadline && item.duration_deadline) {
+        durationMinutes = parseInt(item.duration_deadline.split(':')[0])
+        durationMinutes = parseInt(item.duration_deadline.split(':')[1])
+        durationMinutes = durationMinutes + (durationHours * 60)
+      // not an all day event and duration in not provided:
+      } else if (item.time_deadline) {
+        // .. default to 1 hour like most calendars do
+        durationMinutes = 60
+      }
+      retVal.push({
+        title: item.name,
+        details: item.description ? item.description : '',
+        date: item.date_deadline,
+        // this data is used for week and day view
+        time: item.time_deadline,
+        duration: durationMinutes,
+        overlaps: 0,
+        allday: item.time_deadline === ''
+      })
+    })
+    return retVal
   }
 }

@@ -44,10 +44,6 @@
     <template #day-header="{ timestamp }">
       <div class="row justify-center">
         <template v-for="(event, index) in eventsMap[timestamp.date]">
-          <div
-            v-if="event.allday && index === 0"
-            class="q-calendar-allday"
-            :key="index + '-header'">All day events:</div>
           <q-badge
             multi-line
             v-if="event.allday"
