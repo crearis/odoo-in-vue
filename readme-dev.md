@@ -52,7 +52,13 @@ MUST point to the Python binary in the project's Python virtual environment.
 
 If you get the following error when debugging: `greenlet.error: cannot switch to a different thread` and the long-polling
 port is not working, then look at this: https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994  
-Its a simple fix.
+DO NOT IMPLEMENT THIS FIX IF YOU WANT BREAKPOINTS TO WORK! - The problem with using that fix, is that the "Gevent compatible"
+setting in PyCharm [does not work with Python above version 3.5](https://www.jetbrains.com/help/idea/debugger-python.html),
+and Odoo 13 [requires Python 3.6 or above](https://www.odoo.com/documentation/13.0/setup/install.html#id12). I have not
+found any issues with debugging with the "Gevent compatible" option unchecked and the console throwing that error, so
+just ignore that error when debugging and longpolling is not working. When longpolling stops working, or is disabled
+by setting `workers = 0`, the Odoo UI will be annoying by continually putting up the "Trying to connect" message,
+followed by the "You are back online" message .. in a continual loop. Just ignore it.
 
 
 ---

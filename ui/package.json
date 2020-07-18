@@ -1,8 +1,8 @@
 {
   "name": "ui",
   "version": "0.0.1",
-  "description": "odoo-dev-ez",
-  "productName": "odoo-dev-ez",
+  "description": "odoo-in-vue",
+  "productName": "odoo-in-vue",
   "author": "anon@example.com",
   "private": true,
   "scripts": {

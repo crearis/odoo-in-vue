@@ -1,6 +1,6 @@
-# odoo-dev-ez (ui)
+# odoo-in-vue (ui)
 
-odoo-dev-ez
+odoo-in-vue
 
 ## Install the dependencies
 ```bash

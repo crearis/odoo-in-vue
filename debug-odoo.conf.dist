@@ -1,6 +1,6 @@
 [options]
-data_dir = ~/git/<what-ever-path>/odoo-dev-ez/docker/var-lib-odoo
-addons_path = ~/git/<what-ever-path>/odoo-dev-ez/addons,~/git/odoo/13/addons
+data_dir = ~/git/<what-ever-path>/odoo-in-vue/docker/var-lib-odoo
+addons_path = ~/git/<what-ever-path>/odoo-in-vue/addons,~/git/odoo/13/addons
 admin_passwd = odoo
 
 workers = 1
