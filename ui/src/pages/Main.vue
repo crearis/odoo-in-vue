@@ -6,10 +6,7 @@
           <div class="q-pa-sm q-pr-sm q-gutter-md"
                style="min-width: 400px; max-width: 500px; overflow: hidden;">
             <div class="my-title">My Projects</div>
-            <Table
-              v-bind:data="projects"
-              v-bind:columns="projectsColumns"
-            />
+            <Table ref="tableMyProjects" />
           </div>
 
           <div class="q-pa-sm q-gutter-md"
@@ -31,11 +28,7 @@
       <q-card-section>
         <div>
             <div class="q-mb-sm my-title">My Tasks</div>
-            <Table
-              v-if="tasks.length"
-              v-bind:data="tasks"
-              v-bind:columns="tasksColumns"
-              ></Table>
+            <Table ref="tableMyTasks" ></Table>
         </div>
       </q-card-section>
     </q-card>
@@ -77,6 +70,7 @@ export default {
   },
   methods: {
     setProjectData () {
+      this.$refs.tableMyProjects.isLoading = true
       Server.search_read(
         'project.project',
         [
@@ -87,8 +81,8 @@ export default {
         'date_start, name'
       ).then(r => {
         if (r.data.length) {
-          this.projects = r.data
-          this.projectsColumns = r.cc
+          this.$refs.tableMyProjects.setData(r.data, r.cc)
+          this.$refs.tableMyProjects.isLoading = false
         }
       })
     },
@@ -105,6 +99,7 @@ export default {
       })
     },
     setTaskData () {
+      this.$refs.tableMyTasks.isLoading = true
       Server.search_read(
         'project.task',
         [
@@ -120,8 +115,8 @@ export default {
         'date_deadline'
       ).then(r => {
         if (r.data.length) {
-          this.tasks = r.data
-          this.tasksColumns = r.cc
+          this.$refs.tableMyTasks.setData(r.data, r.cc)
+          this.$refs.tableMyTasks.isLoading = false
         }
       })
     }

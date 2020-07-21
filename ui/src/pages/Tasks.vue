@@ -1,9 +1,5 @@
 <template>
-  <Table v-if="tasks.length"
-         title="All Tasks"
-         v-bind:data="tasks"
-         v-bind:columns="tasksColumns"
-  />
+  <Table ref="tableTasks" title="All Tasks" />
 </template>
 
 <script>
@@ -31,6 +27,7 @@ export default {
   },
   methods: {
     setTaskData () {
+      this.$refs.tableTasks.isLoading = true
       Server.search_read(
         'project.task',
         [
@@ -45,8 +42,8 @@ export default {
         'date_deadline'
       ).then(r => {
         if (r.data.length) {
-          this.tasks = r.data
-          this.tasksColumns = r.cc
+          this.$refs.tableTasks.setData(r.data, r.cc)
+          this.$refs.tableTasks.isLoading = false
         }
       })
     }

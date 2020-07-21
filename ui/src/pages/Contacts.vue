@@ -1,9 +1,5 @@
 <template>
-  <Table v-if="contacts.length"
-         title="Contacts"
-         v-bind:data="contacts"
-         v-bind:columns="contactsColumns"
-  />
+  <Table ref="tableContacts" title="Contacts" />
 </template>
 
 <script>
@@ -23,6 +19,7 @@ export default {
     }
   },
   mounted () {
+    this.$refs.tableContacts.isLoading = true
     Server.redirectIfNotAuthenticated()
       .then(r => {
         Server.search_read(
@@ -31,8 +28,8 @@ export default {
           ['id', 'name', 'street', 'city', 'phone']
         ).then(r => {
           if (r.data.length) {
-            this.contacts = r.data
-            this.contactsColumns = r.cc
+            this.$refs.tableContacts.setData(r.data, r.cc)
+            this.$refs.tableContacts.isLoading = false
           }
         })
       })

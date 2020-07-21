@@ -1,7 +1,6 @@
 <template>
   <div>
     <q-table
-      v-if="data.length"
       :title="title"
       :data="data"
       :columns="columns"
@@ -18,12 +17,6 @@ export default {
   components: {
   },
   props: {
-    data: {
-      type: Array
-    },
-    columns: {
-      type: Array
-    },
     title: {
       type: String
     },
@@ -34,11 +27,10 @@ export default {
   },
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      data: [],
+      columns: []
     }
-  },
-  mounted () {
-    this.setFormatting()
   },
   methods: {
     /*
@@ -59,13 +51,16 @@ export default {
       }
       return val
     },
-    setFormatting () {
-      console.log('setFormatting?', Boolean(this.columns.length))
-      this.columns.forEach((c, i) => {
-        if (!c.format) {
-          c.format = (val, row) => this.formatTableVal(val, row, parseInt(`${i}`))
-        }
-      })
+    setData (data, columns = false) {
+      this.data = data
+      if (columns) {
+        this.columns = columns
+        this.columns.forEach((c, i) => {
+          if (!c.format) {
+            c.format = (val, row) => this.formatTableVal(val, row, parseInt(`${i}`))
+          }
+        })
+      }
     }
   }
 }
