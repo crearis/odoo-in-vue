@@ -6,13 +6,9 @@
       :data="data"
       :columns="columns"
       :row-key="rowKey"
+      :loading="isLoading"
+      :no-data-label="'No data to show.'"
     />
-    <div v-else class="align-middle align-center q-pb-lg q-mb-lg">
-      <q-btn color="primary">
-        <q-icon left size="2em" name="find_in_page" />
-        <div style="font-size: 0.75em">No data to show</div>
-      </q-btn>
-    </div>
   </div>
 </template>
 
@@ -36,12 +32,13 @@ export default {
       default: 'id'
     }
   },
-  created () {
-    this.columns.forEach((c, i) => {
-      if (!c.format) {
-        c.format = (val, row) => this.formatTableVal(val, row, parseInt(`${i}`))
-      }
-    })
+  data () {
+    return {
+      isLoading: false
+    }
+  },
+  mounted () {
+    this.setFormatting()
   },
   methods: {
     /*
@@ -61,6 +58,14 @@ export default {
         return ''
       }
       return val
+    },
+    setFormatting () {
+      console.log('setFormatting?', Boolean(this.columns.length))
+      this.columns.forEach((c, i) => {
+        if (!c.format) {
+          c.format = (val, row) => this.formatTableVal(val, row, parseInt(`${i}`))
+        }
+      })
     }
   }
 }
