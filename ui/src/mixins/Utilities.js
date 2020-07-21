@@ -151,8 +151,6 @@ export default {
         overlaps: 0,
         allday: item.time_deadline_display === false
       }
-      console.log('item', item)
-      console.log('event', event)
       retVal.push(event)
     })
     return retVal
