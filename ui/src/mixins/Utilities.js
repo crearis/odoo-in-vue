@@ -141,28 +141,19 @@ export default {
   taskEvents2QCalendar (data) {
     const retVal = []
     data.forEach(item => {
-      const durationHours = 0
-      let durationMinutes = 0
-      // not an all day event and duration is provided:
-      if (item.time_deadline && item.duration_deadline) {
-        durationMinutes = parseInt(item.duration_deadline.split(':')[0])
-        durationMinutes = parseInt(item.duration_deadline.split(':')[1])
-        durationMinutes = durationMinutes + (durationHours * 60)
-      // not an all day event and duration in not provided:
-      } else if (item.time_deadline) {
-        // .. default to 1 hour like most calendars do
-        durationMinutes = 60
-      }
-      retVal.push({
+      const event = {
         title: item.name,
         details: item.description ? item.description : '',
         date: item.date_deadline,
         // this data is used for week and day view
-        time: item.time_deadline,
-        duration: durationMinutes,
+        time: item.time_deadline_display,
+        duration: item.duration_deadline_minutes,
         overlaps: 0,
-        allday: item.time_deadline === ''
-      })
+        allday: item.time_deadline_display === false
+      }
+      console.log('item', item)
+      console.log('event', event)
+      retVal.push(event)
     })
     return retVal
   }

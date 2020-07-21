@@ -186,7 +186,8 @@ export default {
     return this.search_read(
       'project.task',
       domain,
-      ['name', 'date_deadline', 'description', 'duration_deadline', 'active', 'time_deadline', 'duration_deadline']
+      ['name', 'date_deadline', 'description', 'duration_deadline_minutes', 'active', 'time_deadline_display',
+        'duration_deadline']
     ).then(r => {
       try {
         if (r.data.length) {
