@@ -152,6 +152,9 @@ export default {
           if (event.overlaps > 0) {
             s.left = Math.round(event.number * (this.viewMode === 'day' ? 10 : event.overlaps * 3)) + '%'
             s.width = Math.round(80 / event.overlaps) + '%'
+          } else {
+            s.left = '0px'
+            s.width = '100%'
           }
           s.height = Math.round(timeDurationHeight(event.duration)) + 'px'
         }
