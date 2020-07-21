@@ -139,6 +139,7 @@ export default {
 
     weekViewBadgeStyles (event, type, timeStartPos, timeDurationHeight) {
       const s = {}
+      // header styling:
       if (type === 'header') {
         if (this.viewMode === 'week') {
           s.width = '100%'
@@ -146,19 +147,28 @@ export default {
           s['margin-right'] = '5px'
         }
         s.cursor = 'pointer'
-      } else {
-        if (timeStartPos) { s.top = Math.round(timeStartPos(event.time)) + 'px' }
-        if (timeDurationHeight) {
-          if (event.overlaps > 0) {
-            s.left = Math.round(event.number * (this.viewMode === 'day' ? 10 : event.overlaps * 3)) + '%'
-            s.width = Math.round(80 / event.overlaps) + '%'
-          } else {
-            s.left = '0px'
-            s.width = '100%'
-          }
-          s.height = Math.round(timeDurationHeight(event.duration)) + 'px'
-        }
+
+      // body styling:
+      } else if (type === 'body') {
+        console.log(event)
         s['align-items'] = 'flex-start'
+        if (event.time) { s.top = Math.round(timeStartPos(event.time)) + 'px' }
+
+        // conditional width and position for overlaps
+        if (event.overlaps > 0) {
+          s.left = Math.round(event.number * (this.viewMode === 'day' ? 10 : event.overlaps * 3)) + '%'
+          s.width = Math.round(80 / event.overlaps) + '%'
+        } else {
+          s.left = '0px'
+          s.width = '100%'
+        }
+
+        // conditional height calculation
+        if (event.duration) {
+          s.height = Math.round(timeDurationHeight(event.duration)) + 'px'
+        } else { // if no duration is provided, the assume 60, as most calendars do
+          s.height = Math.round(timeDurationHeight(60)) + 'px'
+        }
       }
       return s
     },
