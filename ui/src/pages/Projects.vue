@@ -29,8 +29,8 @@ export default {
         ).then(r => {
           if (r.data.length) {
             this.$refs.tableProjects.setData(r.data, r.cc)
-            this.$refs.tableProjects.isLoading = false
           }
+          this.$refs.tableProjects.isLoading = false
         })
       })
   }

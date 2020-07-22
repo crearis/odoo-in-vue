@@ -82,8 +82,11 @@ export default {
       ).then(r => {
         if (r.data.length) {
           this.$refs.tableMyProjects.setData(r.data, r.cc)
-          this.$refs.tableMyProjects.isLoading = false
         }
+        this.$refs.tableMyProjects.isLoading = false
+      }).catch(e => {
+        console.log(e)
+        this.$refs.tableMyProjects.isLoading = false
       })
     },
     setCalendarData () {
@@ -116,8 +119,8 @@ export default {
       ).then(r => {
         if (r.data.length) {
           this.$refs.tableMyTasks.setData(r.data, r.cc)
-          this.$refs.tableMyTasks.isLoading = false
         }
+        this.$refs.tableMyTasks.isLoading = false
       })
     }
   }
