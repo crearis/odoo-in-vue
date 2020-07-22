@@ -44,7 +44,7 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-      publicPath: '/vue',  // corresponds with the reverse proxy setting where path prefix "/vue" forwards to Quasar
+      publicPath: '/vue', // corresponds with the reverse proxy setting where path prefix "/vue" forwards to Quasar
 
       // transpile: false,
 
@@ -114,9 +114,9 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'odoo-docker-ez',
-        short_name: 'odoo-docker-ez',
-        description: 'odoo-docker-ez VueJS',
+        name: 'odoo-in-vue',
+        short_name: 'odoo-in-vue',
+        description: 'Odoo in Vue using Quasar',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
