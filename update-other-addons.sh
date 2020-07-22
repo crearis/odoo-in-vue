@@ -54,6 +54,7 @@ cp_repo_dir project_tools-13.0/project_contact project_contact
 rm_tmp_unzip
 
 
-get_repo_code "https://github.com/odoo-ce-modules/13" "master"
-cp_repo_dir 13-master/tagged_notes tagged_notes
+get_repo_code "https://github.com/idazco/odoo-addons" "13"
+cp_repo_dir odoo-addons-13/tagged_notes tagged_notes
+cp_repo_dir odoo-addons-13/project_task_plan project_task_plan
 rm_tmp_unzip
