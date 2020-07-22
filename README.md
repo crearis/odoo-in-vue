@@ -24,7 +24,8 @@ These are the external modules that are downloaded to this project when running 
  - [project_task_add_very_high](https://github.com/OCA/project/tree/13.0/project_task_add_very_high): Adds two new levels of priority for tasks on projects
  - [project_task_dependency](https://github.com/OCA/project/tree/13.0/project_task_dependency): Define dependencies (other tasks) of a task
  - [project_task_material](https://github.com/OCA/project/tree/13.0/project_task_material): Enables tracking of expenses for a project
- - [tagged_notes](https://github.com/odoo-ce-modules/13/tree/master/tagged_notes): Link notes to other records and tag them
+ - [project_task_plan](https://github.com/idazco/odoo-addons/tree/13/project_task_plan): Adds features for aiding with task planning
+ - [tagged_notes](https://github.com/idazco/odoo-addons/tree/13/tagged_notes): Link notes to other records and tag them
 
 ---
 
