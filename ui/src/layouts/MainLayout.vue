@@ -60,7 +60,7 @@ export default {
       leftDrawerOpen: false,
       navLinks: [
         {
-          title: 'Dashboard',
+          title: 'Main',
           caption: 'Your Dashboard',
           icon: 'dashboard',
           link: '/vue/#/main'
