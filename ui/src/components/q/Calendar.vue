@@ -13,6 +13,7 @@
       <template v-for="(event, index) in getEventsByDate(timestamp.date)">
         <q-badge
           :key="index"
+          @click.stop.prevent="onEventClick(event)"
           style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
           class="q-event"
         >
@@ -27,15 +28,14 @@
       <template v-for="(event, index) in getEventsByDate(timestamp.date)">
         <q-badge
           v-if="!event.allday"
+          @click.stop.prevent="onEventClick(event)"
           :key="index"
           class="text-black"
           multi-line
           :class="weekViewBadgeClasses(event, 'body')"
           :style="weekViewBadgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
         >
-          <span class="ellipsis">
-              {{ event.title }}
-          </span>
+          <span class="ellipsis">{{ event.title }}</span>
         </q-badge>
       </template>
     </template>
@@ -46,6 +46,7 @@
         <template v-for="(event, index) in eventsMap[timestamp.date]">
           <q-badge
             multi-line
+            @click.stop.prevent="onEventClick(event)"
             v-if="event.allday"
             :key="index"
             :style="weekViewBadgeStyles(event, 'header')"
@@ -186,6 +187,10 @@ export default {
       const parts = this.selectedDate.split('-')
       const retval = new Date(parts[0], parts[1] - 1, parts[2])
       return retval
+    },
+
+    onEventClick (e) {
+      this.$emit('event-click', e)
     }
   }
 }
