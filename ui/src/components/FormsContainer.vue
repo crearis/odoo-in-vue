@@ -16,7 +16,7 @@
           </q-btn-group>
           <q-space/>
           <q-space/>
-          <span class="q-pl-sm q-pr-sm"># / #</span>
+          <span class="q-pl-sm q-pr-sm">{{recNumCurrent}} / {{recNumTotal}}</span>
           <q-btn-group>
             <q-btn icon="chevron_left" class="btn-divider-right"></q-btn>
             <q-btn icon="chevron_right"></q-btn>
@@ -55,7 +55,9 @@ export default {
       btnCreate: true,
       btnMore: true,
       showRibbon: false,
-      showFooter: false
+      showFooter: false,
+      recNumCurrent: 0,
+      recNumTotal: 0
     }
   }
 }
