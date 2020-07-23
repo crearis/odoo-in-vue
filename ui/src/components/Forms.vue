@@ -2,7 +2,7 @@
   <div class="row items-start q-gutter-md" style="min-width: 420px">
 
     <!-- form header -->
-    <div class="fit">
+    <div class="fit q-pt-none q-mt-none q-mb-sm">
       <slot name="header">
         <div v-if="title" class="q-pt-sm q-pl-sm q-pr-sm q-pb-none q-mb-none form-title">
           {{ title }}
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'CompForms',
   data () {
@@ -64,9 +65,7 @@ export default {
 </script>
 <style scoped>
 .form-title {
-  font-size-adjust: inherit;
-  font-min-size: small;
-  font-max-size: medium;
+  font-size: medium;
 }
 .btn-divider-right {
   border-right: #BBBBBB 1px solid
