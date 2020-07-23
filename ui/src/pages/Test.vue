@@ -1,14 +1,14 @@
 <template>
-  <q-page class="flex flex-center">
-    Test
-  </q-page>
+  <FormsContainer />
 </template>
 
 <script>
+import FormsContainer from 'components/FormsContainer.vue'
 
 export default {
   name: 'PageTest',
   components: {
+    FormsContainer
   }
 }
 </script>
