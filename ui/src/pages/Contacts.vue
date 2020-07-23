@@ -1,5 +1,5 @@
 <template>
-  <Table ref="tableContacts" title="Contacts" />
+  <Table ref="tableContacts" title="Contacts" @row-dblclick="contactOpen"/>
 </template>
 
 <script>
@@ -33,6 +33,11 @@ export default {
           }
         })
       })
+  },
+  methods: {
+    contactOpen: function (e) {
+      this.$router.push('/contacts/record/' + e.row.id)
+    }
   }
 }
 </script>

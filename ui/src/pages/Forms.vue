@@ -1,7 +1,10 @@
 <template>
-  <Dialog ref="dialogComp" v-on:dialogClosed="onDialogClosed">
+  <Dialog ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable">
     <Forms ref="formComp">
-      <Project v-if="$route.params.model = 'project'"/>
+      <Contact v-if="$route.params.model === 'contacts'"/>
+      <Project v-if="$route.params.model === 'projects'"/>
+      <Task v-if="$route.params.model === 'tasks'"/>
+      <!-- register more forms here as needed, from src/components/forms -->
     </Forms>
   </Dialog>
 </template>
@@ -10,18 +13,35 @@
 import Dialog from 'components/q/Dialog.vue'
 import Forms from 'components/Forms.vue'
 import Project from 'components/forms/Project.vue'
+import Contact from 'components/forms/Contact.vue'
+import Task from 'components/forms/Task.vue'
+// register more forms here as needed, from src/components/forms -->
 
 export default {
   name: 'PageForms',
   components: {
     Dialog,
     Forms,
-    Project
+    Contact,
+    Project,
+    Task
+  },
+  data () {
+    return {
+      availableForms: ['projects', 'tasks', 'contacts'],
+      noFormAvailable: false
+    }
   },
   methods: {
     onDialogClosed: function () {
       this.$refs.dialogComp.showDialog = false
-      window.location = window.location.toString().split('/record/')[0]
+      this.$router.push('/' + this.$route.params.model) // back to the standard page for the model
+    }
+  },
+  mounted () {
+    this.noFormAvailable = !this.availableForms.includes(this.$route.params.model)
+    if (this.noFormAvailable) {
+      this.$router.push('/no-form-for-model/' + this.$route.params.model)
     }
   }
 }
