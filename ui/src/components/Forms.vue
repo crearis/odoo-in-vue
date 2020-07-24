@@ -4,14 +4,11 @@
     <!-- form header -->
     <div class="fit q-pa-none q-ma-none">
       <slot name="header">
-        <div v-if="title" class="form-title q-pl-sm">
-          {{ title }}
-        </div>
         <q-card-actions class="q-ma-none form-header-bottom-border q-mb-sm">
           <q-btn-group>
-            <q-btn push color="primary" v-if="btnEdit">Edit</q-btn>
-            <q-btn push color="info" v-if="btnCreate">Create</q-btn>
-            <q-btn-dropdown color="primary" label="..." v-if="btnMore">
+            <q-btn push color="primary" v-if="btnEdit && $route.params.res_id !== '0'">Edit</q-btn>
+            <q-btn push color="info" v-if="btnCreate && $route.params.res_id !== '0'">Create</q-btn>
+            <q-btn-dropdown color="primary" label="..." v-if="btnActions.length">
             </q-btn-dropdown>
           </q-btn-group>
           <q-space/>
@@ -51,14 +48,19 @@ export default {
   name: 'CompForms',
   data () {
     return {
-      title: 'Odoo In Vue / Form',
       btnEdit: true,
       btnCreate: true,
-      btnMore: true,
       showRibbon: false,
       showFooter: false,
       recNumCurrent: 0,
       recNumTotal: 0
+    }
+  },
+  props: {
+    btnActions: {
+      type: Array,
+      required: false,
+      default: function () { return [] }
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
-  <Dialog ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable">
+  <Dialog ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable" :title="title">
     <Forms ref="formComp">
-      <Contact v-if="$route.params.model === 'contacts'"/>
+      <Contact v-if="$route.params.model === 'contacts'" @title="onTitle"/>
       <Project v-if="$route.params.model === 'projects'"/>
       <Task v-if="$route.params.model === 'tasks'"/>
       <!-- register more forms here as needed, from src/components/forms -->
@@ -29,17 +29,21 @@ export default {
   data () {
     return {
       availableForms: ['projects', 'tasks', 'contacts'],
-      noFormAvailable: false
+      noFormAvailable: false,
+      title: 'Odoo In Vue - Form'
     }
   },
   methods: {
-    onDialogClosed: function () {
+    onDialogClosed () {
       this.$refs.dialogComp.showDialog = false
       if (this.$route.query.returnTo) {
         this.$router.push(this.$route.query.returnTo.toString()) // back to the standard page for the model
         return
       }
       this.$router.push('/' + this.$route.params.model) // back to the standard page for the model
+    },
+    onTitle (t) {
+      this.title = t
     }
   },
   mounted () {

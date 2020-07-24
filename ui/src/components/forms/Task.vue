@@ -6,11 +6,14 @@
 
 <script>
 export default {
-  name: 'ProjectForm',
+  name: 'TaskForm',
   data () {
     return {
-      data: {}
+      title: 'Task - Edit'
     }
+  },
+  mounted () {
+    this.$emit('title', this.title)
   }
 }
 </script>

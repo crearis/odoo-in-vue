@@ -56,7 +56,7 @@ const routes = [
   },
 
   {
-    path: '/:model/record/:id',
+    path: '/:model/record/:res_id',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Forms.vue') }

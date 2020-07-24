@@ -9,8 +9,11 @@ export default {
   name: 'ProjectForm',
   data () {
     return {
-      data: {}
+      title: 'Project - Edit'
     }
+  },
+  mounted () {
+    this.$emit('title', this.title)
   }
 }
 </script>

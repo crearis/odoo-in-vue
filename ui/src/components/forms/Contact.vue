@@ -1,24 +1,30 @@
 <template>
   <div class="row">
-    <div>
-      <div>Name</div>
-      <div>Company</div>
-    </div>
+    <Field :schema="schema" :value="data"/>
   </div>
 </template>
 
 <script>
+import Field from './auto/Field'
 export default {
-  name: 'ProjectForm',
+  name: 'ContactForm',
+  components: {
+    Field
+  },
   data () {
     return {
-      data: {}
+      title: 'Contact - Edit',
+      schema: {}, // model schema
+      data: {},
+      fields: []
     }
   },
-  methods: {
-    test () {
-      console.log('test OK')
-    }
+  created () {
+    // get the model schema
+    // get the data
+  },
+  mounted () {
+    this.$emit('title', this.title)
   }
 }
 </script>
