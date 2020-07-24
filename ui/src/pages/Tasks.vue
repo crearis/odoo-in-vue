@@ -1,5 +1,5 @@
 <template>
-  <Table ref="tableTasks" title="All Tasks" @row-dblclick="taskOpen"/>
+  <Table ref="tableTasks" title="All Tasks" @row-click="taskOpen"/>
 </template>
 
 <script>
@@ -47,8 +47,8 @@ export default {
         }
       })
     },
-    taskOpen: function (e) {
-      this.$router.push('/tasks/record/' + e.row.id)
+    taskOpen: function (e, row) {
+      this.$router.push('/tasks/record/' + row.id)
     }
   }
 }

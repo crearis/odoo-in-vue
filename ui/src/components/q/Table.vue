@@ -7,7 +7,7 @@
       :row-key="rowKey"
       :loading="isLoading"
       :no-data-label="'No data to show.'"
-      @row-dblclick="rowDblClick"
+      @row-click="rowClick"
     />
   </div>
 </template>
@@ -63,8 +63,8 @@ export default {
         })
       }
     },
-    rowDblClick (evt, row) {
-      this.$emit('row-dblclick', { evt, row })
+    rowClick (evt, row) {
+      this.$emit('row-click', evt, row)
     }
   }
 }

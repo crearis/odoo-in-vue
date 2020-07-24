@@ -1,5 +1,5 @@
 <template>
-  <Table ref="tableProjects" title="Projects" @row-dblclick="projectOpen" />
+  <Table ref="tableProjects" title="Projects" @row-click="projectOpen" />
 </template>
 
 <script>
@@ -35,8 +35,8 @@ export default {
       })
   },
   methods: {
-    projectOpen: function (e) {
-      this.$router.push('/projects/record/' + e.row.id)
+    projectOpen: function (e, row) {
+      this.$router.push('/projects/record/' + row.id)
     }
   }
 }
