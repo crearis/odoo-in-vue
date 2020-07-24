@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <q-badge @click.stop.prevent="test" label="Test"/>
+  <div class="row">
+    <div>
+      <div>Name</div>
+      <div>Company</div>
+    </div>
   </div>
 </template>
 
