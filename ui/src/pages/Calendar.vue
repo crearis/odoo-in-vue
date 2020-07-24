@@ -31,6 +31,7 @@
         v-if="viewMode !== 'list'"
         v-bind:viewMode="viewMode"
         v-bind:events="calendarData"
+        @event-click="onEventClick"
         />
     </q-card-section>
 
@@ -71,6 +72,9 @@ export default {
     this.changeViewMode('month')
   },
   methods: {
+    onEventClick (e) {
+      this.$router.push('/tasks/record/' + e.res_id + '?returnTo=/calendar')
+    },
     changeViewMode (mode) {
       console.log(`pages/calendar.changeView(${mode})`)
       this.viewMode = mode

@@ -35,6 +35,10 @@ export default {
   methods: {
     onDialogClosed: function () {
       this.$refs.dialogComp.showDialog = false
+      if (this.$route.query.returnTo) {
+        this.$router.push(this.$route.query.returnTo.toString()) // back to the standard page for the model
+        return
+      }
       this.$router.push('/' + this.$route.params.model) // back to the standard page for the model
     }
   },

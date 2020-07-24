@@ -128,7 +128,9 @@ export default {
         time: item.start.split(' ')[1].substr(0, 5),
         duration: item.duration * 60,
         overlaps: 0,
-        allday: item.allday
+        allday: item.allday,
+        model: 'calendar.event',
+        res_id: item.id
       })
     })
     return retVal
@@ -149,7 +151,9 @@ export default {
         time: item.time_deadline_display,
         duration: item.duration_deadline_minutes,
         overlaps: 0,
-        allday: item.time_deadline_display === false
+        allday: item.time_deadline_display === false,
+        model: 'project.task',
+        res_id: item.id
       }
       retVal.push(event)
     })

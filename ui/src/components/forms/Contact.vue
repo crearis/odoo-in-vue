@@ -1,6 +1,6 @@
 <template>
   <div>
-      Contact Form content here
+    <q-badge @click.stop.prevent="test" label="Test"/>
   </div>
 </template>
 
@@ -10,6 +10,11 @@ export default {
   data () {
     return {
       data: {}
+    }
+  },
+  methods: {
+    test () {
+      console.log('test OK')
     }
   }
 }
