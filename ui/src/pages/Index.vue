@@ -20,7 +20,7 @@ export default {
     }
   },
   mounted () {
-    Server.hasAuthenticatedSession()
+    Server.isSessionOK()
       .then(r => { if (r) { this.doAuthOK() } })
   },
   methods: {

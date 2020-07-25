@@ -31,7 +31,6 @@ export default {
     }
   },
   mounted () {
-    console.log('Table mounted with initData =', this.initData)
     if (this.initData) {
       this.data = this.initData.data
       this.columns = this.initData.cc

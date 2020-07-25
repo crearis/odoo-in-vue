@@ -68,7 +68,9 @@ export default {
     }
   },
   mounted () {
-    this.changeViewMode('month')
+    Server.checkSession().then(r => {
+      this.changeViewMode('month')
+    })
   },
   methods: {
     onEventClick (e) {
@@ -114,7 +116,6 @@ export default {
       })
     },
     setListData () {
-      console.log('getListData() called')
       Server.search_read(
         'project.task',
         [],
@@ -122,7 +123,6 @@ export default {
         'date_deadline'
       ).then(r => {
         if (r.data.length) {
-          console.log('getListData returns', r)
           this.tableInitData = r
         }
       })

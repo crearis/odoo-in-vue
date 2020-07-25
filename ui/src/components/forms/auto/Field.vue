@@ -60,7 +60,7 @@ export default {
           break
         }
       }
-      console.log('schema for', this.name, this.schema)
+      // console.log('schema for', this.name, this.schema)
     },
     getLabel () {
       if (this.schema === false) { this.setSchema() }

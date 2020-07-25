@@ -61,9 +61,11 @@ export default {
     }
   },
   mounted () {
-    this.setProjectData()
-    this.setCalendarData()
-    this.setTaskData()
+    Server.checkSession().then(r => {
+      this.setProjectData()
+      this.setCalendarData()
+      this.setTaskData()
+    })
   },
   methods: {
     setProjectData () {
@@ -82,7 +84,7 @@ export default {
         }
         this.$refs.tableMyProjects.isLoading = false
       }).catch(e => {
-        console.log(e)
+        console.log(e) // todo
         this.$refs.tableMyProjects.isLoading = false
       })
     },

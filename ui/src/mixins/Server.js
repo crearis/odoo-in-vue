@@ -62,7 +62,8 @@ export default {
   Returns a promise for an Odoo RPC query if the user has a session, else false.
   Also, it will refresh the users profile data from the server.
    */
-  hasAuthenticatedSession () {
+  isSessionOK () {
+    const errP = 'failed hasAuthenticatedSession() check'
     return Odoo.search_count('res.partner')
       .then(r => {
         if (r.status === 200) {
@@ -73,16 +74,27 @@ export default {
                 store.commit('setSessionProfile', r.data.result)
                 return true
               }).catch(e => {
-                this.log('hasAuthenticatedSession', e)
+                this.log(errP, e)
               })
           }
         }
         return false
       })
       .catch(e => {
-        console.log('hasAuthenticatedSession', e)
+        console.log(errP, e)
         return false
       })
+  },
+
+  checkSession () {
+    return this.isSessionOK().then(r => {
+      if (!r) {
+        this.$router.push('/')
+        return false
+      }
+      console.log('session OK')
+      return true
+    })
   },
 
   /*

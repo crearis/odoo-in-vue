@@ -19,7 +19,9 @@ export default {
     }
   },
   mounted () {
-    this.setTaskData()
+    Server.checkSession().then(r => {
+      this.setTaskData()
+    })
   },
   methods: {
     setTaskData () {
