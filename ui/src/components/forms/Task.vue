@@ -4,6 +4,7 @@
     <q-card-section class="fit">
       <Field name="name" v-bind:record="record" style="font-weight: bold"/>
       <Field name="priority" v-bind:record="record"/>
+      <Field name="kanban_state" v-bind:record="record"/>
     </q-card-section>
 
     <q-card-section>
@@ -29,7 +30,7 @@ export default {
     this.model = 'project.task'
     this.fields = [
       'id', 'name', 'project_id', 'user_id', 'date_deadline', 'time_deadline',
-      'duration_deadline', 'tag_ids', 'priority'
+      'duration_deadline', 'tag_ids', 'priority', 'kanban_state'
     ]
     this.read()
   }
