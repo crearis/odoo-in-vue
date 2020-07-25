@@ -20,10 +20,7 @@ export default {
     }
   },
   mounted () {
-    Server.redirectIfNotAuthenticated()
-      .then(r => {
-        this.setTaskData()
-      })
+    this.setTaskData()
   },
   methods: {
     setTaskData () {

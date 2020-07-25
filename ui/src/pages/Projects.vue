@@ -19,20 +19,17 @@ export default {
     }
   },
   mounted () {
-    Server.redirectIfNotAuthenticated()
-      .then(r => {
-        this.$refs.tableProjects.isLoading = true
-        Server.search_read(
-          'project.project',
-          [], // 'user', '=', store.state.session.profile.uid
-          ['id', 'name', 'partner_id', 'date_start', 'active']
-        ).then(r => {
-          if (r.data.length) {
-            this.$refs.tableProjects.setData(r.data, r.cc)
-          }
-          this.$refs.tableProjects.isLoading = false
-        })
-      })
+    this.$refs.tableProjects.isLoading = true
+    Server.search_read(
+      'project.project',
+      [], // 'user', '=', store.state.session.profile.uid
+      ['id', 'name', 'partner_id', 'date_start', 'active']
+    ).then(r => {
+      if (r.data.length) {
+        this.$refs.tableProjects.setData(r.data, r.cc)
+      }
+      this.$refs.tableProjects.isLoading = false
+    })
   },
   methods: {
     projectOpen: function (e, row) {

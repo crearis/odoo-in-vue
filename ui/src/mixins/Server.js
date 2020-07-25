@@ -86,20 +86,6 @@ export default {
   },
 
   /*
-  Call to check if user is authenticated. Redirects to login is user is not.
-   */
-  redirectIfNotAuthenticated () {
-    return this.hasAuthenticatedSession()
-      .then(r => {
-        if (!r) {
-          window.location.href = '/vue/#/'
-          return
-        }
-        console.log('session_id OK; wont redirect')
-      })
-  },
-
-  /*
   "Search-Read (with Column Config)"
   Gets field info from Odoo for a model and converts it to QTable column config data,
   then does Odoo.search_read for Odoo data.
@@ -111,7 +97,8 @@ export default {
   }
   "ccUseStoreBool" means "Column Config [loading] Uses [Vuex] Store? (TRUE/false)"
    */
-  search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80, contextObj = {}, ccUseStoreBool = true) {
+  search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80,
+    contextObj = {}, ccUseStoreBool = true) {
     const result = { data: {}, cc: [] }
     return Utilities.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
       .then(r => {

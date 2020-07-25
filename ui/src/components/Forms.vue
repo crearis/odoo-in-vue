@@ -4,7 +4,7 @@
     <!-- form header -->
     <div class="fit q-pa-none q-ma-none">
       <slot name="header">
-        <q-card-actions class="q-ma-none form-header-bottom-border q-mb-sm">
+        <q-card-actions class="q-ma-none form-header-bottom-border q-mb-lg">
           <q-btn-group>
             <q-btn push color="primary" v-if="btnEdit && $route.params.res_id !== '0'">Edit</q-btn>
             <q-btn push color="info" v-if="btnCreate && $route.params.res_id !== '0'">Create</q-btn>
@@ -13,7 +13,7 @@
           </q-btn-group>
           <q-space/>
           <q-space/>
-          <span class="q-pl-xs q-pr-sm">{{recNumCurrent}} / {{recNumTotal}}</span>
+          <span class="q-pl-xs q-pr-sm">Rec #{{$route.params.res_id}}</span>
           <q-btn-group>
             <q-btn icon="chevron_left" class="btn-divider-right"></q-btn>
             <q-btn icon="chevron_right"></q-btn>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- form body slot -->
-    <div class="q-mt-none q-pa-none fit">
+    <div class="q-ma-none q-pa-none fit">
       <slot></slot>
     </div>
 
@@ -51,9 +51,7 @@ export default {
       btnEdit: true,
       btnCreate: true,
       showRibbon: false,
-      showFooter: false,
-      recNumCurrent: 0,
-      recNumTotal: 0
+      showFooter: false
     }
   },
   props: {

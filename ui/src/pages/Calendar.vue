@@ -115,20 +115,17 @@ export default {
       })
     },
     setListData () {
-      Server.redirectIfNotAuthenticated()
-        .then(r => {
-          Server.search_read(
-            'calendar.event',
-            [],
-            ['name', 'display_start', 'user_id', 'location', 'duration', 'allday'],
-            'start'
-          ).then(r => {
-            if (r.data.length) {
-              this.listData = r.data
-              this.listDataColumns = r.cc
-            }
-          })
-        })
+      Server.search_read(
+        'calendar.event',
+        [],
+        ['name', 'display_start', 'user_id', 'location', 'duration', 'allday'],
+        'start'
+      ).then(r => {
+        if (r.data.length) {
+          this.listData = r.data
+          this.listDataColumns = r.cc
+        }
+      })
     },
     getDisplayDate () {
       try {

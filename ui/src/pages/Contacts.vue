@@ -20,19 +20,16 @@ export default {
   },
   mounted () {
     this.$refs.tableContacts.isLoading = true
-    Server.redirectIfNotAuthenticated()
-      .then(r => {
-        Server.search_read(
-          'res.partner',
-          [['active', '=', true]],
-          ['id', 'name', 'street', 'city', 'phone']
-        ).then(r => {
-          if (r.data.length) {
-            this.$refs.tableContacts.setData(r.data, r.cc)
-            this.$refs.tableContacts.isLoading = false
-          }
-        })
-      })
+    Server.search_read(
+      'res.partner',
+      [['active', '=', true]],
+      ['id', 'name', 'street', 'city', 'phone']
+    ).then(r => {
+      if (r.data.length) {
+        this.$refs.tableContacts.setData(r.data, r.cc)
+        this.$refs.tableContacts.isLoading = false
+      }
+    })
   },
   methods: {
     contactOpen: function (e, row) {

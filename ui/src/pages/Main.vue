@@ -61,12 +61,9 @@ export default {
     }
   },
   mounted () {
-    Server.redirectIfNotAuthenticated()
-      .then(r => {
-        this.setProjectData()
-        this.setCalendarData()
-        this.setTaskData()
-      })
+    this.setProjectData()
+    this.setCalendarData()
+    this.setTaskData()
   },
   methods: {
     setProjectData () {
