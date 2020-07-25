@@ -36,10 +36,10 @@
     </q-card-section>
 
     <Table
-      v-if="listData.length && viewMode === 'list'"
+      v-if="viewMode === 'list' && tableInitData !== false"
       title="All Events"
-      v-bind:data="listData"
-      v-bind:columns="listDataColumns"
+      v-bind:initData="tableInitData"
+      @row-click="taskOpen"
     />
   </q-card>
 </template>
@@ -62,10 +62,9 @@ export default {
       errorMessage: '',
       viewMode: 'month',
       calendarData: [],
-      listData: [],
-      listDataColumns: [],
       calendarDataStart: null,
-      calendarDataEnd: null
+      calendarDataEnd: null,
+      tableInitData: false
     }
   },
   mounted () {
@@ -115,15 +114,16 @@ export default {
       })
     },
     setListData () {
+      console.log('getListData() called')
       Server.search_read(
-        'calendar.event',
+        'project.task',
         [],
-        ['name', 'display_start', 'user_id', 'location', 'duration', 'allday'],
-        'start'
+        ['id', 'name', 'project_id', 'user_id', 'stage_id'],
+        'date_deadline'
       ).then(r => {
         if (r.data.length) {
-          this.listData = r.data
-          this.listDataColumns = r.cc
+          console.log('getListData returns', r)
+          this.tableInitData = r
         }
       })
     },
@@ -133,6 +133,9 @@ export default {
       } catch {
         return ''
       }
+    },
+    taskOpen (e, row) {
+      this.$router.push('/tasks/record/' + row.id)
     }
   }
 }

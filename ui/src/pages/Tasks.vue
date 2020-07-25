@@ -5,7 +5,6 @@
 <script>
 import Server from '../mixins/Server'
 import Table from 'components/q/Table.vue'
-// import { store } from '../store'
 
 export default {
   name: 'PageTasks',
@@ -44,7 +43,7 @@ export default {
         }
       })
     },
-    taskOpen: function (e, row) {
+    taskOpen (e, row) {
       this.$router.push('/tasks/record/' + row.id)
     }
   }

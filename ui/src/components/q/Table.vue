@@ -24,6 +24,17 @@ export default {
     rowKey: {
       type: String,
       default: 'id'
+    },
+    initData: {
+      type: [Boolean, Object],
+      default: false
+    }
+  },
+  mounted () {
+    console.log('Table mounted with initData =', this.initData)
+    if (this.initData) {
+      this.data = this.initData.data
+      this.columns = this.initData.cc
     }
   },
   data () {
