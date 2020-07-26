@@ -8,6 +8,9 @@ description: Odoo In Vue landing page
 date: 2020-01-26T04:15:05+09:00
 ---
 ' > ./content/_index.md
+echo '
+{{< figure src="https://gitlab.com/sylnsr/odoo-in-vue/-/raw/13/docs/hugo/static/odooinvue.png" >}}
+' >> ./content/_index.md
 cat ../../README.md >> ./content/_index.md
 
 ######
@@ -54,4 +57,4 @@ mv ./public ../
 cd ../
 git add ./public
 rm -rf ./hugo/resources
-git commit ./public/* -m"update www"
+git commit ./public ./hugo -m"update www"
