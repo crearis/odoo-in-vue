@@ -10,3 +10,4 @@ docker/var-lib-odoo/*
 odoo.deb
 debug-odoo.conf
 __pycache__
+docs/hugo/resources
