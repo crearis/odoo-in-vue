@@ -1,3 +1,10 @@
+
+---
+title: Odoo In Vue
+description: Odoo In Vue landing page
+date: 2020-01-26T04:15:05+09:00
+---
+
 Odoo In Vue is a project that provides a foundation for developing typical business apps with Odoo and Vue. It includes
 a very simple Vue prototype app that connects to the Odoo server through the Odoo JSON-RPC API.
 

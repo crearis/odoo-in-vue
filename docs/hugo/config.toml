@@ -1,0 +1,3 @@
+baseURL = "http://odooinvue.org/"
+title = "Odoo In Vue"
+theme = "ace-documentation"

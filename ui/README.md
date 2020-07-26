@@ -1,26 +1,23 @@
-# odoo-in-vue (ui)
+**Before you run the Quasar/Vue sub-project follow these steps (as needed).**
 
-odoo-in-vue
+Install the dependencies:
 
-## Install the dependencies
-```bash
-yarn
-```
+`yarn`
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+Start the app in development mode (hot-code reloading, error reporting, etc.):
 
-### Lint the files
-```bash
-yarn run lint
-```
+`quasar dev`
 
-### Build the app for production
-```bash
-quasar build
-```
+Lint the files:
 
-### Customize the configuration
+`yarn run lint`
+
+Build the app for production:
+
+`quasar build`
+
+Customize the configuration:
+
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+
+---

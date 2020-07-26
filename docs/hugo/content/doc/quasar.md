@@ -1,3 +1,10 @@
+
+---
+title: "Vue Setup"
+description: "Introduction/ Vue Setup"
+date: 2020-01-11T14:09:21+09:00
+---
+
 ## About the Quasar/Vue project
 
 Using VueJS with Odoo is an established paradigm that we borrow from older projects in the public domain. The Quasar/Vue
@@ -18,5 +25,28 @@ The root directory for the Quasar/Vue project is `/ui`
  - Axios for async queries
  - Project uses JSON-RPC to communicate with the Odoo backend
  - Server interfacing is managed as a mixin
+
+---
+**Before you run the Quasar/Vue sub-project follow these steps (as needed).**
+
+Install the dependencies:
+
+`yarn`
+
+Start the app in development mode (hot-code reloading, error reporting, etc.):
+
+`quasar dev`
+
+Lint the files:
+
+`yarn run lint`
+
+Build the app for production:
+
+`quasar build`
+
+Customize the configuration:
+
+See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
 
 ---

@@ -5,7 +5,6 @@
  * error or unmet condition in which case they MUST only return false (bool).
  */
 
-import axios from 'axios'
 import { store } from '../store'
 import OdooRpc from './OdooRpc'
 import Utilities from './Utilities'
@@ -26,19 +25,6 @@ export default {
     if (error !== null) {
       console.log(error)
     }
-  },
-
-  /*
-  Return the health of the server.
-  Requires the spa_support Odoo module installed
-   */
-  getHealth () {
-    return axios.get('/spa-support/utility/health')
-      .then(r => {
-        // console.log('server health ok')
-      }).catch(e => {
-        console.log('server health:', e)
-      })
   },
 
   /*
