@@ -9,6 +9,8 @@ Just download this repo and start customizing the Vue app in the `/ui` directory
 your Odoo development environment setup, then just download the `ui` directory from this project to get a basis for your
 Quasar/Vue project that connects to Odoo.
 
+Everything is available on **Gitlab**: https://gitlab.com/sylnsr/odoo-in-vue
+
 ---
 
 ### Whats so bad about QWeb?
