@@ -21,6 +21,8 @@ Quasar/Vue project that connects to Odoo.
 
 Everything is available on **Gitlab**: https://gitlab.com/sylnsr/odoo-in-vue
 
+The stand-alone documentation is here: https://www.odooinvue.org
+
 ---
 
 ### Whats so bad about QWeb?
