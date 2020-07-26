@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
+
   <url>
-    <loc>http://localhost:1313/doc/concepts/</loc>
+    <loc>https://www.odooinvue.org/doc/concepts/</loc>
     <lastmod>2020-01-28T00:38:51+09:00</lastmod>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://www.odooinvue.org/about/</loc>
     <lastmod>2020-07-25T00:00:00+00:00</lastmod>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://www.odooinvue.org/</loc>
     <lastmod>2020-01-26T04:15:05+09:00</lastmod>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/doc/docker/</loc>
+    <loc>https://www.odooinvue.org/doc/docker/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/doc/</loc>
+    <loc>https://www.odooinvue.org/doc/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/doc/development/</loc>
+    <loc>https://www.odooinvue.org/doc/development/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/doc/quasar/</loc>
+    <loc>https://www.odooinvue.org/doc/quasar/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://www.odooinvue.org/categories/</loc>
   </url>
-  
+
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://www.odooinvue.org/tags/</loc>
   </url>
-  
+
 </urlset>
