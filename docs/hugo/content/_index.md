@@ -6,7 +6,7 @@ date: 2020-01-26T04:15:05+09:00
 ---
 
 
-{{< figure src="https://gitlab.com/sylnsr/odoo-in-vue/-/raw/13/docs/hugo/static/odooinvue.png" >}}
+{{< figure src="https://gitlab.com/sylnsr/odoo-in-vue/-/raw/13/docs/hugo/static/img/odooinvue.png" >}}
 
 This is a project that provides a foundation for developing typical business apps with Odoo and Vue. It includes
 a very simple Vue prototype app that connects to the Odoo server through the Odoo JSON-RPC API.
