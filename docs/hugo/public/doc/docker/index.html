@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://odooinvue.org/doc/docker/">
+
+    <title>
+        
+        Docker | Odoo In Vue
+        
+    </title>
+
+    
+    <link href="http://odooinvue.org/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://odooinvue.org/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                Odoo In Vue
+            </a>
+        </div>
+        
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/about/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+    </li>
+    <li data-nav-id="/doc/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/doc/concepts/" class="nav-item my-1">
+                
+                 <a href="/doc/concepts/" class="nav-link p-0">
+                    Concepts
+                </a>
+        </li>
+        <li data-nav-id="/doc/docker/" class="nav-item my-1 active">
+                
+                 <a href="/doc/docker/" class="nav-link p-0">
+                    Docker
+                </a>
+        </li>
+        <li data-nav-id="/doc/development/" class="nav-item my-1">
+                
+                 <a href="/doc/development/" class="nav-link p-0">
+                    Odoo Development
+                </a>
+        </li>
+        <li data-nav-id="/doc/quasar/" class="nav-item my-1">
+                
+                 <a href="/doc/quasar/" class="nav-link p-0">
+                    Vue Setup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#starting-backend-services-in-docker">Starting backend services in Docker</a>
+      <ul>
+        <li><a href="#directory-notes">Directory Notes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Docker</h1>
+
+<h2 id="starting-backend-services-in-docker">Starting backend services in Docker</h2>
+<p>The scripts in the <code>/docker</code> dir are only for getting the backend services running. Docker is not used to run the
+Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in <code>/docker</code>
+which provides a proxy server that will reverse proxy to Quasar&rsquo;s built in server, but obviously for that to work, the
+Quasar server needs to be started from the commmand line (e.g. <code>quasar dev</code>)</p>
+<p>Run <code>/docker/start-docker-stack.sh</code>. The script will first prompt you about installing 3rd party add-ons. If this is
+your first time running the script enter <code>y</code>. The stack requires those modules. You will also be prompted if you want to
+reset <code>docker</code> folder data and if you want to preserve your demo data, choose <code>n</code>.</p>
+<p>Once the stack is running, you can access the standard Odoo UI from http://localhost and the Quasar/Vue UI from http://localhost/vue</p>
+<p>Once logged in, go to the main menu and click <code>Apps</code> and install the <code>project_task_plan</code> module. This will install the
+base module for this project and load all its dependencies. <strong>Because there are a lot of dependencies to install, this
+process can take a while.</strong> The <code>cpu_time_limit</code> config in
+<a href="https://gitlab.com/sylnsr/odoo-in-vue/-/tree/13/docker/odoo.conf"><code>/docker/odoo.conf</code></a> is deliberately set to a large
+value so that the installation should not time out, provided that you have a reasonably fast machine.</p>
+<p>Once all the modules are installed, you can navigate to <code>Projects</code>.</p>
+<p>Note: Using Docker with Odoo is an established paradigm and Odoo themselves provide the Docker images and Docker files.
+Whether or not you use this paradigm and how you might use it, is up to you.</p>
+<p>Alternatively, you might want to run the stack for development purposes in which case you might only want the reverse
+proxy (Traefik) and DB (Postgres 12) Docker containers. For this purpose, the individual scripts are:</p>
+<ul>
+<li><code>/docker/start-traefik.sh</code></li>
+<li><code>/docker/start-postgres.sh</code></li>
+</ul>
+<p>So, a typical workflow for a full development setup is to:</p>
+<ol>
+<li>run these two scripts (above)</li>
+<li>start Odoo debugging in your Python IDE (e.g. Pycharm)</li>
+<li>start Quasar in dev mode with <code>quasar dev</code></li>
+</ol>
+<p><strong>Note:</strong> starting these containers using these 2 scripts start them with the <code>--rm</code> param, so they will be removed once
+you stop them. In this case of the Postgres container, this means that no data is persisted. If you want to start
+debugging again, you will also need to reinstall the Odoo modules.</p>
+<hr>
+<h3 id="directory-notes">Directory Notes</h3>
+<p>The <code>/docker</code> directory has pre-existing <code>pg-data</code> and <code>var-lib-odoo</code> directories for convenience however the
+.gitignore file omits all their contents from being part of the repo.</p>
+<p>When the containers start, they will set the permissions of these directories to be owned by root.
+The <a href="https://gitlab.com/sylnsr/odoo-in-vue/-/tree/13/docker/start-docker-stack.sh">/docker/start-docker-stack.sh</a> and
+<a href="https://gitlab.com/sylnsr/odoo-in-vue/-/tree/13/docker/reset-data.sh">/docker/reset-data.sh</a> scripts will use <code>sudo</code> to
+reset these and you can read those scripts and confirm it, to know that nothing evil is going on when your sudo
+password is prompted.</p>
+<hr>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/doc/concepts/" title="Concepts"><i class="fas fa-chevron-left p-1"></i>Concepts</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/doc/development/" title="Odoo Development">Odoo Development<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://odooinvue.org/lib/jquery.min.js"></script> 
+<script src="http://odooinvue.org/lib/popper.min.js"></script> 
+
+<script src="http://odooinvue.org/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/odooinvue.org\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>
