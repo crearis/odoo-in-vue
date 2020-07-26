@@ -46,7 +46,7 @@ date: 2020-01-11T14:09:21+09:00
 cat ../../readme-dev.md >> ./content/doc/development.md
 
 
-###### bug: Hugo wont build to a higher lvl dir, we have to move it up after a pause
+###### bug: Hugo isn't building to a higher lvl dir for whatever reason, so we have to move it up after a pause
 rm -rf ../public
 hugo -d ./public
 sleep 3

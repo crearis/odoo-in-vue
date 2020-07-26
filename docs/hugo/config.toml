@@ -1,4 +1,4 @@
-baseURL = "http://odooinvue.org/"
+baseURL = "https://www.odooinvue.org/"
 title = "Odoo In Vue"
 theme = "ace-documentation"
 
