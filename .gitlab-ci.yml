@@ -2,7 +2,7 @@
 
 pages:
   script:
-    - mv ./hugo/public ./public
+    - mv ./docs/public ./public
   artifacts:
     paths:
       - public
