@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://odooinvue.org/doc/development/">
+
+    <title>
+        
+        Odoo Development | Odoo In Vue
+        
+    </title>
+
+    
+    <link href="http://odooinvue.org/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://odooinvue.org/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                Odoo In Vue
+            </a>
+        </div>
+        
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/about/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+    </li>
+    <li data-nav-id="/doc/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/doc/concepts/" class="nav-item my-1">
+                
+                 <a href="/doc/concepts/" class="nav-link p-0">
+                    Concepts
+                </a>
+        </li>
+        <li data-nav-id="/doc/docker/" class="nav-item my-1">
+                
+                 <a href="/doc/docker/" class="nav-link p-0">
+                    Docker
+                </a>
+        </li>
+        <li data-nav-id="/doc/development/" class="nav-item my-1 active">
+                
+                 <a href="/doc/development/" class="nav-link p-0">
+                    Odoo Development
+                </a>
+        </li>
+        <li data-nav-id="/doc/quasar/" class="nav-item my-1">
+                
+                 <a href="/doc/quasar/" class="nav-link p-0">
+                    Vue Setup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#setup-basics">Setup Basics</a>
+      <ul>
+        <li><a href="#external-addons-for-odoo">External Addons for Odoo</a></li>
+      </ul>
+    </li>
+    <li><a href="#debugging-with-a-jetbrains-ide">Debugging with a JetBrains IDE</a></li>
+    <li><a href="#other-recommended-tools">Other Recommended Tools</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Odoo Development</h1>
+
+<h2 id="setup-basics">Setup Basics</h2>
+<p>Assumptions:</p>
+<ul>
+<li>You are a Python developer</li>
+<li>You have at least basic Odoo development knowledge</li>
+<li>You are using Ubuntu 18.04 for development (or similar)</li>
+</ul>
+<p>Pre-requisites:</p>
+<ul>
+<li>Python <code>setuptools</code> - (<code>sudo apt-get install python3-setuptools</code>)</li>
+<li>Python <code>wheel</code> - (<code>pip3 install wheel</code>)</li>
+</ul>
+<ol>
+<li>
+<p>Get Odoo 13 one of 2 ways (choose just one, unless you know what you are doing):</p>
+<ul>
+<li>Clone the Odoo <strong>13</strong> source code to a directory of your choice. You can use the following script to do this.
+Be sure to read the <a href="https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh">source code</a>
+if you have security concerns. Just run the this command in a directory where you want to download the source code
+(be sure to choose Odoo <strong>13</strong> when prompted): <br>
+<code>source &lt;(curl -s https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)</code></li>
+<li>Install Odoo 13 using the .deb installer file - just run <code>install-odoo-debian.sh</code></li>
+</ul>
+</li>
+<li>
+<p>Setup your Python 3.6 virtual environment by running the following in the root directory of the project:<br>
+<code>python3 -m venv ./venv</code></p>
+</li>
+<li>
+<p>Activate the Python 3 virtual environment:<br>
+<code>source ./venv/bin/activate</code></p>
+</li>
+<li>
+<p>Install the Odoo requirements into the virtual environment:
+<code>pip3 install -r &lt;path-where-you-cloned-odoo-13&gt;/requirements.txt</code></p>
+</li>
+<li>
+<p>Copy <code>debug-odoo.conf.dist</code> to <code>debug-odoo.conf</code> and update it so that <code>data_dir</code> and <code>addons_path</code>
+are correct paths for your file system.</p>
+</li>
+<li>
+<p>Run <code>./docker/start-postgres.sh</code> and <code>./docker/start-traefik.sh</code>. Then start debugging Odoo in your IDE.</p>
+</li>
+<li>
+<p>Finally, from the <code>./ui/</code> folder, run <code>quasar dev</code> to start Quasar in development mode. Now going to,
+http://localhost/vue gets you into the custom UI app and http://localhost/web will get you into Odoo 13. Direct
+access to Odoo 13 via http://localhost:8069 will also work for that.</p>
+</li>
+</ol>
+<p><strong>Note:</strong> if you install Odoo from the installer AND THEN you try to run it from source, you will probably get an error
+indicating that port 8069 is already in use. This is because the installer starts Odoo running as a service so the port
+will already be occupied.</p>
+<hr>
+<h3 id="external-addons-for-odoo">External Addons for Odoo</h3>
+<p><strong>(This section does not apply if you are only downloading the Quasar/Vue code in the <code>/ui</code> dir)</strong></p>
+<p>This project already includes (via download) some free add-on modules from the Odoo community (OCA and others).
+These are the external modules that are downloaded to this project when running the <code>update-other-addons.sh</code> script.</p>
+<ul>
+<li><a href="https://github.com/OCA/project/tree/13.0/project_category">project_category</a>: For categorization of projects (formally named Project Types)</li>
+<li><a href="https://github.com/sylnsr/project_tools/tree/13.0/project_contact">project_contact</a>: Contextually link contacts to projects</li>
+<li><a href="https://github.com/OCA/project/tree/13.0/project_key">project_key</a>: Unique project key generation</li>
+<li><a href="https://github.com/sylnsr/project_tools/tree/13.0/project_ledger">project_ledger</a>: Adds project ledger features</li>
+<li><a href="https://github.com/OCA/project/tree/13.0/project_status">project_status</a>: Provides status management on projects</li>
+<li><a href="https://github.com/OCA/project/tree/13.0/project_task_add_very_high">project_task_add_very_high</a>: Adds two new levels of priority for tasks on projects</li>
+<li><a href="https://github.com/OCA/project/tree/13.0/project_task_dependency">project_task_dependency</a>: Define dependencies (other tasks) of a task</li>
+<li><a href="https://github.com/OCA/project/tree/13.0/project_task_material">project_task_material</a>: Enables tracking of expenses for a project</li>
+<li><a href="https://github.com/idazco/odoo-addons/tree/13/project_task_plan">project_task_plan</a>: Adds features for aiding with task planning</li>
+<li><a href="https://github.com/idazco/odoo-addons/tree/13/tagged_notes">tagged_notes</a>: Link notes to other records and tag them</li>
+</ul>
+<p>This project will strive to incorporate all the UI features/objective from these Odoo modules in the Vue project.</p>
+<hr>
+<h2 id="debugging-with-a-jetbrains-ide">Debugging with a JetBrains IDE</h2>
+<p>After setting up your environment, you should be able to just run the <code>odoo-bin</code> run/debug configuration that is already
+<a href="./.idea/runConfigurations/odoo_bin.xml">provided with this project</a>, AFTER you correct the &ldquo;Script path&rdquo;; &ldquo;Parameters&rdquo;;
+&ldquo;Working directory&rdquo; and &ldquo;Python Interpreter&rdquo; so that they are correct for your environment. Note, the Python Interpreter
+MUST point to the Python binary in the project&rsquo;s Python virtual environment.</p>
+<p>If you get the following error when debugging: <code>greenlet.error: cannot switch to a different thread</code> and the long-polling
+port is not working, then look at this: <a href="https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994">https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994</a>
+&ndash; USE CAUTION WHEN IMPLEMENTING THIS FIX - IT MAY CAUSE BREAKPOINTS TO STOP WORKING! - The problem with using that fix,
+is that the &ldquo;Gevent compatible&rdquo; setting in PyCharm <a href="https://youtrack.jetbrains.com/issue/PY-11910">does not always work</a>,
+but YMMV.</p>
+<p>I have not found any issues with debugging with the &ldquo;Gevent compatible&rdquo; option unchecked and the console throwing that
+error, so just ignore that error when debugging and longpolling is not working.</p>
+<p>When longpolling stops working, or is disabled by setting <code>workers = 0</code>, the Odoo UI will be annoying by continually
+putting up the &ldquo;Trying to connect&rdquo; message, followed by the &ldquo;You are back online&rdquo; message .. in a continual loop. Just
+ignore it.</p>
+<hr>
+<h2 id="other-recommended-tools">Other Recommended Tools</h2>
+<ul>
+<li>IDE: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> or <a href="https://www.jetbrains.com/pycharm/">Pycharm</a></li>
+<li>Python Shell: <a href="https://ipython.readthedocs.io/en/stable/install/index.html">IPython</a></li>
+</ul>
+<p>The <a href="https://ipython.org/">IPython</a> shell is especially useful with <a href="https://github.com/katyukha/odoo-rpc-client">odoo-rpc-client</a>
+for testing your class methods that are accessible over Odoo&rsquo;s built-in JSON-RPC API.</p>
+<p>The <code>requirements.txt</code> file already includes <code>odoo-rpc-client</code>. So assuming you:</p>
+<ol>
+<li>are using the default login with the demo database</li>
+<li>have the virtual environment (venv) activated</li>
+</ol>
+<p>&hellip; just type the following in your CLI:</p>
+<pre><code>ipython -i connect.py
+</code></pre>
+<p>Now you can start using the Odoo JSON-RPC API, for example:</p>
+<pre><code>odoo['res.partner'].browse(1).email
+</code></pre>
+<p>&hellip; which results in:</p>
+<pre><code>Out[6]: 'info@yourcompany.example.com'
+</code></pre>
+<hr>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/doc/docker/" title="Docker"><i class="fas fa-chevron-left p-1"></i>Docker</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/doc/quasar/" title="Vue Setup">Vue Setup<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://odooinvue.org/lib/jquery.min.js"></script> 
+<script src="http://odooinvue.org/lib/popper.min.js"></script> 
+
+<script src="http://odooinvue.org/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/odooinvue.org\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>
