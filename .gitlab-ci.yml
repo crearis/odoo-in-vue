@@ -1,0 +1,10 @@
+---
+
+pages:
+  script:
+    - mv ./hugo/public ./public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
