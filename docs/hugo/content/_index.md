@@ -5,7 +5,7 @@ description: Odoo In Vue landing page
 date: 2020-01-26T04:15:05+09:00
 ---
 
-Odoo In Vue is a project that provides a foundation for developing typical business apps with Odoo and Vue. It includes
+This is a project that provides a foundation for developing typical business apps with Odoo and Vue. It includes
 a very simple Vue prototype app that connects to the Odoo server through the Odoo JSON-RPC API.
 
 The Vue framework is built upon using the [Quasar Framework](https://quasar.dev/), which means that you can easily
@@ -23,18 +23,19 @@ Quasar/Vue project that connects to Odoo.
   
 **Using Qweb to develop your UX solution has some specific drawbacks:**
 
- - QWeb is still based on terse and bloated bloated XML
+ - QWeb is still based on terse and bloated XML
  - QWeb is complicated and has a big learning curve
  - QWeb is specific to Odoo
  - QWeb provides a small selection of standard UI widgets
  - Odoo documentation sucks and the QWeb part of it is no exception
  - Reactive design with QWeb still sucks and is still buggy
- - QWeb is only targeted for browsers and converting HTML to PDF
+ - QWeb is only targeted for browsers and for converting HTML to PDF
  - Community support is tiny compared to the Vue community
  - Lacks support for many modern paradigms and concepts available in Vue
- - UX customizations made in Odoo Studio can't be exported to .xml add-on view files for storing in a code repo
  - No browser plugins to help QWeb development
- - No popular IDE plugin support and Odoo Studio requires Enterprise Edition ($$$)
+ - No popular IDE plugin support
+ - Odoo Studio requires Enterprise Edition ($$$)
+ - Work done in Odoo Studio can't be exported as .xml view files that can be used in an add-on and stored in a code repo
  - It's hard to find UX developers that know QWeb or are willing to learn it and those that do usually cost more ($$$)
  
 **Conversely, using Quasar/Vue for UX development has specific advantages:**

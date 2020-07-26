@@ -1,3 +1,7 @@
 baseURL = "http://odooinvue.org/"
 title = "Odoo In Vue"
 theme = "ace-documentation"
+
+orderSectionsby = "weight"
+disableReadmoreNav = true
+disableSearch = true

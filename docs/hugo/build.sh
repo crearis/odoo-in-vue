@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")" || exit 1
 
-
 echo '
 ---
 title: Odoo In Vue
@@ -45,3 +44,11 @@ date: 2020-01-11T14:09:21+09:00
 ---
 ' > ./hugo/content/doc/development.md
 cat ../readme-dev.md >> ./hugo/content/doc/development.md
+
+
+######
+rm -rf ./public/*
+hugo -d ./public/
+git add ./public/*
+git commit ./public -m"update www"
+
