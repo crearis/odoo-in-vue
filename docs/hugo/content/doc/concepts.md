@@ -22,7 +22,7 @@ the Projects module is enough to demonstrate all the paradigms involved in using
 ##### Regarding the Calendar
 
 Odoo does have a Calendar module but its not used for the purposes of this project. Instead we show project task data on
-the QCalendar component because project tasks have deadlines, which are fine for basically demonstrating how we can put
+the QCalendar component because project tasks have deadlines, which is fine for basically demonstrating how we can put
 that on QCalendar. 
 
 ---
