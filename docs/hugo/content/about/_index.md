@@ -12,9 +12,15 @@ collapsible: true
 
 ---
 
+### Project Source Code
+
+GitLab URL: [https://gitlab.com/sylnsr/odoo-in-vue](https://gitlab.com/sylnsr/odoo-in-vue)
+
+---
+
 ### License
 
-Except as otherwise noted, this project is licensed under the [LGLP 3 license](www.gnu.org/licenses/lgpl-3.0.en.html)
+Except as otherwise noted, code in this repo is licensed under the MIT license
 
 --- 
 
