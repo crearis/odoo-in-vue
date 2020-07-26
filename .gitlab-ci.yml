@@ -7,4 +7,4 @@ pages:
     paths:
       - public
   only:
-    - 13
+    - "13"
