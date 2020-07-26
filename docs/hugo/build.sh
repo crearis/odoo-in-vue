@@ -51,4 +51,4 @@ rm -rf ./public/*
 hugo -d ./public/
 git add ./public/*
 git commit ./public -m"update www"
-
+rm -rf ./resources
