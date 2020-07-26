@@ -48,7 +48,7 @@ cat ../../readme-dev.md >> ./content/doc/development.md
 
 ###### bug: Hugo isn't building to a higher lvl dir for whatever reason, so we have to move it up after a pause
 rm -rf ../public
-hugo -d ./public
+hugo
 sleep 3
 mv ./public ../
 cd ../
