@@ -3,46 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://odooinvue.org/doc/concepts/</loc>
+    <loc>http://localhost:1313/doc/concepts/</loc>
     <lastmod>2020-01-28T00:38:51+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2020-07-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2020-01-26T04:15:05+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/doc/docker/</loc>
+    <loc>http://localhost:1313/doc/docker/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/doc/</loc>
+    <loc>http://localhost:1313/doc/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/doc/development/</loc>
+    <loc>http://localhost:1313/doc/development/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/doc/quasar/</loc>
+    <loc>http://localhost:1313/doc/quasar/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url>
   
   <url>
-    <loc>http://odooinvue.org/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
   
 </urlset>
