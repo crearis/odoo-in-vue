@@ -9,3 +9,6 @@ updates in the master branch.
 
 Some of the documentation in the Hugo rendered site comes directly from the "read me" markdown files in the project and
 are copied in as Hugo content with the build script.
+
+The `ace-documentation` Hugo theme was altered because it has issues with the version of Hugo I am using.
+Don't download again over the existing directory.
