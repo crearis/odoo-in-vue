@@ -16,7 +16,8 @@
       <pubDate>Tue, 28 Jan 2020 00:38:51 +0900</pubDate>
       
       <guid>https://www.odooinvue.org/doc/concepts/</guid>
-      <description>Odoo Concepts As you can see in the main Odoo Development page, the Odoo setup for this project centers around usage of the Odoo Projects module and additional modules that extend that. There is a lot more to Odoo than the Projects module, but the main concepts I want to demonstrate is how to build a Vue app that uses Odoo in the backend. For this the Projects module is enough to demonstrate all the paradigms involved in using Odoo&amp;rsquo;s JSON-RPC API, which are:</description>
+      <description>Inspiration for this project Whats so bad about QWeb? Using Qweb to develop your UX solution has some specific drawbacks:
+ QWeb is still based on terse and bloated XML QWeb is complicated and has a big learning curve QWeb is specific to Odoo QWeb provides a small selection of standard UI widgets Odoo documentation sucks and the QWeb part of it is no exception Reactive design with QWeb still sucks and is still buggy QWeb is only targeted for browsers and for converting HTML to PDF Community support is tiny compared to the Vue community Lacks support for many modern paradigms and concepts available in Vue No browser plugins to help QWeb development No popular IDE plugin support Odoo Studio requires Enterprise Edition ($$$) Work done in Odoo Studio can&amp;rsquo;t be exported as .</description>
     </item>
     
     <item>
@@ -25,7 +26,7 @@
       <pubDate>Sat, 11 Jan 2020 14:09:21 +0900</pubDate>
       
       <guid>https://www.odooinvue.org/doc/docker/</guid>
-      <description>Starting backend services in Docker If you are not an Odoo developer: The scripts in the /docker dir are only for getting the backend services running, including Odoo. Docker is not used to run the Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in /docker which provides a proxy server that will reverse proxy to Quasar&amp;rsquo;s built in server, but obviously for that to work, the Quasar server needs to be started from the command line (e.</description>
+      <description>Starting backend services in Docker  If you are not an Odoo developer: The scripts in the /docker dir are only for getting the backend services running, including Odoo. Docker is not used to run the Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in /docker which provides a proxy server that will reverse proxy to Quasar&amp;rsquo;s built in server, but obviously for that to work, the Quasar server needs to be started from the command line (e.</description>
     </item>
     
     <item>

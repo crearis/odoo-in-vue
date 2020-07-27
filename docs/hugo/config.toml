@@ -2,6 +2,18 @@ baseURL = "https://www.odooinvue.org/"
 title = "Odoo In Vue"
 theme = "ace-documentation"
 
-orderSectionsby = "weight"
-disableReadmoreNav = true
-disableSearch = true
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Docs"
+url = "/doc/"
+weight = 2
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 3
