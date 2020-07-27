@@ -7,17 +7,18 @@ date: 2020-01-11T14:09:21+09:00
 
 ## Starting backend services in Docker
 
-The scripts in the `/docker` dir are only for getting the backend services running. Docker is not used to run the
-Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in `/docker`
-which provides a proxy server that will reverse proxy to Quasar's built in server, but obviously for that to work, the
-Quasar server needs to be started from the commmand line (e.g. `quasar dev`)
+#### If you are not an Odoo developer:
+
+The scripts in the `/docker` dir are only for getting the backend services running, including Odoo. Docker is not used to
+run the Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in
+`/docker` which provides a proxy server that will reverse proxy to Quasar's built in server, but obviously for that to
+work, the Quasar server needs to be started from the command line (e.g. `quasar dev`)
 
 Run `/docker/start-docker-stack.sh`. The script will first prompt you about installing 3rd party add-ons. If this is
 your first time running the script enter `y`. The stack requires those modules. You will also be prompted if you want to
 reset `docker` folder data and if you want to preserve your demo data, choose `n`.
 
 Once the stack is running, you can access the standard Odoo UI from http://localhost and the Quasar/Vue UI from http://localhost/vue
-
 
 Once logged in, go to the main menu and click `Apps` and install the `project_task_plan` module. This will install the
 base module for this project and load all its dependencies. **Because there are a lot of dependencies to install, this
@@ -29,6 +30,10 @@ Once all the modules are installed, you can navigate to `Projects`.
  
 Note: Using Docker with Odoo is an established paradigm and Odoo themselves provide the Docker images and Docker files.
 Whether or not you use this paradigm and how you might use it, is up to you.
+
+---
+
+#### If are an Odoo developer:
 
 Alternatively, you might want to run the stack for development purposes in which case you might only want the reverse
 proxy (Traefik) and DB (Postgres 12) Docker containers. For this purpose, the individual scripts are:

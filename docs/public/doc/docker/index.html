@@ -94,6 +94,7 @@
   <ul>
     <li><a href="#starting-backend-services-in-docker">Starting backend services in Docker</a>
       <ul>
+        <li></li>
         <li><a href="#directory-notes">Directory Notes</a></li>
       </ul>
     </li>
@@ -107,10 +108,11 @@
 <h1>Docker</h1>
 
 <h2 id="starting-backend-services-in-docker">Starting backend services in Docker</h2>
-<p>The scripts in the <code>/docker</code> dir are only for getting the backend services running. Docker is not used to run the
-Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in <code>/docker</code>
-which provides a proxy server that will reverse proxy to Quasar&rsquo;s built in server, but obviously for that to work, the
-Quasar server needs to be started from the commmand line (e.g. <code>quasar dev</code>)</p>
+<h4 id="if-you-are-not-an-odoo-developer">If you are not an Odoo developer:</h4>
+<p>The scripts in the <code>/docker</code> dir are only for getting the backend services running, including Odoo. Docker is not used to
+run the Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in
+<code>/docker</code> which provides a proxy server that will reverse proxy to Quasar&rsquo;s built in server, but obviously for that to
+work, the Quasar server needs to be started from the command line (e.g. <code>quasar dev</code>)</p>
 <p>Run <code>/docker/start-docker-stack.sh</code>. The script will first prompt you about installing 3rd party add-ons. If this is
 your first time running the script enter <code>y</code>. The stack requires those modules. You will also be prompted if you want to
 reset <code>docker</code> folder data and if you want to preserve your demo data, choose <code>n</code>.</p>
@@ -123,6 +125,8 @@ value so that the installation should not time out, provided that you have a rea
 <p>Once all the modules are installed, you can navigate to <code>Projects</code>.</p>
 <p>Note: Using Docker with Odoo is an established paradigm and Odoo themselves provide the Docker images and Docker files.
 Whether or not you use this paradigm and how you might use it, is up to you.</p>
+<hr>
+<h4 id="if-are-an-odoo-developer">If are an Odoo developer:</h4>
 <p>Alternatively, you might want to run the stack for development purposes in which case you might only want the reverse
 proxy (Traefik) and DB (Postgres 12) Docker containers. For this purpose, the individual scripts are:</p>
 <ul>

@@ -25,7 +25,7 @@
       <pubDate>Sat, 11 Jan 2020 14:09:21 +0900</pubDate>
       
       <guid>https://www.odooinvue.org/doc/docker/</guid>
-      <description>Starting backend services in Docker The scripts in the /docker dir are only for getting the backend services running. Docker is not used to run the Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in /docker which provides a proxy server that will reverse proxy to Quasar&amp;rsquo;s built in server, but obviously for that to work, the Quasar server needs to be started from the commmand line (e.</description>
+      <description>Starting backend services in Docker If you are not an Odoo developer: The scripts in the /docker dir are only for getting the backend services running, including Odoo. Docker is not used to run the Quasar/Vue part of the project. Quasar provides a built-in server for running the Vue app. There is a script in /docker which provides a proxy server that will reverse proxy to Quasar&amp;rsquo;s built in server, but obviously for that to work, the Quasar server needs to be started from the command line (e.</description>
     </item>
     
     <item>
