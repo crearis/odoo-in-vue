@@ -52,5 +52,4 @@ The stand-alone documentation is here: https://www.odooinvue.org
 ### On the flip side
 
 What does QWeb have that's better than Quasar? Currently, Odoo has a great calendar with drag and drop support for
-moving appointments. The QCalendar component from Quasar supports it drag and drop also .. but .. I just haven't
-prototyped that .... yet. 
+moving appointments. The QCalendar component from Quasar supports it also .. but .. I just haven't prototyped it yet. 
