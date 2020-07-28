@@ -6,17 +6,17 @@
     </q-badge>
 
     <!-- char field -->
-    <div v-if="!editMode && schema.type === 'char'" class="data">
-      {{record.data[0][name]}}
-    </div>
+    <q-input v-if="schema.type === 'char'" class="data" outlined dense
+             v-model="record.data[0][name]" :readonly="!editing"
+    />
 
     <!-- selection field -->
-    <div v-if="!editMode && schema.type === 'selection'" class="data">
+    <div v-if="!editing && schema.type === 'selection'" class="data">
       {{record.data[0][name]}}
     </div>
 
     <!-- many2one field -->
-    <div v-if="!editMode && schema.type === 'many2one'" class="data">
+    <div v-if="!editing && schema.type === 'many2one'" class="data">
       {{record.data[0][name][1]}}
     </div>
 
@@ -31,24 +31,31 @@ export default {
       type: String,
       required: true
     },
-    readOnly: {
-      type: Boolean,
-      required: false
-    },
     record: {
       type: [Boolean, Object],
       required: false,
       default: false
     },
-    editMode: {
-      type: Boolean,
+    modes: { // indicates the modes the field must support
+      type: Array, // can have one or more of the following: 'read', 'edit', 'create'
       required: false,
-      default: false
+      default: function () { return ['read', 'edit'] }
+    },
+    mode: {
+      type: String,
+      required: true
+    }
+  },
+  watch: {
+    mode: function () {
+      console.log('mode change:', this.mode)
+      this.editing = this.mode === 'create' || this.mode === 'edit'
     }
   },
   data () {
     return {
-      schema: false
+      schema: false,
+      editing: false
     }
   },
   methods: {

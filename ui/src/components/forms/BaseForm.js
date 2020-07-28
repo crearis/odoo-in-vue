@@ -5,6 +5,17 @@ export default {
   components: {
     Field
   },
+  props: {
+    click: {
+      type: Object,
+      required: true
+    }
+  },
+  watch: {
+    click: function () {
+      this.clicked = this.click.event
+    }
+  },
   data () {
     return {
       title: 'Form',
@@ -15,7 +26,8 @@ export default {
       /** optional field to set before calling read() **/
       context: {}, // Odoo context to send with search_read
       /** do not modify this - it will be set by read() method **/
-      record: false
+      record: false,
+      clicked: ''
     }
   },
   mounted () {
@@ -23,6 +35,7 @@ export default {
   },
   methods: {
     read () {
+      this.clicked = 'read'
       Server.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
         .then(r => {
           if (r === []) {

@@ -2,18 +2,18 @@
   <q-card class="row">
 
     <q-card-section class="fit">
-      <Field name="name" v-bind:record="record" style="font-weight: bold"/>
-      <Field name="priority" v-bind:record="record"/>
-      <Field name="kanban_state" v-bind:record="record"/>
+      <Field name="name" v-bind:record="record" :mode="clicked" style="font-weight: bold"/>
+      <Field name="priority" v-bind:record="record" :mode="clicked"/>
+      <Field name="kanban_state" v-bind:record="record" :mode="clicked"/>
     </q-card-section>
 
     <q-card-section>
-      <Field name="project_id" v-bind:record="record"/>
-      <Field name="user_id" v-bind:record="record"/>
-      <Field name="date_deadline" v-bind:record="record"/>
-      <Field name="time_deadline" v-bind:record="record"/>
-      <Field name="duration_deadline" v-bind:record="record"/>
-      <Field name="tag_ids" v-bind:record="record"/>
+      <Field name="project_id" v-bind:record="record" :mode="clicked"/>
+      <Field name="user_id" v-bind:record="record" :mode="clicked"/>
+      <Field name="date_deadline" v-bind:record="record" :mode="clicked"/>
+      <Field name="time_deadline" v-bind:record="record" :mode="clicked"/>
+      <Field name="duration_deadline" v-bind:record="record" :mode="clicked"/>
+      <Field name="tag_ids" v-bind:record="record" :mode="clicked"/>
     </q-card-section>
 
   </q-card>

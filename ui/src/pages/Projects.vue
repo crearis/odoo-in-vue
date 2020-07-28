@@ -20,6 +20,10 @@ export default {
   },
   mounted () {
     Server.checkSession().then(r => {
+      if (!r) {
+        this.$router.push('/')
+        return
+      }
       this.$refs.tableProjects.isLoading = true
       Server.search_read(
         'project.project',

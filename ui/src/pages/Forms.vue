@@ -1,9 +1,9 @@
 <template>
   <Dialog ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable" :title="title">
-    <Forms ref="formComp">
-      <Contact v-if="$route.params.model === 'contacts'" @title="onTitle"/>
-      <Project v-if="$route.params.model === 'projects'"/>
-      <Task v-if="$route.params.model === 'tasks'"/>
+    <Forms ref="formComp" @click="onClick">
+      <Contact v-if="$route.params.model === 'contacts'" @title="onTitle" v-bind:click="click"/>
+      <Project v-if="$route.params.model === 'projects'" @title="onTitle" v-bind:click="click"/>
+      <Task v-if="$route.params.model === 'tasks'" @title="onTitle" v-bind:click="click"/>
       <!-- register more forms here as needed, from src/components/forms -->
     </Forms>
   </Dialog>
@@ -30,7 +30,8 @@ export default {
     return {
       availableForms: ['projects', 'tasks', 'contacts'],
       noFormAvailable: false,
-      title: 'Odoo In Vue - Form'
+      title: 'Odoo In Vue - Form',
+      click: {}
     }
   },
   methods: {
@@ -44,6 +45,9 @@ export default {
     },
     onTitle (t) {
       this.title = t
+    },
+    onClick (e) {
+      this.click = e
     }
   },
   mounted () {

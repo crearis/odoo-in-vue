@@ -75,7 +75,6 @@ export default {
   checkSession () {
     return this.isSessionOK().then(r => {
       if (!r) {
-        this.$router.push('/')
         return false
       }
       console.log('session OK')

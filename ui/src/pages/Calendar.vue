@@ -69,6 +69,10 @@ export default {
   },
   mounted () {
     Server.checkSession().then(r => {
+      if (!r) {
+        this.$router.push('/')
+        return
+      }
       this.changeViewMode('month')
     })
   },
