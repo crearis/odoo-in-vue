@@ -184,7 +184,7 @@ MUST point to the Python binary in the project&rsquo;s Python virtual environmen
 <p>If you get the following error when debugging: <code>greenlet.error: cannot switch to a different thread</code> and the long-polling
 port is not working, then look at this: <a href="https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994">https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994</a>
 &ndash; USE CAUTION WHEN IMPLEMENTING THIS FIX - IT MAY CAUSE BREAKPOINTS TO STOP WORKING! - The problem with using that fix,
-is that the &ldquo;Gevent compatible&rdquo; setting in PyCharm <a href="https://youtrack.jetbrains.com/issue/IDEA-246732">does not always work</a>,
+is that the &ldquo;Gevent compatible&rdquo; setting in PyCharm <a href="https://youtrack.jetbrains.com/issue/PY-43676">does not always work</a>,
 but YMMV.</p>
 <p>I have not found any issues with debugging with the &ldquo;Gevent compatible&rdquo; option unchecked and the console throwing that
 error, so just ignore that error when debugging and longpolling is not working.</p>
