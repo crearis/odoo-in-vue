@@ -12,24 +12,35 @@
               v-if="btnEdit && $route.params.res_id !== '0' && !hideBtnEdit"
               @click="onClick('edit')"
             >Edit</q-btn>
+
             <q-btn
               push
               color="info"
               v-if="btnCreate && $route.params.res_id !== '0' && !hideBtnCreate"
               @click="onClick('create')"
             >Create</q-btn>
+
             <q-btn
               push
               color="info"
               v-if="(btnCreate || btnEdit) && hideBtnCreate"
               @click="onClick('save')"
             >Save</q-btn>
+
+            <q-btn
+              push
+              color="secondary"
+              v-if="(btnCreate || btnEdit) && hideBtnCreate"
+              @click="onClick('discard')"
+            >Discard</q-btn>
+
             <q-btn-dropdown
               color="primary"
               label="..."
               @click="onClick('action')"
               v-if="btnActions.length">
             </q-btn-dropdown>
+
           </q-btn-group>
           <q-space/>
           <q-space/>
@@ -92,7 +103,7 @@ export default {
       if (btn === 'edit' || btn === 'create') {
         this.hideBtnSave = false
         this.hideBtnCreate = this.hideBtnEdit = true
-      } else if (btn === 'save') {
+      } else if (btn === 'save' || btn === 'discard') {
         this.hideBtnSave = true
         this.hideBtnCreate = this.hideBtnEdit = false
       } else if (btn === 'next' || btn === 'previous') {

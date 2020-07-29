@@ -62,6 +62,32 @@ export default {
   },
 
   /*
+  Gets the options for selection fields
+   */
+  fieldOptions (fieldId) {
+    // return it from Vuex if its there
+    if (store.state.odooIr.fieldOptions[fieldId]) {
+      return new Promise((resolve) => {
+        return resolve(store.state.odooIr.fieldOptions[fieldId])
+      })
+    }
+    return Odoo.search_read(
+      'ir.model.fields.selection',
+      [['field_id', '=', fieldId]],
+      ['name', 'value'],
+      'sequence',
+      1000
+    ).then(r => {
+      if (r.data.result.records.length) {
+        const result = []
+        r.data.result.records.forEach(opt => { result.push({ label: opt.name, value: opt.value }) })
+        return result
+      }
+      return false
+    })
+  },
+
+  /*
   "Fields to QTable Column Config"
   Gets models field info from Odoo and converts it to a basic QTable column config
    */
@@ -69,26 +95,26 @@ export default {
     const configName = this.colConfName(model, fieldsArr)
     if (useStore) {
       // return it from Vuex if its there
-      if (store.state.qtable.columnConfig[configName]) {
+      if (store.state.odooIr.fieldsConfig[configName]) {
         return new Promise((resolve) => {
-          resolve(store.state.qtable.columnConfig[configName])
+          resolve(store.state.odooIr.fieldsConfig[configName])
         })
       }
     }
     // else get it, store it, return it
     return Odoo.search_read(
-      'ir.model.fields',
-      [['model', '=', model], ['name', 'in', fieldsArr]],
+      'ir.model.fields', [['model', '=', model], ['name', 'in', fieldsArr]],
       ['name', 'field_description', 'ttype', 'relation', 'relation_field', 'help'],
-      '',
-      200
+      '', 200
     ).then(r => {
       if (r.data.result.records.length) {
         const result = []
-        fieldsArr.forEach(function (fieldName) {
+        fieldsArr.forEach(fieldName => {
           r.data.result.records.forEach(function (fieldInfo) {
             if (fieldInfo.name === fieldName) {
+              // selection options
               result.push({
+                field_id: fieldInfo.id, // needed to get extended field info
                 name: fieldName,
                 field: fieldName,
                 type: fieldInfo.ttype,
@@ -109,7 +135,6 @@ export default {
       }
       return false
     }).catch(e => {
-      console.log('fields2QTableColConfig', e)
       return false
     })
   },

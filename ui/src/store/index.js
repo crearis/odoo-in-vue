@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import session from './session.js'
-import qtable from './qtable.js'
+import odooIr from './odoo_ir.js'
 
 Vue.use(Vuex)
 
@@ -23,7 +23,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       session,
-      qtable
+      odooIr
     },
 
     // enable strict mode (adds overhead!)

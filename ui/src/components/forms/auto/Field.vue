@@ -7,23 +7,21 @@
 
     <!-- char field -->
     <q-input v-if="schema.type === 'char'" class="data" outlined dense
-             v-model="record.data[0][name]" :readonly="!editing"
+             v-model="record.data[0][name]" :readonly="!editing" :disable="!editing"
     />
 
     <!-- selection field -->
-    <div v-if="!editing && schema.type === 'selection'" class="data">
-      {{record.data[0][name]}}
-    </div>
-
-    <!-- many2one field -->
-    <div v-if="!editing && schema.type === 'many2one'" class="data">
-      {{record.data[0][name][1]}}
-    </div>
+    <q-select v-if="(schema.type === 'selection' || schema.type === 'many2one' )"
+              class="data" outlined dense :options="options" :display-value="displayValue"
+              v-model="record.data[0][name]" :readonly="!editing" :disable="!editing"
+    />
 
   </div>
 </template>
 
 <script>
+import Utilities from 'src/mixins/Utilities'
+
 export default {
   name: 'AutoField',
   props: {
@@ -48,26 +46,37 @@ export default {
   },
   watch: {
     mode: function () {
-      console.log('mode change:', this.mode)
       this.editing = this.mode === 'create' || this.mode === 'edit'
     }
   },
   data () {
     return {
       schema: false,
-      editing: false
+      editing: false,
+      options: [],
+      displayValue: ''
     }
   },
   methods: {
+    getValue () {
+      return this.record.data[0][this.name]
+    },
     setSchema () {
       // get the details for this field based on its name
       for (let i = 0; i < this.record.cc.length; ++i) {
         if (this.record.cc[i].name === this.name) {
           this.schema = this.record.cc[i]
+          // set the options for 'selection'
+          if (this.schema.type === 'selection') {
+            Utilities.fieldOptions(this.schema.field_id).then(r => {
+              this.options = r
+              r.forEach(opt => { if (this.getValue() === opt.value) { this.displayValue = opt.label } })
+            })
+          }
+          // set options for 'many2one' (todo)
           break
         }
       }
-      // console.log('schema for', this.name, this.schema)
     },
     getLabel () {
       if (this.schema === false) { this.setSchema() }
