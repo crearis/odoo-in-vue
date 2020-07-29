@@ -2,15 +2,15 @@
   <q-card class="row">
 
     <q-card-section class="fit">
-      <Field name="name" v-bind:record="record" :mode="clicked" style="font-weight: bold"/>
-      <Field name="parent_id" v-bind:record="record" :mode="clicked"/>
+      <Field name="name" v-bind:record="record" style="font-weight: bold"/>
+      <Field name="parent_id" v-bind:record="record"/>
     </q-card-section>
 
     <q-card-section>
-      <Field name="type" v-bind:record="record" :mode="clicked"/>
-      <Field name="street" v-bind:record="record" :mode="clicked"/>
-      <Field name="city" v-bind:record="record" :mode="clicked"/>
-      <Field name="zip" v-bind:record="record" :mode="clicked"/>
+      <Field name="type" v-bind:record="record"/>
+      <Field name="street" v-bind:record="record"/>
+      <Field name="city" v-bind:record="record"/>
+      <Field name="zip" v-bind:record="record"/>
     </q-card-section>
 
   </q-card>
@@ -29,8 +29,8 @@ export default {
     this.read()
   },
   watch: {
-    click: function (e) {
-      console.log('contact component click', e.event)
+    click () {
+      console.log('contact form clicked', this.click)
     }
   }
 }

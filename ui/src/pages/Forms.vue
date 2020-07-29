@@ -1,15 +1,16 @@
 <template>
   <Dialog ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable" :title="title">
-    <Forms ref="formComp" @click="onClick">
-      <Contact v-if="$route.params.model === 'contacts'" @title="onTitle" v-bind:click="click"/>
-      <Project v-if="$route.params.model === 'projects'" @title="onTitle" v-bind:click="click"/>
-      <Task v-if="$route.params.model === 'tasks'" @title="onTitle" v-bind:click="click"/>
+    <Forms ref="formComp">
+      <Contact v-if="$route.params.model === 'contacts'"/>
+      <Project v-if="$route.params.model === 'projects'"/>
+      <Task v-if="$route.params.model === 'tasks'"/>
       <!-- register more forms here as needed, from src/components/forms -->
     </Forms>
   </Dialog>
 </template>
 
 <script>
+import EventBus from 'components/EventBus'
 import Dialog from 'components/q/Dialog.vue'
 import Forms from 'components/Forms.vue'
 import Project from 'components/forms/Project.vue'
@@ -30,8 +31,7 @@ export default {
     return {
       availableForms: ['projects', 'tasks', 'contacts'],
       noFormAvailable: false,
-      title: 'Odoo In Vue - Form',
-      click: {}
+      title: ''
     }
   },
   methods: {
@@ -42,19 +42,19 @@ export default {
         return
       }
       this.$router.push('/' + this.$route.params.model) // back to the standard page for the model
-    },
-    onTitle (t) {
-      this.title = t
-    },
-    onClick (e) {
-      this.click = e
     }
   },
   mounted () {
     this.noFormAvailable = !this.availableForms.includes(this.$route.params.model)
     if (this.noFormAvailable) {
       this.$router.push('/no-form-for-model/' + this.$route.params.model)
+      return
     }
+    // wire the 'title' from a forms sub-component into the dialog
+    EventBus.$on('components-forms--title', t => { this.title = t })
+  },
+  destroyed () {
+    EventBus.$off('components-forms--title')
   }
 }
 </script>

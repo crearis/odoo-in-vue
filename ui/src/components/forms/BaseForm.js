@@ -1,41 +1,27 @@
 import Server from 'src/mixins/Server'
 import Field from './auto/Field'
+import BaseData from 'src/components/BaseData'
+import EventBus from 'components/EventBus'
 
 export default {
+  extends: BaseData,
   components: {
     Field
   },
-  props: {
-    click: {
-      type: Object,
-      required: true
-    }
-  },
-  watch: {
-    click: function () {
-      this.clicked = this.click.event
-    }
-  },
   data () {
     return {
-      title: 'Form',
-      /** these fields must be set before calling the read() method **/
-      model: '', // Odoo model name
-      fields: [], // fields we want to read from Odoo
+      title: '(set the "title"!)',
       domain: [['id', '=', this.$route.params.res_id]], // to filter to one record
-      /** optional field to set before calling read() **/
-      context: {}, // Odoo context to send with search_read
-      /** do not modify this - it will be set by read() method **/
-      record: false,
-      clicked: ''
+      click: {}
     }
   },
   mounted () {
-    this.$emit('title', this.title)
+    EventBus.$emit('components-forms--title', this.title)
+    // this MUST also be implemented in the child to listen for click events
+    EventBus.$on('components-forms--click', e => { this.click = e })
   },
   methods: {
     read () {
-      this.clicked = 'read'
       Server.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
         .then(r => {
           if (r === []) {
@@ -48,5 +34,8 @@ export default {
     save () {
       console.log('save data in BaseForm.js')
     }
+  },
+  destroyed () {
+    EventBus.$off('components-forms--click')
   }
 }

@@ -21,6 +21,7 @@
 
 <script>
 import Utilities from 'src/mixins/Utilities'
+import EventBus from 'src/components/EventBus'
 
 export default {
   name: 'AutoField',
@@ -38,15 +39,11 @@ export default {
       type: Array, // can have one or more of the following: 'read', 'edit', 'create'
       required: false,
       default: function () { return ['read', 'edit'] }
-    },
-    mode: {
-      type: String,
-      required: true
     }
   },
   watch: {
-    mode: function () {
-      this.editing = this.mode === 'create' || this.mode === 'edit'
+    formMode: function () {
+      this.editing = this.formMode === 'create' || this.formMode === 'edit'
     }
   },
   data () {
@@ -54,7 +51,8 @@ export default {
       schema: false,
       editing: false,
       options: [],
-      displayValue: ''
+      displayValue: '',
+      formMode: 'read'
     }
   },
   methods: {
@@ -77,11 +75,18 @@ export default {
           break
         }
       }
+      // console.log(this.schema)
     },
     getLabel () {
       if (this.schema === false) { this.setSchema() }
       return this.schema.label
     }
+  },
+  mounted () {
+    EventBus.$on('components-forms--click', e => { this.formMode = e.event })
+  },
+  destroyed () {
+    EventBus.$off('components-forms--click')
   }
 }
 </script>

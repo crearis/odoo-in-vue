@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import EventBus from './EventBus'
 
 export default {
   name: 'CompForms',
@@ -98,7 +99,7 @@ export default {
   methods: {
     onClick (btn, params = {}) {
       // emit the click event for the button
-      this.$emit('click', { event: btn, params: params })
+      EventBus.$emit('components-forms--click', { event: btn, params: params })
       // set button states
       if (btn === 'edit' || btn === 'create') {
         this.hideBtnSave = false

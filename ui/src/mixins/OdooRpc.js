@@ -24,8 +24,9 @@ export default {
   /*
   Wrapper for call_kw JSON-RPC call.
    */
-  call_kw (methodStr, modelStr, argsArr = [[]], kwargs = {}) {
+  call_kw (methodStr, modelStr, argsArr = [[]], kwargs = {}, context = {}) {
     const path = '/web/dataset/call_kw/' + modelStr + '/' + methodStr
+    kwargs.context = context
     return this.rpc(path, {
       args: argsArr,
       model: modelStr,

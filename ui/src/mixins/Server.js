@@ -82,6 +82,28 @@ export default {
     })
   },
 
+  sessionAllowedCompanies () {
+    const allowedCompanies = []
+    store.state.session.profile.user_companies.allowed_companies.forEach(c => {
+      allowedCompanies.push(c[0])
+    })
+    return allowedCompanies
+  },
+
+  /*
+  Checks access rights for a model based on user's ID and company ID.
+
+  Returns a Promise. 'operation' param can be one of 'read', 'write', 'unlink'
+   */
+  check_access_rights (modelStr, operation) {
+    return OdooRpc.call_kw('check_access_rights', modelStr, [],
+      { operation: operation },
+      {
+        uid: store.state.session.profile.uid,
+        allowed_company_ids: this.sessionAllowedCompanies()
+      }).then(r => { return r.data.result === true })
+  },
+
   /*
   "Search-Read (with Column Config)"
   Gets field info from Odoo for a model and converts it to QTable column config data,
