@@ -20,6 +20,9 @@ export default {
     // this MUST also be implemented in the child to listen for click events
     EventBus.$on('components-forms--click', e => { this.click = e })
   },
+  destroyed () {
+    EventBus.$off('components-forms--click')
+  },
   methods: {
     read () {
       Server.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
@@ -32,10 +35,13 @@ export default {
         })
     },
     save () {
-      console.log('save data in BaseForm.js')
+      console.log('todo: save record')
+    },
+    unlink () {
+      console.log('todo: unlink record')
+    },
+    archive () {
+      console.log('todo: archive record')
     }
-  },
-  destroyed () {
-    EventBus.$off('components-forms--click')
   }
 }
