@@ -34,34 +34,30 @@ export default {
       type: [Boolean, Object],
       required: false,
       default: false
-    },
-    modes: { // indicates the modes the field must support
-      type: Array, // can have one or more of the following: 'read', 'edit', 'create'
-      required: false,
-      default: function () { return ['read', 'edit'] }
     }
   },
   watch: {
-    formMode () {
-      this.editing = ['create', 'edit'].includes(this.formMode)
-    },
     options () {
-      this.options.forEach(opt => {
-        const val = this.getValue()
-        if (val === opt.value) {
-          this.displayValue = opt.label
-        }
-      })
+      const val = this.getValue()
+      if (val) {
+        this.options.forEach(opt => {
+          if (val === opt.value) {
+            this.displayValue = opt.label
+          }
+        })
+      }
     }
   },
   data () {
     return {
       schema: false,
-      editing: false,
       options: [],
       displayValue: '',
       formMode: 'read'
     }
+  },
+  computed: {
+    editing () { return ['create', 'edit'].includes(this.formMode) && !this.schema.readOnly }
   },
   methods: {
     getValue () {
@@ -76,16 +72,15 @@ export default {
       for (let i = 0; i < this.record.cc.length; ++i) {
         if (this.record.cc[i].name === this.name) {
           this.schema = this.record.cc[i]
-          this.setSelectionOptions()
+          this.setQSelectionOptions()
           break
         }
       }
       // console.log(this.schema)
     },
-    setSelectionOptions () {
-      // set the options for 'selection'
+    setQSelectionOptions () {
       if (this.schema.type === 'selection') {
-        Utilities.fieldOptions(this.schema.field_id).then(r => {
+        Utilities.fieldSelectionOptions(this.schema.fieldId).then(r => {
           this.options = r
         })
       } else if (this.schema.type === 'many2one') {

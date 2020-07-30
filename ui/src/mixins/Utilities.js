@@ -64,7 +64,7 @@ export default {
   /*
   Gets the options for selection fields
    */
-  fieldOptions (fieldId) {
+  fieldSelectionOptions (fieldId) {
     // return it from Vuex if its there
     if (store.state.odooIr.fieldOptions[fieldId]) {
       return new Promise((resolve) => {
@@ -125,7 +125,8 @@ export default {
     // else get it, store it, return it
     return Odoo.search_read(
       'ir.model.fields', [['model', '=', model], ['name', 'in', fieldsArr]],
-      ['name', 'field_description', 'ttype', 'relation', 'relation_field', 'help'],
+      ['name', 'field_description', 'ttype', 'required', 'readonly', 'relation', 'relation_field',
+        'relation_field_id', 'help'],
       '', 200
     ).then(r => {
       if (r.data.result.records.length) {
@@ -135,12 +136,15 @@ export default {
             if (fieldInfo.name === fieldName) {
               // selection options
               result.push({
-                field_id: fieldInfo.id, // needed to get extended field info
+                fieldId: fieldInfo.id, // needed to get extended field info
                 name: fieldName,
                 field: fieldName,
                 type: fieldInfo.ttype,
+                required: fieldInfo.required,
+                readOnly: fieldInfo.readonly,
                 relation: fieldInfo.relation,
                 relationField: fieldInfo.relation_field,
+                relationFieldId: fieldInfo.relation_field_id,
                 help: fieldInfo.help,
                 label: fieldInfo.field_description,
                 align: 'left'
