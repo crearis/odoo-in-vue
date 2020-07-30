@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import Server from '../mixins/Server'
+import Odoo from '../mixins/Odoo'
 import Table from 'components/q/Table.vue'
 import Calendar from 'components/q/Calendar.vue'
 import { store } from '../store'
@@ -61,7 +61,7 @@ export default {
     }
   },
   mounted () {
-    Server.checkSession().then(r => {
+    Odoo.checkSession().then(r => {
       if (!r) {
         this.$router.push('/')
         return
@@ -74,7 +74,7 @@ export default {
   methods: {
     setProjectData () {
       this.$refs.tableMyProjects.isLoading = true
-      Server.search_read(
+      Odoo.search_read(
         'project.project',
         [
           ['user_id', '=', store.state.session.profile.uid],
@@ -96,7 +96,7 @@ export default {
       const d = new Date()
       this.calendarDataStart = date.startOfDate(d, 'month')
       this.calendarDataEnd = date.endOfDate(d, 'month')
-      Server.getTaskEventData(
+      Odoo.getTaskEventData(
         this.calendarDataStart,
         this.calendarDataEnd,
         store.state.session.profile.uid
@@ -106,7 +106,7 @@ export default {
     },
     setTaskData () {
       this.$refs.tableMyTasks.isLoading = true
-      Server.search_read(
+      Odoo.search_read(
         'project.task',
         [
           ['user_id', '=', store.state.session.profile.uid],

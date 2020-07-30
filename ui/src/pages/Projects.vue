@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Server from '../mixins/Server'
+import Odoo from '../mixins/Odoo'
 import Table from 'components/q/Table.vue'
 
 export default {
@@ -19,13 +19,13 @@ export default {
     }
   },
   mounted () {
-    Server.checkSession().then(r => {
+    Odoo.checkSession().then(r => {
       if (!r) {
         this.$router.push('/')
         return
       }
       this.$refs.tableProjects.isLoading = true
-      Server.search_read(
+      Odoo.search_read(
         'project.project',
         [], // 'user', '=', store.state.session.profile.uid
         ['id', 'name', 'partner_id', 'date_start', 'active']

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Server from '../mixins/Server'
+import Odoo from '../mixins/Odoo'
 import Error from './ErrorForModals.vue'
 import WorkingSpinner from './WorkingSpinner'
 
@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     onSubmit () {
-      Server.getSessionId(this.database, this.login, this.password)
+      Odoo.getSessionId(this.database, this.login, this.password)
         .then(r => {
           if (r) {
             this.authenticating = false

@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Server from '../mixins/Server'
+import Odoo from '../mixins/Odoo'
 import Table from 'components/q/Table.vue'
 import Calendar from 'components/q/Calendar.vue'
 import { date } from 'quasar'
@@ -68,7 +68,7 @@ export default {
     }
   },
   mounted () {
-    Server.checkSession().then(r => {
+    Odoo.checkSession().then(r => {
       if (!r) {
         this.$router.push('/')
         return
@@ -112,7 +112,7 @@ export default {
           this.calendarDataEnd = date.addToDate(sow, { days: 6 })
           break
       }
-      Server.getTaskEventData(
+      Odoo.getTaskEventData(
         this.calendarDataStart,
         this.calendarDataEnd
       ).then(r => {
@@ -120,7 +120,7 @@ export default {
       })
     },
     setListData () {
-      Server.search_read(
+      Odoo.search_read(
         'project.task',
         [],
         ['id', 'name', 'project_id', 'user_id', 'stage_id'],

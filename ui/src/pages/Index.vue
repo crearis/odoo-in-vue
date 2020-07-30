@@ -6,7 +6,7 @@
 
 <script>
 import Login from 'components/Login.vue'
-import Server from '../mixins/Server.js'
+import Odoo from '../mixins/Odoo'
 
 export default {
   name: 'PageIndex',
@@ -20,7 +20,7 @@ export default {
     }
   },
   mounted () {
-    Server.isSessionOK()
+    Odoo.isSessionOK()
       .then(r => { if (r) { this.doAuthOK() } })
   },
   methods: {

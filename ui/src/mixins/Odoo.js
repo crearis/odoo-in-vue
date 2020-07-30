@@ -7,7 +7,7 @@
 
 import { store } from '../store'
 import OdooRpc from './OdooRpc'
-import Utilities from './Utilities'
+import OdooQUtils from './OdooQUtils'
 
 const Odoo = OdooRpc.Client()
 
@@ -119,7 +119,7 @@ export default {
   search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80,
     contextObj = {}, ccUseStoreBool = true) {
     const result = { data: {}, cc: [] }
-    return Utilities.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
+    return OdooQUtils.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
       .then(r => {
         if (r) {
           // if we can get the column config:
@@ -154,8 +154,8 @@ export default {
    */
   getCalendarEventsData (start, end, userId = 0) {
     const domain = [
-      ['start', '>=', Utilities.Date.getYMDString(start) + ' 00:00:00.000000'],
-      ['stop', '<=', Utilities.Date.getYMDString(end) + ' 23:59:59.999999']
+      ['start', '>=', OdooQUtils.Date.getYMDString(start) + ' 00:00:00.000000'],
+      ['stop', '<=', OdooQUtils.Date.getYMDString(end) + ' 23:59:59.999999']
     ]
     // add user_id filter if needed
     if (userId !== 0) {
@@ -168,7 +168,7 @@ export default {
     ).then(r => {
       try {
         if (r.data.length) {
-          return Utilities.calendarEvents2QCalendar(r.data)
+          return OdooQUtils.calendarEvents2QCalendar(r.data)
         }
       } catch (e) {
         console.log(e, r)
@@ -182,8 +182,8 @@ export default {
    */
   getTaskEventData (start, end, userId = 0) {
     const domain = [
-      ['date_deadline', '>=', Utilities.Date.getYMDString(start) + ' 00:00:00.000000'],
-      ['date_deadline', '<=', Utilities.Date.getYMDString(end) + ' 23:59:59.999999']
+      ['date_deadline', '>=', OdooQUtils.Date.getYMDString(start) + ' 00:00:00.000000'],
+      ['date_deadline', '<=', OdooQUtils.Date.getYMDString(end) + ' 23:59:59.999999']
     ]
     // add user_id filter if needed
     if (userId !== 0) {
@@ -197,7 +197,7 @@ export default {
     ).then(r => {
       try {
         if (r.data.length) {
-          return Utilities.taskEvents2QCalendar(r.data)
+          return OdooQUtils.taskEvents2QCalendar(r.data)
         }
       } catch (e) {
         console.log(e, r)

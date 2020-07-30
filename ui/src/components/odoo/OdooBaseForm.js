@@ -1,4 +1,4 @@
-import Server from 'src/mixins/Server'
+import Odoo from 'src/mixins/Odoo'
 import OField from './OdooField'
 import OdooBaseData from './OdooBaseData'
 import OdooEventBus from './OdooEventBus'
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     read () {
-      Server.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
+      Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
         .then(r => {
           if (r === []) {
             console.log('failed to read record') // todo

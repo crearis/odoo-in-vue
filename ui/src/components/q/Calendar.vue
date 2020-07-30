@@ -63,7 +63,7 @@
 
 <script>
 import { QCalendar } from '@quasar/quasar-ui-qcalendar'
-import Utilities from '../../mixins/Utilities'
+import OdooQUtils from '../../mixins/OdooQUtils'
 
 export default {
   components: {
@@ -120,7 +120,7 @@ export default {
           if (i1 !== i2) {
             const start2 = Date.parse(returns[i2].date + ' ' + returns[i2].time)
             const end2 = Math.round(start2 + (returns[i2].duration * 60000))
-            if (Utilities.Date.isOverlap(start1, end1, start2, end2)) {
+            if (OdooQUtils.Date.isOverlap(start1, end1, start2, end2)) {
               overlaps[i1] = overlaps[i1] + 1
             }
           }

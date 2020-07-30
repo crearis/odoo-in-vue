@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Utilities from 'src/mixins/Utilities'
+import OdooQUtils from 'src/mixins/OdooQUtils'
 import OdooEventBus from './OdooEventBus'
 
 export default {
@@ -80,11 +80,11 @@ export default {
     },
     setQSelectionOptions () {
       if (this.schema.type === 'selection') {
-        Utilities.fieldSelectionOptions(this.schema.fieldId).then(r => {
+        OdooQUtils.fieldSelectionOptions(this.schema.fieldId).then(r => {
           this.options = r
         })
       } else if (this.schema.type === 'many2one') {
-        Utilities.fieldRelationOptions(this.schema.relation).then(r => {
+        OdooQUtils.fieldRelationOptions(this.schema.relation).then(r => {
           this.options = r
         })
       }

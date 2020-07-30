@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Server from '../mixins/Server'
+import Odoo from '../mixins/Odoo'
 import Table from 'components/q/Table.vue'
 
 export default {
@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted () {
-    Server.checkSession().then(r => {
+    Odoo.checkSession().then(r => {
       if (!r) {
         this.$router.push('/')
         return
@@ -30,7 +30,7 @@ export default {
   methods: {
     setTaskData () {
       this.$refs.tableTasks.isLoading = true
-      Server.search_read(
+      Odoo.search_read(
         'project.task',
         [
           ['stage_id', '=', 5]
