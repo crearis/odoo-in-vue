@@ -1,12 +1,13 @@
 import Server from 'src/mixins/Server'
-import Field from './auto/Field'
-import BaseData from 'src/components/BaseData'
-import EventBus from 'components/EventBus'
+import OField from './OdooField'
+import OdooBaseData from './OdooBaseData'
+import OdooEventBus from './OdooEventBus'
 
 export default {
-  extends: BaseData,
+  name: 'OdooBaseForm',
+  extends: OdooBaseData,
   components: {
-    Field
+    OField
   },
   data () {
     return {
@@ -16,12 +17,12 @@ export default {
     }
   },
   mounted () {
-    EventBus.$emit('components-forms--title', this.title)
+    OdooEventBus.$emit('components-forms--title', this.title)
     // this MUST also be implemented in the child to listen for click events
-    EventBus.$on('components-forms--click', e => { this.click = e })
+    OdooEventBus.$on('components-forms--click', e => { this.click = e })
   },
   destroyed () {
-    EventBus.$off('components-forms--click')
+    OdooEventBus.$off('components-forms--click')
   },
   methods: {
     read () {

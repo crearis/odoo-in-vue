@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import EventBus from './EventBus'
+import OdooEventBus from './OdooEventBus'
 
 export default {
   name: 'CompForms',
@@ -99,7 +99,7 @@ export default {
   methods: {
     onClick (btn, params = {}) {
       // emit the click event for the button
-      EventBus.$emit('components-forms--click', { event: btn, params: params })
+      OdooEventBus.$emit('components-forms--click', { event: btn, params: params })
       // set button states
       if (btn === 'edit' || btn === 'create') {
         this.hideBtnSave = false

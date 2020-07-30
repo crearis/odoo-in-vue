@@ -1,5 +1,5 @@
 import Server from 'src/mixins/Server'
-import EventBus from 'src/components/EventBus'
+import OdooEventBus from './OdooEventBus'
 
 export default {
   data () {
@@ -32,7 +32,7 @@ export default {
           return Server.check_access_rights(this.model, 'unlink').then(r => {
             this.canDelete = r
             // console.log('permissions for', this.model, ':', this.canRead, this.canWrite, this.canDelete)
-            EventBus.$emit('access-rights', {
+            OdooEventBus.$emit('access-rights', {
               read: this.canRead,
               write: this.canWrite,
               delete: this.canDelete

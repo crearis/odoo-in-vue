@@ -21,7 +21,7 @@
 
 <script>
 import Utilities from 'src/mixins/Utilities'
-import EventBus from 'src/components/EventBus'
+import OdooEventBus from './OdooEventBus'
 
 export default {
   name: 'AutoField',
@@ -95,10 +95,10 @@ export default {
     }
   },
   mounted () {
-    EventBus.$on('components-forms--click', e => { this.formMode = e.event })
+    OdooEventBus.$on('components-forms--click', e => { this.formMode = e.event })
   },
   destroyed () {
-    EventBus.$off('components-forms--click')
+    OdooEventBus.$off('components-forms--click')
   }
 }
 </script>

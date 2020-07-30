@@ -1,28 +1,28 @@
 <template>
   <Dialog ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable" :title="title">
-    <Forms ref="formComp">
+    <OdooForms ref="formComp">
       <Contact v-if="$route.params.model === 'contacts'"/>
       <Project v-if="$route.params.model === 'projects'"/>
       <Task v-if="$route.params.model === 'tasks'"/>
       <!-- register more forms here as needed, from src/components/forms -->
-    </Forms>
+    </OdooForms>
   </Dialog>
 </template>
 
 <script>
-import EventBus from 'components/EventBus'
 import Dialog from 'components/q/Dialog.vue'
-import Forms from 'components/Forms.vue'
-import Project from 'components/forms/Project.vue'
-import Contact from 'components/forms/Contact.vue'
-import Task from 'components/forms/Task.vue'
+import OdooEventBus from 'components/odoo/OdooEventBus'
+import OdooForms from 'components/odoo/OdooForms.vue'
+import Project from 'components/myforms/Project.vue'
+import Contact from 'components/myforms/Contact.vue'
+import Task from 'components/myforms/Task.vue'
 // register more forms here as needed, from src/components/forms -->
 
 export default {
   name: 'PageForms',
   components: {
     Dialog,
-    Forms,
+    OdooForms,
     Contact,
     Project,
     Task
@@ -51,10 +51,10 @@ export default {
       return
     }
     // wire the 'title' from a forms sub-component into the dialog
-    EventBus.$on('components-forms--title', t => { this.title = t })
+    OdooEventBus.$on('components-forms--title', t => { this.title = t })
   },
   destroyed () {
-    EventBus.$off('components-forms--title')
+    OdooEventBus.$off('components-forms--title')
   }
 }
 </script>
