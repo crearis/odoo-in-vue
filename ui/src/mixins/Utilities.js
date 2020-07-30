@@ -88,6 +88,27 @@ export default {
   },
 
   /*
+  Gets the options for selection fields
+   */
+  fieldRelationOptions (relation, domain = [], relationField = '') {
+    // don't use Vuex store here because the source data changes more frequently
+    return Odoo.search_read(
+      relation,
+      domain,
+      ['name'],
+      'name',
+      1000
+    ).then(r => {
+      if (r.data.result.records.length) {
+        const result = []
+        r.data.result.records.forEach(opt => { result.push({ label: opt.name, value: opt.id }) })
+        return result
+      }
+      return false
+    })
+  },
+
+  /*
   "Fields to QTable Column Config"
   Gets models field info from Odoo and converts it to a basic QTable column config
    */

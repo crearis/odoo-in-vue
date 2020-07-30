@@ -31,7 +31,7 @@ export default {
           this.canWrite = r
           return Server.check_access_rights(this.model, 'unlink').then(r => {
             this.canDelete = r
-            console.log('permissions for', this.model, ':', this.canRead, this.canWrite, this.canDelete)
+            // console.log('permissions for', this.model, ':', this.canRead, this.canWrite, this.canDelete)
             EventBus.$emit('access-rights', {
               read: this.canRead,
               write: this.canWrite,
