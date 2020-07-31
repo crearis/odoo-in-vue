@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://www.odooinvue.org/doc/quasar/">
+
+    <title>
+        
+        Vue Setup | Odoo In Vue
+        
+    </title>
+
+    
+    <link href="https://www.odooinvue.org/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://www.odooinvue.org/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                Odoo In Vue
+            </a>
+        </div>
+        
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/about/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+    </li>
+    <li data-nav-id="/doc/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/doc/concepts/" class="nav-item my-1">
+                
+                 <a href="/doc/concepts/" class="nav-link p-0">
+                    Concepts
+                </a>
+        </li>
+        <li data-nav-id="/doc/docker/" class="nav-item my-1">
+                
+                 <a href="/doc/docker/" class="nav-link p-0">
+                    Docker
+                </a>
+        </li>
+        <li data-nav-id="/doc/development/" class="nav-item my-1">
+                
+                 <a href="/doc/development/" class="nav-link p-0">
+                    Odoo Development
+                </a>
+        </li>
+        <li data-nav-id="/doc/quasar/" class="nav-item my-1 active">
+                
+                 <a href="/doc/quasar/" class="nav-link p-0">
+                    Vue Setup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#about-the-quasarvue-project">About the Quasar/Vue project</a>
+      <ul>
+        <li><a href="#quasar-setup-basics">Quasar setup basics</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Vue Setup</h1>
+
+<h2 id="about-the-quasarvue-project">About the Quasar/Vue project</h2>
+<p>Using VueJS with Odoo is an established paradigm that we borrow from older projects in the public domain. The Quasar/Vue
+app in this project is obviously not meant to be complete since its just a functional sample that demonstrates how to
+use VueJS with Odoo as the backend.</p>
+<p>Because the VueJS interface is built using <a href="https://quasar.dev">Quasar</a> .. the <a href="https://quasar.dev/start/quasar-cli">Quasar CLI</a>
+is required.</p>
+<p>The root directory for the Quasar/Vue project is <code>/ui</code></p>
+<hr>
+<h3 id="quasar-setup-basics">Quasar setup basics</h3>
+<ul>
+<li><a href="https://classic.yarnpkg.com/en/docs/install/#debian-stable">Yarn</a> for dependencies</li>
+<li>Vuex to manage data state</li>
+<li>Axios for async queries</li>
+<li>Project uses JSON-RPC to communicate with the Odoo backend</li>
+<li>Server interfacing is managed as a mixin</li>
+</ul>
+<hr>
+<p><strong>Before you run the Quasar/Vue sub-project follow these steps (as needed).</strong></p>
+<p>Install the dependencies:</p>
+<p><code>yarn</code></p>
+<p>Start the app in development mode (hot-code reloading, error reporting, etc.):</p>
+<p><code>quasar dev</code></p>
+<p>Lint the files:</p>
+<p><code>yarn run lint</code></p>
+<p>Build the app for production:</p>
+<p><code>quasar build</code></p>
+<p>Customize the configuration:</p>
+<p>See <a href="https://quasar.dev/quasar-cli/quasar-conf-js">Configuring quasar.conf.js</a>.</p>
+<hr>
+<h1 id="project-directories-and-files">Project Directories and Files</h1>
+<p>All of the core Odoo files in the Vue project which provide Odoo specific functions and features, have their file name
+prefixed with <code>Odoo</code>. These files are explained as follows:</p>
+<p><strong>Components:</strong>
+<code>/ui/src/components/odoo/OdooBaseData.js</code>: Provides core data features for other Odoo components
+<code>/ui/src/components/odoo/OdooBaseForm.js</code>: Base form component to extend to create your own Quasar/Odoo forms
+<code>/ui/src/components/odoo/OdooEventBus.js</code>: Event bus for Odoo form component
+<code>/ui/src/components/odoo/OdooField.vue</code>: Provides field for your Quasar/Odoo form based on field schema data
+<code>/ui/src/components/odoo/OdooForms.vue</code>: Provides a standard container for your Quasar/Odoo forms with standard buttons</p>
+<p><strong>Mixins:</strong>
+<code>/ui/src/mixins/Odoo.js</code>: Mixin for Odoo server interaction
+<code>/ui/src/mixins/OdooQUtils.js</code>: Mixin for features that pertain to Quasar and Odoo, e.g. Odoo to Quasar data conversion
+<code>/ui/src/mixins/OdooRpc.js</code>: Mixin for RPC calls made to Odoo</p>
+<p><strong>Vuex (Store):</strong>
+<code>/ui/src/store/odoo.js</code>: Vuex file for Odoo stuff</p>
+<p>Currently these are all the files you need to create your own Quasar-Odoo project and eventually these will be files put
+into an NPM package.</p>
+<p>The other files of interest are in <code>/ui/src/components/myforms</code>, which are example Vue components that use the files
+listed above and demonstrate how simple it is to create Quasar-Odoo forms.</p>
+<p>Lastly, the <code>/ui/src/pages</code> directory can be reviewed to give a broad level example of how one might setup their own
+Quasar-Odoo project in Vue</p>
+<hr>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://www.odooinvue.org/lib/jquery.min.js"></script> 
+<script src="https://www.odooinvue.org/lib/popper.min.js"></script> 
+
+<script src="https://www.odooinvue.org/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/www.odooinvue.org\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>
