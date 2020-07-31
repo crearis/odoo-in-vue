@@ -8,7 +8,7 @@
 
     <title>
         
-        Vue Setup | Odoo In Vue
+        Vue / Quasar / Odoo | Odoo In Vue
         
     </title>
 
@@ -75,7 +75,7 @@
         <li data-nav-id="/doc/quasar/" class="nav-item my-1 active">
                 
                  <a href="/doc/quasar/" class="nav-link p-0">
-                    Vue Setup
+                    Vue / Quasar / Odoo
                 </a>
         </li>
         </ul>
@@ -101,7 +101,7 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Vue Setup</h1>
+<h1>Vue / Quasar / Odoo</h1>
 
 <h2 id="about-the-quasarvue-project">About the Quasar/Vue project</h2>
 <p>Using VueJS with Odoo is an established paradigm that we borrow from older projects in the public domain. The Quasar/Vue
@@ -135,24 +135,28 @@ is required.</p>
 <h1 id="project-directories-and-files">Project Directories and Files</h1>
 <p>All of the core Odoo files in the Vue project which provide Odoo specific functions and features, have their file name
 prefixed with <code>Odoo</code>. These files are explained as follows:</p>
-<p><strong>Components:</strong>
-<code>/ui/src/components/odoo/OdooBaseData.js</code>: Provides core data features for other Odoo components
-<code>/ui/src/components/odoo/OdooBaseForm.js</code>: Base form component to extend to create your own Quasar/Odoo forms
-<code>/ui/src/components/odoo/OdooEventBus.js</code>: Event bus for Odoo form component
-<code>/ui/src/components/odoo/OdooField.vue</code>: Provides field for your Quasar/Odoo form based on field schema data
-<code>/ui/src/components/odoo/OdooForms.vue</code>: Provides a standard container for your Quasar/Odoo forms with standard buttons</p>
-<p><strong>Mixins:</strong>
-<code>/ui/src/mixins/Odoo.js</code>: Mixin for Odoo server interaction
-<code>/ui/src/mixins/OdooQUtils.js</code>: Mixin for features that pertain to Quasar and Odoo, e.g. Odoo to Quasar data conversion
-<code>/ui/src/mixins/OdooRpc.js</code>: Mixin for RPC calls made to Odoo</p>
-<p><strong>Vuex (Store):</strong>
-<code>/ui/src/store/odoo.js</code>: Vuex file for Odoo stuff</p>
+<p><strong>Components:</strong></p>
+<ul>
+<li><code>/ui/src/components/odoo/OdooBaseData.js</code>: Provides core data features for other Odoo components</li>
+<li><code>/ui/src/components/odoo/OdooBaseForm.js</code>: Base form component to extend to create your own Quasar/Odoo forms</li>
+<li><code>/ui/src/components/odoo/OdooEventBus.js</code>: Event bus for Odoo form component</li>
+<li><code>/ui/src/components/odoo/OdooField.vue</code>: Provides field for your Quasar/Odoo form based on field schema data</li>
+<li><code>/ui/src/components/odoo/OdooForms.vue</code>: Provides a standard container for your Quasar/Odoo forms with standard buttons</li>
+</ul>
+<p><strong>Mixins:</strong></p>
+<ul>
+<li><code>/ui/src/mixins/Odoo.js</code>: Mixin for Odoo server interaction</li>
+<li><code>/ui/src/mixins/OdooQUtils.js</code>: Mixin for features that pertain to Quasar and Odoo, e.g. Odoo to Quasar data conversion</li>
+<li><code>/ui/src/mixins/OdooRpc.js</code>: Mixin for RPC calls made to Odoo</li>
+</ul>
+<p><strong>Vuex (Store):</strong></p>
+<ul>
+<li><code>/ui/src/store/odoo.js</code>: Vuex file for Odoo stuff</li>
+</ul>
 <p>Currently these are all the files you need to create your own Quasar-Odoo project and eventually these will be files put
-into an NPM package.</p>
-<p>The other files of interest are in <code>/ui/src/components/myforms</code>, which are example Vue components that use the files
-listed above and demonstrate how simple it is to create Quasar-Odoo forms.</p>
-<p>Lastly, the <code>/ui/src/pages</code> directory can be reviewed to give a broad level example of how one might setup their own
-Quasar-Odoo project in Vue</p>
+into an NPM package. The other files of interest are in <code>/ui/src/components/myforms</code>, which are example Vue components
+that use the files listed above and demonstrate how simple it is to create Quasar-Odoo forms. Lastly, the <code>/ui/src/pages</code>
+directory can be reviewed to give a broad level example of how one might setup their own Quasar-Odoo project in Vue.</p>
 <hr>
 
 
