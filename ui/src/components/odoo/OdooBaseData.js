@@ -1,7 +1,7 @@
 import Odoo from 'src/mixins/Odoo'
-import OdooEventBus from './OdooEventBus'
 
 export default {
+  name: 'OdooBaseData',
   data () {
     return {
       /** these fields must be set before calling the read() method **/
@@ -32,11 +32,6 @@ export default {
           return Odoo.check_access_rights(this.model, 'unlink').then(r => {
             this.canDelete = r
             // console.log('permissions for', this.model, ':', this.canRead, this.canWrite, this.canDelete)
-            OdooEventBus.$emit('access-rights', {
-              read: this.canRead,
-              write: this.canWrite,
-              delete: this.canDelete
-            })
           })
         })
       })

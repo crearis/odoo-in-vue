@@ -1,12 +1,13 @@
 import Odoo from 'src/mixins/Odoo'
 import OField from './OdooField'
 import OdooBaseData from './OdooBaseData'
-import OdooEventBus from './OdooEventBus'
+import OdooForm from '../odoo/OdooForm'
 
 export default {
   name: 'OdooBaseForm',
   extends: OdooBaseData,
   components: {
+    OdooForm,
     OField
   },
   data () {
@@ -16,23 +17,19 @@ export default {
       click: {}
     }
   },
-  mounted () {
-    OdooEventBus.$emit('components-forms--title', this.title)
-    // this MUST also be implemented in the child to listen for click events
-    OdooEventBus.$on('components-forms--click', e => { this.click = e })
-  },
-  destroyed () {
-    OdooEventBus.$off('components-forms--click')
+  watch: {
+    title () { this.$emit('title', this.title) }
   },
   methods: {
     read () {
-      Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
+      return Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
         .then(r => {
           if (r === []) {
             console.log('failed to read record') // todo
-            return
+            return false
           }
           this.record = r
+          return true
         })
     },
     save () {

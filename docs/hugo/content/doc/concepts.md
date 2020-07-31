@@ -69,3 +69,22 @@ the QCalendar component because project tasks have deadlines, which is fine for 
 that on QCalendar. 
 
 ---
+
+## Vue concepts for this project
+
+In the Vue/Quasar sub-project in the `/ui` directory, I provide components; mixins and a store that bridges the knowledge
+gap between Odoo and Vue/Quasar. The idea is that the UI developer can use these to easily create lists and forms that
+connect to Odoo in the back-end, with minimal effort and just basic knowledge of Odoo. The UI developer should only need
+minimal attentiveness concerning schema's of the various Odoo models because that information is already stored in Odoo
+and the Odoo resources here already account for all of that. The UI developer should only need to focus on what fields
+the end user needs; if they should be represented in specific "widgets" and how they should be laid out.
+
+I follow the exact same paradigm for specifying widgets for fields, as Odoo does, because its one of the few, simple
+and intuitive paradigms for a non-Odoo developer to grasp from Odoo. For example, in Odoo, time fields are stored as a
+`float` value, but to show that properly in an Odoo form, you must use the following in the Odoo form XML to get the
+[proper type of input field](https://www.odoo.com/fr_FR/forum/aide-1/question/time-field-in-odoo-124037) ("widget"):
+`<field name="time" widget="float_time"/>`
+
+In Odoo-In-View, you likewise do it like this:
+
+`<OField name="time" widget="float_time" v-bind:record="record"/>`

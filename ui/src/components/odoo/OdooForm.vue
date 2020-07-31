@@ -74,10 +74,9 @@
 </template>
 
 <script>
-import OdooEventBus from './OdooEventBus'
 
 export default {
-  name: 'CompForms',
+  name: 'OdooForm',
   data () {
     return {
       btnEdit: true,
@@ -86,7 +85,8 @@ export default {
       showFooter: false,
       hideBtnEdit: false,
       hideBtnCreate: false,
-      hideBtnSave: false
+      hideBtnSave: false,
+      click: {}
     }
   },
   props: {
@@ -94,12 +94,16 @@ export default {
       type: [Array, Boolean],
       required: false,
       default: false
+    },
+    record: {
+      type: [Boolean, Object],
+      required: true,
+      default: false
     }
   },
   methods: {
     onClick (btn, params = {}) {
-      // emit the click event for the button
-      OdooEventBus.$emit('components-forms--click', { event: btn, params: params })
+      this.$emit('click', this.click = { event: btn, args: params === {} ? params : false })
       // set button states
       if (btn === 'edit' || btn === 'create') {
         this.hideBtnSave = false
