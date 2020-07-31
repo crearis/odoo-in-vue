@@ -103,7 +103,8 @@ export default {
   },
   methods: {
     onClick (btn, params = {}) {
-      this.$emit('click', this.click = { event: btn, args: params === {} ? params : false })
+      this.click = { event: btn, args: params === {} ? params : false }
+      this.$emit('click', this.click)
       // set button states
       if (btn === 'edit' || btn === 'create') {
         this.hideBtnSave = false

@@ -1,19 +1,23 @@
 <template>
-  <q-card class="row">
+  <OdooForm v-if="record || $route.params.id === '0'"
+            @click="onFormClick"
+            v-bind:record="record">
+    <q-card class="row">
 
-    <q-card-section class="fit">
-      <OField name="name" v-bind:record="record" style="font-weight: bold"/>
-      <OField name="parent_id" v-bind:record="record"/>
-    </q-card-section>
+      <q-card-section class="fit">
+        <field name="name" style="font-weight: bold"/>
+        <field name="parent_id"/>
+      </q-card-section>
 
-    <q-card-section>
-      <OField name="type" v-bind:record="record"/>
-      <OField name="street" v-bind:record="record"/>
-      <OField name="city" v-bind:record="record"/>
-      <OField name="zip" v-bind:record="record"/>
-    </q-card-section>
+      <q-card-section>
+        <field name="type"/>
+        <field name="street"/>
+        <field name="city"/>
+        <field name="zip"/>
+      </q-card-section>
 
-  </q-card>
+    </q-card>
+  </OdooForm>
 </template>
 
 <script>
@@ -28,9 +32,9 @@ export default {
     this.fields = ['id', 'type', 'name', 'parent_id', 'street', 'city', 'zip', 'display_name']
     this.read()
   },
-  watch: {
-    click () {
-      console.log('contact form clicked', this.click)
+  methods: {
+    onFormClick (e) {
+      console.log('OdooProjectForm.onFormClick', e)
     }
   }
 }

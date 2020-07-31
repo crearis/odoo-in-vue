@@ -79,7 +79,7 @@ export default {
     }
   },
   computed: {
-    formMode () { return this.getOdooForm().click },
+    formMode () { return this.getOdooForm().click.event },
     editing () { return ['create', 'edit'].includes(this.formMode) && !this.schema.readOnly }
   },
   created () {

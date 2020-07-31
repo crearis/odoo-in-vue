@@ -1,22 +1,22 @@
 <template>
   <OdooForm v-if="record || $route.params.id === '0'"
-            @click="onClick"
+            @click="onFormClick"
             v-bind:record="record">
     <q-card class="row">
 
       <q-card-section class="fit">
-        <OField name="name" style="font-weight: bold"/>
-        <OField name="priority"/>
-        <OField name="kanban_state"/>
+        <field name="name" style="font-weight: bold"/>
+        <field name="priority"/>
+        <field name="kanban_state"/>
       </q-card-section>
 
       <q-card-section>
-        <OField name="project_id"/>
-        <OField name="user_id"/>
-        <OField name="date_deadline"/>
-        <OField name="time_deadline" widget="float_time"/>
-        <OField name="duration_deadline"/>
-        <OField name="tag_ids"/>
+        <field name="project_id"/>
+        <field name="user_id"/>
+        <field name="date_deadline"/>
+        <field name="time_deadline" widget="float_time"/>
+        <field name="duration_deadline"/>
+        <field name="tag_ids"/>
       </q-card-section>
 
     </q-card>
@@ -39,8 +39,8 @@ export default {
     this.read()
   },
   methods: {
-    onClick (e) {
-      console.log('form clicked', e)
+    onFormClick (e) {
+      console.log('OdooContactForm.onFormClick', e)
     }
   }
 }
