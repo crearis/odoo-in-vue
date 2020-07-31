@@ -54,10 +54,10 @@ export default {
   },
 
   /*
-  Creates a name for a menu QTable column config that we store in Vuex.
+  Creates a cache ID for a set of field data from ir_model_fields that we store in Vuex.
   Format: <model-name>/<fields-count>-<fields-hash (number)>
    */
-  colConfName (model, fieldsArr) {
+  cacheIdModelFields (model, fieldsArr) {
     return model + '/' + fieldsArr.length + '-' + Math.abs(this.hashString(fieldsArr.join('+')))
   },
 
@@ -66,9 +66,9 @@ export default {
    */
   fieldSelectionOptions (fieldId) {
     // return it from Vuex if its there
-    if (store.state.odooIr.fieldOptions[fieldId]) {
+    if (store.state.odoo.ir_model_fields_selection[fieldId]) {
       return new Promise((resolve) => {
-        return resolve(store.state.odooIr.fieldOptions[fieldId])
+        return resolve(store.state.odoo.ir_model_fields_selection[fieldId])
       })
     }
     return Odoo.search_read(
@@ -113,12 +113,12 @@ export default {
   Gets models field info from Odoo and converts it to a basic QTable column config
    */
   fields2QTableColConfig (model, fieldsArr, useStore = true) {
-    const configName = this.colConfName(model, fieldsArr)
+    const cacheId = this.cacheIdModelFields(model, fieldsArr)
     if (useStore) {
       // return it from Vuex if its there
-      if (store.state.odooIr.fieldsConfig[configName]) {
+      if (store.state.odoo.ir_model_fields[cacheId]) {
         return new Promise((resolve) => {
-          resolve(store.state.odooIr.fieldsConfig[configName])
+          resolve(store.state.odoo.ir_model_fields[cacheId])
         })
       }
     }
@@ -154,7 +154,7 @@ export default {
         })
         if (useStore) {
           // save the column config in Vuex
-          store.commit('setColumnConfig', { name: configName, data: result })
+          store.commit('cache_ir_model_fields', { id: cacheId, data: result })
         }
         return result
       }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import session from './session.js'
-import odooIr from './odoo_ir.js'
+import odoo from './odoo.js'
 
 Vue.use(Vuex)
 
@@ -23,7 +23,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       session,
-      odooIr
+      odoo
     },
 
     // enable strict mode (adds overhead!)
