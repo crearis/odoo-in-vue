@@ -79,12 +79,33 @@ minimal attentiveness concerning schema's of the various Odoo models because tha
 and the Odoo resources here already account for all of that. The UI developer should only need to focus on what fields
 the end user needs; if they should be represented in specific "widgets" and how they should be laid out.
 
-I follow the exact same paradigm for specifying widgets for fields, as Odoo does, because its one of the few, simple
-and intuitive paradigms for a non-Odoo developer to grasp from Odoo. For example, in Odoo, time fields are stored as a
-`float` value, but to show that properly in an Odoo form, you must use the following in the Odoo form XML to get the
-[proper type of input field](https://www.odoo.com/fr_FR/forum/aide-1/question/time-field-in-odoo-124037) ("widget"):
-`<field name="time" widget="float_time"/>`
+Conversely, if you are an Odoo developer and not a Vue developer, you should find it very easy to adapt because I keep
+some familiar Odoo paradigms. For example field declarations used in forms are exactly the same. For example the
+following snippet defines a field, as its used in Odoo and as its used in Odoo-In-Vue: `<field name="time"/>`
 
-In Odoo-In-View, you likewise do it like this:
+Also, I follow the exact same paradigm for specifying widgets for fields. For example, in Odoo, time fields are stored
+as a `float` value, but to show that properly in an Odoo form, you must use the following in the Odoo form XML to get
+the [proper type of input field](https://www.odoo.com/fr_FR/forum/aide-1/question/time-field-in-odoo-124037) ("widget"):
+`<field name="time" widget="float_time"/>` and in Odoo-In-Vue, its exactly the same.
 
-`<OField name="time" widget="float_time" v-bind:record="record"/>`
+Functionality for reading, writing, creating, archiving and deleting records is handled for you by the Odoo web client
+and so, in the Vue project, I handle it for you as as well. This way you just concentrate on defining forms.
+
+Odoo automatically checks permissions on models and Odoo-In-Vue does that in the OdooBaseData component.
+
+I still have a lot more work to do, but this should give you an idea that things that Odoo does for you, this project
+will do for you as well, and that way you can just focus on designing forms, lists and layouts and not how to make
+everything work with Odoo.
+
+##### Where the paradigms deviate
+
+There are obviously major differences between Odoo QWeb and Vue and I am not going to list them all, but instead this is
+a very short list of some ways that a make big deviations from Odoo's approach to the client UI architecture, regardless
+of the Qweb and Vue differences:
+
+ - When rendering a form, I don't read all the fields for the record from Odoo but instead, I only read the fields you
+ specify. This keeps your async communication with Odoo very lean and fast. Odoo will pull everything, even if your form
+ never uses all fields. 
+ - I cache very specific schema data in the browser based on only on how your forms and lists are defined.
+
+---
