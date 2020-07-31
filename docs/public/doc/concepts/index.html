@@ -99,6 +99,7 @@
         <li></li>
       </ul>
     </li>
+    <li><a href="#vue-concepts-for-this-project">Vue concepts for this project</a></li>
   </ul>
 </nav>
 </div>
@@ -162,6 +163,20 @@ the Projects module is enough to demonstrate all the paradigms involved in using
 the QCalendar component because project tasks have deadlines, which is fine for basically demonstrating how we can put
 that on QCalendar.</p>
 <hr>
+<h2 id="vue-concepts-for-this-project">Vue concepts for this project</h2>
+<p>In the Vue/Quasar sub-project in the <code>/ui</code> directory, I provide components; mixins and a store that bridges the knowledge
+gap between Odoo and Vue/Quasar. The idea is that the UI developer can use these to easily create lists and forms that
+connect to Odoo in the back-end, with minimal effort and just basic knowledge of Odoo. The UI developer should only need
+minimal attentiveness concerning schema&rsquo;s of the various Odoo models because that information is already stored in Odoo
+and the Odoo resources here already account for all of that. The UI developer should only need to focus on what fields
+the end user needs; if they should be represented in specific &ldquo;widgets&rdquo; and how they should be laid out.</p>
+<p>I follow the exact same paradigm for specifying widgets for fields, as Odoo does, because its one of the few, simple
+and intuitive paradigms for a non-Odoo developer to grasp from Odoo. For example, in Odoo, time fields are stored as a
+<code>float</code> value, but to show that properly in an Odoo form, you must use the following in the Odoo form XML to get the
+<a href="https://www.odoo.com/fr_FR/forum/aide-1/question/time-field-in-odoo-124037">proper type of input field</a> (&ldquo;widget&rdquo;):
+<code>&lt;field name=&quot;time&quot; widget=&quot;float_time&quot;/&gt;</code></p>
+<p>In Odoo-In-View, you likewise do it like this:</p>
+<p><code>&lt;OField name=&quot;time&quot; widget=&quot;float_time&quot; v-bind:record=&quot;record&quot;/&gt;</code></p>
 
 
     

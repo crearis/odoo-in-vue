@@ -60,7 +60,6 @@ prefixed with `Odoo`. These files are explained as follows:
 
 - `/ui/src/components/odoo/OdooBaseData.js`: Provides core data features for other Odoo components
 - `/ui/src/components/odoo/OdooBaseForm.js`: Base form component to extend to create your own Quasar/Odoo forms
-- `/ui/src/components/odoo/OdooEventBus.js`: Event bus for Odoo form component
 - `/ui/src/components/odoo/OdooField.vue`: Provides field for your Quasar/Odoo form based on field schema data
 - `/ui/src/components/odoo/OdooForms.vue`: Provides a standard container for your Quasar/Odoo forms with standard buttons
 
