@@ -99,7 +99,6 @@
         <li></li>
       </ul>
     </li>
-    <li><a href="#vue-concepts-for-this-project">Vue concepts for this project</a></li>
   </ul>
 </nav>
 </div>
@@ -156,28 +155,12 @@ the Projects module is enough to demonstrate all the paradigms involved in using
 <li>creating / updating records</li>
 <li>archiving / deleting records</li>
 <li>calling actions on modules</li>
+<li>automatic field generation based on Odoo model/field data</li>
 </ul>
 <h5 id="regarding-the-calendar">Regarding the Calendar</h5>
 <p>Odoo does have a Calendar module but its not used for the purposes of this project. Instead we show project task data on
 the QCalendar component because project tasks have deadlines, which is fine for basically demonstrating how we can put
 that on QCalendar.</p>
-<hr>
-<h2 id="vue-concepts-for-this-project">Vue concepts for this project</h2>
-<p>As long as we can effectively use the Odoo JSON-RPC API, we have everything we need to leverage Odoo from Vue just as
-effectively as if we built a UI using QWeb. This is because the native Odoo UI (&ldquo;client&rdquo;) also uses the existing
-JSON-RPC API, with no additional hidden or proprietary tricks.</p>
-<p>In the Vue project the following mixins will provide whats needed to bridge the communication gap from Quasar to Odoo:</p>
-<ul>
-<li>
-<p><code>OdooRpc.js</code>: wrappers for the common RPC calls made to Odoo (inspired by the <a href="https://github.com/katyukha/odoo-rpc-client">odoo-rpc-client</a> Python library)</p>
-</li>
-<li>
-<p><code>Server.js</code>: bridges OdooRpc.js methods to code in the rest of the project</p>
-</li>
-<li>
-<p><code>Utilities.js</code>: converts Odoo things to Quasar things and provides some other minor utility methods</p>
-</li>
-</ul>
 <hr>
 
 
