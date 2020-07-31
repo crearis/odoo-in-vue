@@ -196,6 +196,9 @@ of the Qweb and Vue differences:</p>
 specify. This keeps your async communication with Odoo very lean and fast. Odoo will pull everything, even if your form
 never uses all fields.</li>
 <li>I cache very specific schema data in the browser based on only on how your forms and lists are defined.</li>
+<li>I use Vue <a href="https://vuejs.org/v2/guide/single-file-components.html">single file components</a> so that you can keep all
+component related logic in one logical file, although, this is not required. In Odoo, you are forced to spread out the
+XML, JavaScript and CSS.</li>
 </ul>
 <hr>
 
