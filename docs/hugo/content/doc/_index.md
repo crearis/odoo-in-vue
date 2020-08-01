@@ -116,7 +116,7 @@ of the Qweb and Vue differences:
 #### Doesn't OWL solve everything?
 
 For some people, it might. On the other hand I still come across many people that still believe there isn't a need for
-yet another web framework. Also, OWL, like QWeb is only for Odoo which has many of the same implications as QWeb does.
+yet another web framework. Also, OWL, still has many of the same problems as QWeb does.
 
 For example:
 
