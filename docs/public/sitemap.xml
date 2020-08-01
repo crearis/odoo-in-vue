@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.odooinvue.org/doc/concepts/</loc>
+    <loc>https://www.odooinvue.org/doc/</loc>
     <lastmod>2020-01-28T00:38:51+09:00</lastmod>
   </url>
   
@@ -19,11 +19,6 @@
   
   <url>
     <loc>https://www.odooinvue.org/doc/docker/</loc>
-    <lastmod>2020-01-11T14:09:21+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.odooinvue.org/doc/</loc>
     <lastmod>2020-01-11T14:09:21+09:00</lastmod>
   </url>
   

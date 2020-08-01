@@ -8,7 +8,7 @@
 
     <title>
         
-        Introduction | Odoo In Vue
+        Intro | Odoo In Vue
         
     </title>
 
@@ -44,22 +44,11 @@
 
      <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/about/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
-    </li>
     <li data-nav-id="/doc/" class="nav-item my-1 parent active haschildren
         ">
         
-        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        <a class="nav-link p-0" href="/doc/"><h6>Intro</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/doc/concepts/" class="nav-item my-1">
-                
-                 <a href="/doc/concepts/" class="nav-link p-0">
-                    Concepts
-                </a>
-        </li>
         <li data-nav-id="/doc/docker/" class="nav-item my-1">
                 
                  <a href="/doc/docker/" class="nav-link p-0">
@@ -80,6 +69,11 @@
         </li>
         </ul>
     </li>
+    <li data-nav-id="/about/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+    </li>
         </ul>
     </div>
 </nav>
@@ -87,21 +81,136 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#inspiration-for-this-project">Inspiration for this project</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#odoo-concepts-for-this-project">Odoo concepts for this project</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#vue-concepts-for-this-project">Vue concepts for this project</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Introduction</h1>
+<h1>Intro</h1>
 
-<p>This project is actually about more than just replacing your QWeb development paradigm with Quasar/Vue. In its entirety,
-it also demonstrates how you can setup your Odoo dev project side by side with your Vue dev project. I even provide a
-rough guide for getting setup for Odoo development. Why? It&rsquo;s great that this project can help an Odoo developer become
-productive quickly with Quasar/Vue, but I also think it can work the other way around. I hope that it might get some
-interested Vue developers introduced to Odoo development.</p>
-<p>Please explore this Introduction section further by exploring the sub menus on the left.</p>
+<h2 id="inspiration-for-this-project">Inspiration for this project</h2>
+<h4 id="what-are-the-challenged-with-qweb">What are the challenged with QWeb?</h4>
+<p><strong>Using Qweb to develop your UX solution has some specific drawbacks:</strong></p>
+<ul>
+<li>QWeb is still based on terse and bloated XML</li>
+<li>QWeb is complicated and has a big learning curve</li>
+<li>QWeb is specific to Odoo</li>
+<li>QWeb provides a small selection of standard UI widgets</li>
+<li>Odoo documentation sucks and the QWeb part of it is no exception</li>
+<li>Reactive design with QWeb still sucks and is still buggy</li>
+<li>QWeb is only targeted for browsers and for converting HTML to PDF</li>
+<li>Community support is tiny compared to the Vue community</li>
+<li>Lacks support for many modern paradigms and concepts available in Vue</li>
+<li>No browser plugins to help QWeb development</li>
+<li>No popular IDE plugin support</li>
+<li>Odoo Studio requires Enterprise Edition ($$$)</li>
+<li>Work done in Odoo Studio can&rsquo;t be exported as .xml view files that can be used in an add-on and stored in a code repo</li>
+<li>It&rsquo;s hard to find UX developers that know QWeb or are willing to learn it and those that do usually cost more ($$$)</li>
+</ul>
+<p><strong>Conversely, using Quasar/Vue for UX development has specific advantages:</strong></p>
+<ul>
+<li>It&rsquo;s much easier to learn and use</li>
+<li>It&rsquo;s much simpler to find Vue developers than QWeb developers</li>
+<li>It has a huge, vibrant and active community</li>
+<li>Lots of great documentation and video tutorials</li>
+<li>Quasar apps can be built to target browsers, mobile devices or cross platform desktop as Electron apps</li>
+<li>Quasar provides rich selection of UI widgets</li>
+<li>All the major IDEs have plugins to make Vue development even simpler</li>
+<li>Quasar apps look slick and modern compared to QWeb forms</li>
+<li><a href="https://github.com/vuejs/vue-devtools">Vue Dev Tools</a> plugin is available for all major browsers</li>
+</ul>
 <hr>
+<h4 id="on-the-flip-side">On the flip side</h4>
+<p>What does QWeb have that&rsquo;s better than Quasar? Currently, Odoo has a great calendar with drag and drop support for
+moving appointments. The QCalendar component from Quasar supports it also .. but .. I just haven&rsquo;t prototyped it yet.</p>
+<hr>
+<h2 id="odoo-concepts-for-this-project">Odoo concepts for this project</h2>
+<p>As you can see in the main <a href="/doc/development">Odoo Development</a> page, the Odoo setup for this project centers around
+usage of the Odoo Projects module and additional modules that extend that. There is a lot more to Odoo than the Projects
+module, but the main concepts I want to demonstrate is how to build a Vue app that uses Odoo in the backend. For this
+the Projects module is enough to demonstrate all the paradigms involved in using Odoo&rsquo;s JSON-RPC API, which are:</p>
+<ul>
+<li>authenticating against Odoo and getting user profile data</li>
+<li>reading data from Odoo including schema info for fields</li>
+<li>creating / updating records</li>
+<li>archiving / deleting records</li>
+<li>calling actions on modules</li>
+<li>automatic field generation based on Odoo model/field data</li>
+</ul>
+<h5 id="regarding-the-calendar">Regarding the Calendar</h5>
+<p>Odoo does have a Calendar module but its not used for the purposes of this project. Instead we show project task data on
+the QCalendar component because project tasks have deadlines, which is fine for basically demonstrating how we can put
+that on QCalendar.</p>
+<hr>
+<h2 id="vue-concepts-for-this-project">Vue concepts for this project</h2>
+<p>In the Vue/Quasar sub-project in the <code>/ui</code> directory, I provide components; mixins and a store that bridges the knowledge
+gap between Odoo and Vue/Quasar. The idea is that the UI developer can use these to easily create lists and forms that
+connect to Odoo in the back-end, with minimal effort and just basic knowledge of Odoo. The UI developer should only need
+minimal attentiveness concerning schema&rsquo;s of the various Odoo models because that information is already stored in Odoo
+and the Odoo resources here already account for all of that. The UI developer should only need to focus on what fields
+the end user needs; if they should be represented in specific &ldquo;widgets&rdquo; and how they should be laid out.</p>
+<p>Conversely, if you are an Odoo developer and not a Vue developer, you should find it very easy to adapt because I keep
+some familiar Odoo paradigms. For example field declarations used in forms are exactly the same. For example the
+following snippet defines a field, as its used in Odoo and as its used in Odoo-In-Vue: <code>&lt;field name=&quot;time&quot;/&gt;</code></p>
+<p>Also, I follow the exact same paradigm for specifying widgets for fields. For example, in Odoo, time fields are stored
+as a <code>float</code> value, but to show that properly in an Odoo form, you must use the following in the Odoo form XML to get
+the <a href="https://www.odoo.com/fr_FR/forum/aide-1/question/time-field-in-odoo-124037">proper type of input field</a> (&ldquo;widget&rdquo;):
+<code>&lt;field name=&quot;time&quot; widget=&quot;float_time&quot;/&gt;</code> and in Odoo-In-Vue, its exactly the same.</p>
+<p>Functionality for reading, writing, creating, archiving and deleting records is handled for you by the Odoo web client
+and so, in the Vue project, I handle it for you as as well. This way you just concentrate on defining forms.</p>
+<p>Odoo automatically checks permissions on models and Odoo-In-Vue does that in the OdooBaseData component.</p>
+<p>I still have a lot more work to do, but this should give you an idea that things that Odoo does for you, this project
+will do for you as well, and that way you can just focus on designing forms, lists and layouts and not how to make
+everything work with Odoo.</p>
+<h5 id="where-the-paradigms-deviate">Where the paradigms deviate</h5>
+<p>There are obviously major differences between Odoo QWeb and Vue and I am not going to list them all, but instead this is
+a very short list of some ways that a make big deviations from Odoo&rsquo;s approach to the client UI architecture, regardless
+of the Qweb and Vue differences:</p>
+<ul>
+<li>When rendering a form, I don&rsquo;t read all the fields for the record from Odoo but instead, I only read the fields you
+specify. This keeps your async communication with Odoo very lean and fast. Odoo will pull everything, even if your form
+never uses all fields.</li>
+<li>I cache very specific schema data in the browser based on only on how your forms and lists are defined.</li>
+<li>I use Vue <a href="https://vuejs.org/v2/guide/single-file-components.html">single file components</a> so that you can keep all
+component related logic in one logical file, although, this is not required. In Odoo, you are forced to spread out the
+XML, JavaScript and CSS.</li>
+</ul>
+<hr>
+<h4 id="doesnt-owl-solve-everything">Doesn&rsquo;t OWL solve everything?</h4>
+<p>For some people, it might. On the other hand I still come across many people that still believe there isn&rsquo;t a need for
+yet another web framework. Also, OWL, like QWeb is only for Odoo which has many of the same implications as QWeb does.</p>
+<p>For example:</p>
+<ul>
+<li>shortage of 3rd party components, IDE support, browser plugins and frameworks compared to Vue</li>
+<li>no native mobile support</li>
+<li>not compatible with earlier versions of Odoo</li>
+<li>Odoo specific</li>
+<li>does not support all the proven paradigms of existing frameworks such as Vue and React</li>
+<li>poor documentation</li>
+<li>immature project</li>
+</ul>
+<p>No doubt OWL is a huge and over-due leap in the right direction compared to QWeb, but the fact that the Odoo corporate
+machine does not want it to be back ported shows their intent to keep customers on a forced upgrade treadmill - which in
+my opinion is one of the most counter productive aspects of the platform.</p>
 
 
     

@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Introduction on Odoo In Vue</title>
+    <title>Intro on Odoo In Vue</title>
     <link>https://www.odooinvue.org/doc/</link>
-    <description>Recent content in Introduction on Odoo In Vue</description>
+    <description>Recent content in Intro on Odoo In Vue</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 11 Jan 2020 14:09:21 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jan 2020 00:38:51 +0900</lastBuildDate>
     
 	<atom:link href="https://www.odooinvue.org/doc/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Concepts</title>
-      <link>https://www.odooinvue.org/doc/concepts/</link>
-      <pubDate>Tue, 28 Jan 2020 00:38:51 +0900</pubDate>
-      
-      <guid>https://www.odooinvue.org/doc/concepts/</guid>
-      <description>Inspiration for this project Whats so bad about QWeb? Using Qweb to develop your UX solution has some specific drawbacks:
- QWeb is still based on terse and bloated XML QWeb is complicated and has a big learning curve QWeb is specific to Odoo QWeb provides a small selection of standard UI widgets Odoo documentation sucks and the QWeb part of it is no exception Reactive design with QWeb still sucks and is still buggy QWeb is only targeted for browsers and for converting HTML to PDF Community support is tiny compared to the Vue community Lacks support for many modern paradigms and concepts available in Vue No browser plugins to help QWeb development No popular IDE plugin support Odoo Studio requires Enterprise Edition ($$$) Work done in Odoo Studio can&amp;rsquo;t be exported as .</description>
-    </item>
     
     <item>
       <title>Docker</title>
