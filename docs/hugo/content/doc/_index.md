@@ -130,4 +130,6 @@ For example:
 
 No doubt OWL is a huge and over-due leap in the right direction compared to QWeb, but the fact that the Odoo corporate
 machine does not want it to be back ported shows their intent to keep customers on a forced upgrade treadmill - which in
-my opinion is one of the most counter productive aspects of the platform.  
+my opinion is one of the most counter productive aspects of the platform.
+
+In fact, I suspect that once they have people accepting it, they will probably make it an EE only feature.
