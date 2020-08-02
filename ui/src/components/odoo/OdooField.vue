@@ -41,7 +41,7 @@
 
     <!-- duration -->
     <q-input v-if="schema.type === 'float' && widget === 'float_duration'" class="data" outlined dense
-             v-model="formValue" :readonly="!editing" :disable="!editing" mask="##:##" fill-mask="0"
+             v-model="formValue" :readonly="!editing" :disable="!editing" mask="##.##" fill-mask="0"
     />
 
   </div>
