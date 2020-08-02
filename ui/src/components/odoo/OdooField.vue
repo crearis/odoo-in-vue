@@ -7,7 +7,7 @@
 
     <!-- char -->
     <q-input v-if="schema.type === 'char'" class="data" outlined dense
-             v-model="formValue" :readonly="!editing" :disable="!editing"
+             v-model="formValue" :readonly="!editing" :disable="!editing" :mask="mask"
     />
 
     <!-- selection -->
@@ -39,6 +39,11 @@
       </template>
     </q-input>
 
+    <!-- duration -->
+    <q-input v-if="schema.type === 'float' && widget === 'float_duration'" class="data" outlined dense
+             v-model="formValue" :readonly="!editing" :disable="!editing" mask="##:##" fill-mask="0"
+    />
+
   </div>
 </template>
 
@@ -55,16 +60,17 @@ export default {
     widget: {
       type: String,
       required: false
+    },
+    mask: {
+      type: String,
+      required: false,
+      default: ''
     }
-  },
-  watch: {
-    formValue () { this.setQSelectionDisplayValue() }
   },
   data () {
     return {
       options: [],
       formValue: '',
-      displayValue: '',
       record: false,
       schema: false
     }
@@ -74,8 +80,10 @@ export default {
     recordValue () {
       // select widget:
       if (['many2one', 'selection'].includes(this.schema.type)) {
-        console.log(this.name, '=', this.record.data[0][this.name])
         return { label: this.record.data[0][this.name][1], value: this.record.data[0][this.name][0] }
+      }
+      if (this.schema.type === 'float' && !this.record.data[0][this.name]) {
+        return ''
       }
       return this.record.data[0][this.name]
     },
@@ -122,24 +130,12 @@ export default {
               break
             }
           }
-          // After we change this.record.data[0][this.name] we can set the options and displayValue
-          this.setQSelectionDisplayValue()
         })
       } else if (this.schema.type === 'many2one') {
         // for 'many2one' the recordValue is already an object and we don't need to know the options
         // (formValue does not depend on the promise)
         this.formValue = this.recordValue
         OdooQUtils.fieldRelationOptions(this.schema.relation).then(r => { this.options = r })
-        this.setQSelectionDisplayValue()
-      }
-    },
-    setQSelectionDisplayValue () {
-      if (this.options.length) {
-        if (!this.formValue) {
-          this.displayValue = '(select one)'
-        } else {
-          this.options.forEach(opt => { if (this.formValue.value === opt.value) { this.displayValue = opt.label } })
-        }
       }
     }
   }

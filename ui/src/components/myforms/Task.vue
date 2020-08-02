@@ -15,7 +15,7 @@
         <field name="user_id"/>
         <field name="date_deadline"/>
         <field name="time_deadline" widget="float_time"/>
-        <field name="duration_deadline"/>
+        <field name="duration_deadline" widget="float_duration"/>
         <field name="tag_ids"/>
       </q-card-section>
 
