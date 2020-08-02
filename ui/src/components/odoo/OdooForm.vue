@@ -7,7 +7,7 @@
       <q-banner v-if="bannerText" inline-actions dense rounded :class="'bg-' + (bannerColor || 'blue-1') + ' fit'">
         {{ bannerText }}
         <template v-slot:action>
-          <q-btn flat color="white" class="bg-red" label="Close" @click="bannerText = ''" />
+          <q-btn flat color="white" class="bg-red" label="Close" @click="bannerText = ''; bannerColor = ''" />
         </template>
       </q-banner>
 
