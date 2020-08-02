@@ -14,7 +14,8 @@ export default {
     return {
       title: '(set the "title"!)',
       domain: [['id', '=', this.$route.params.res_id]], // to filter to one record
-      click: {}
+      click: {},
+      form: false
     }
   },
   watch: {
@@ -25,7 +26,7 @@ export default {
       return Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
         .then(r => {
           if (r === []) {
-            console.log('failed to read record') // todo
+            this.doBanner('Failed to read the record')
             return false
           }
           this.record = r
@@ -40,6 +41,9 @@ export default {
     },
     archive () {
       console.log('todo: archive record')
+    },
+    doBanner (message) {
+      this.record.error = message
     }
   }
 }

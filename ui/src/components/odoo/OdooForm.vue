@@ -3,6 +3,14 @@
 
     <!-- form header -->
     <div class="fit q-pa-none q-ma-none">
+
+      <q-banner v-if="bannerText" inline-actions dense rounded :class="'bg-' + (bannerColor || 'blue-1') + ' fit'">
+        {{ bannerText }}
+        <template v-slot:action>
+          <q-btn flat color="white" class="bg-red" label="Close" @click="bannerText = ''" />
+        </template>
+      </q-banner>
+
       <slot name="header">
         <q-card-actions class="q-ma-none form-header-bottom-border q-mb-lg">
           <q-btn-group>
@@ -86,7 +94,10 @@ export default {
       hideBtnEdit: false,
       hideBtnCreate: false,
       hideBtnSave: false,
-      click: {}
+      bannerText: '',
+      bannerColor: '',
+      click: {},
+      record: false
     }
   },
   props: {
@@ -94,12 +105,18 @@ export default {
       type: [Array, Boolean],
       required: false,
       default: false
-    },
-    record: {
-      type: [Boolean, Object],
-      required: true,
-      default: false
     }
+  },
+  watch: {
+    record () {
+      if (this.record.error) {
+        this.bannerText = this.record.error
+        this.bannerColor = 'red-1'
+      }
+    }
+  },
+  created () {
+    this.record = this.getOdooForm().record
   },
   methods: {
     onClick (btn, params = {}) {
@@ -116,6 +133,17 @@ export default {
         this.hideBtnSave = true
         this.hideBtnCreate = this.hideBtnEdit = false
       }
+    },
+    getOdooForm () {
+      let component = null
+      let parent = this.$parent
+      while (parent && !component) {
+        if (parent.$options.name.toLowerCase().startsWith('odooform_')) {
+          component = parent
+        }
+        parent = parent.$parent
+      }
+      return component
     }
   }
 }

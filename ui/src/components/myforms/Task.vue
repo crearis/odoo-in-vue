@@ -1,7 +1,5 @@
 <template>
-  <OdooForm v-if="record || $route.params.id === '0'"
-            @click="onFormClick"
-            v-bind:record="record">
+  <OdooForm v-if="record || $route.params.id === '0'" @click="onFormClick">
     <q-card class="row">
 
       <q-card-section class="fit">
@@ -27,7 +25,7 @@
 import OdooBaseForm from '../odoo/OdooBaseForm'
 
 export default {
-  name: 'OdooContactForm',
+  name: 'OdooForm_Task',
   extends: OdooBaseForm,
   created () {
     this.title = 'Task'
