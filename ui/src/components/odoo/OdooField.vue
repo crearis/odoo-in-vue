@@ -44,6 +44,12 @@
              v-model="formValue" :readonly="!editing" :disable="!editing" mask="##.##" fill-mask="0"
     />
 
+    <!-- todo: rating -->
+    <!-- todo: color-select -->
+    <!-- todo: image -->
+    <!-- todo: file-upload -->
+    <!-- todo: progress -->
+
   </div>
 </template>
 
