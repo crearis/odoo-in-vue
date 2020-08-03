@@ -12,20 +12,20 @@ weight: 1
   
 **Using Qweb to develop your UX solution has some specific drawbacks:**
 
- - QWeb is still based on terse and bloated XML
- - QWeb is complicated and has a big learning curve
- - QWeb is specific to Odoo
- - QWeb provides a small selection of standard UI widgets
- - Odoo documentation sucks and the QWeb part of it is no exception
- - Reactive design with QWeb still sucks and is still buggy
+ - Its based on terse and bloated XML
+ - It has a considerable learning curve for most UI developers
+ - Its specific to Odoo
+ - Provides a small selection of standard UI widgets
+ - Documentation is not so good
+ - Reactive design with QWeb is not nearly as good as with Vue
  - QWeb is only targeted for browsers and for converting HTML to PDF
  - Community support is tiny compared to the Vue community
  - Lacks support for many modern paradigms and concepts available in Vue
  - No browser plugins to help QWeb development
  - No popular IDE plugin support
  - Odoo Studio requires Enterprise Edition ($$$)
- - Work done in Odoo Studio can't be exported as .xml view files that can be used in an add-on and stored in a code repo
- - It's hard to find UX developers that know QWeb or are willing to learn it and those that do usually cost more ($$$)
+ - Views created or modified in Odoo Studio cannot be exported as complete .XML view files for add-ons
+ - It's hard to find UX developers that know QWeb or are willing to learn it
  
 **Conversely, using Quasar/Vue for UX development has specific advantages:**
 
@@ -44,7 +44,10 @@ weight: 1
 #### On the flip side
 
 What does QWeb have that's better than Quasar? Currently, Odoo has a great calendar with drag and drop support for
-moving appointments. The QCalendar component from Quasar supports it also .. but .. I just haven't prototyped it yet. 
+moving appointments. The QCalendar component from Quasar supports it also .. but .. I just haven't prototyped it yet.
+
+To be clear, we love Odoo and for many situations the QWeb UI is just fine, but when you need to work outside the
+constraints of QWeb, the Vue framework can take you much further.
 
 ---
 
@@ -120,16 +123,12 @@ yet another web framework. Also, OWL, still has many of the same problems as QWe
 
 For example:
 
+ - its Odoo specific
  - shortage of 3rd party components, IDE support, browser plugins and frameworks compared to Vue
- - no native mobile support
+ - no Android / iOS support
  - not compatible with earlier versions of Odoo
- - Odoo specific
  - does not support all the proven paradigms of existing frameworks such as Vue and React
- - poor documentation
- - immature project
+ - incomplete documentation and general lack of good resources
+ - a very young project compared to Vue or React
 
-No doubt OWL is a huge and over-due leap in the right direction compared to QWeb, but the fact that the Odoo corporate
-machine does not want it to be back ported shows their intent to keep customers on a forced upgrade treadmill - which in
-my opinion is one of the most counter productive aspects of the platform.
-
-In fact, I suspect that once they have people accepting it, they will probably make it an EE only feature.
+---
