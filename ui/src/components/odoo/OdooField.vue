@@ -7,17 +7,17 @@
 
     <!-- char -->
     <q-input v-if="schema.type === 'char'" class="data" outlined dense
-             v-model="formValue" :readonly="!editing" :disable="!editing" :mask="mask"
+             v-model="formValue" :readonly="!editing || schema.readonly" :disable="!editing" :mask="mask"
     />
 
     <!-- selection -->
     <q-select v-if="(schema.type === 'selection' || schema.type === 'many2one' )" outlined dense
-              :options="options" v-model="formValue" :readonly="!editing" :disable="!editing"
+              :options="options" v-model="formValue" :readonly="!editing || schema.readonly" :disable="!editing"
     />
 
     <!-- date -->
-    <q-input v-if="schema.type === 'date'" outlined dense v-model="formValue"
-             mask="date" :rules="['date']" :readonly="!editing" :disable="!editing">
+    <q-input v-if="schema.type === 'date'" outlined dense v-model="formValue" mask="date"
+             :rules="schema.required ? ['date'] : ''" :readonly="!editing || schema.readonly" :disable="!editing">
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -28,12 +28,12 @@
     </q-input>
 
     <!-- time -->
-    <q-input v-if="widget === 'float_time'" outlined dense v-model="formValue"
-             mask="time" :rules="['time']" :readonly="!editing" :disable="!editing">
+    <q-input v-if="widget === 'float_time'" outlined dense v-model="formValue" mask="time"
+             :rules="schema.required ? ['time'] : ''" :readonly="!editing || schema.readonly" :disable="!editing">
       <template v-slot:append>
         <q-icon name="access_time" class="cursor-pointer">
           <q-popup-proxy ref="qTimeProxy" transition-show="scale" transition-hide="scale">
-            <q-time v-model="formValue" @input="() => $refs.qDateProxy.hide()" />
+            <q-time v-model="formValue" @input="() => $refs.qTimeProxy.hide()" />
           </q-popup-proxy>
         </q-icon>
       </template>
@@ -41,7 +41,7 @@
 
     <!-- duration -->
     <q-input v-if="schema.type === 'float' && widget === 'float_duration'" class="data" outlined dense
-             v-model="formValue" :readonly="!editing" :disable="!editing" mask="##.##" fill-mask="0"
+             v-model="formValue" :readonly="!editing || schema.readonly" :disable="!editing" mask="##.##" fill-mask="0"
     />
 
     <!-- todo: rating -->
@@ -80,6 +80,9 @@ export default {
       record: false,
       schema: false
     }
+  },
+  watch: {
+    formValue () { console.log('field `', this.name, '` set to', this.formValue) }
   },
   computed: {
     formMode () { return this.getOdooForm().click.event },
