@@ -30,7 +30,6 @@ export default {
             return false
           }
           this.record = r
-          this.setRecordMessage('Lorem ipsum dolor sit amet.', Odoo.CONST.BANNER_TYPE_PASS)
           return true
         })
     },
