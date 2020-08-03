@@ -1,5 +1,5 @@
 ---
-title: "Intro"
+title: "Introduction"
 description: "Project concepts for the Odoo modules and the Vue project together"
 date: 2020-01-28T00:38:51+09:00
 draft: false
