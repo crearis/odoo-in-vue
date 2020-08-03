@@ -16,6 +16,13 @@ const Odoo = OdooRpc.Client()
 export default {
   Odoo: Odoo,
 
+  CONST: {
+    BANNER_TYPE_PASS: 'pass',
+    BANNER_TYPE_INFO: 'info',
+    BANNER_TYPE_WARN: 'warn',
+    BANNER_TYPE_FAIL: 'fail'
+  },
+
   /*
   Log a message or an error
    */

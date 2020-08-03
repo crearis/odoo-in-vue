@@ -26,10 +26,11 @@ export default {
       return Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
         .then(r => {
           if (r === []) {
-            this.doBanner('Failed to read the record')
+            this.setRecordMessage('Failed to read the record', Odoo.CONST.BANNER_TYPE_FAIL)
             return false
           }
           this.record = r
+          this.setRecordMessage('Lorem ipsum dolor sit amet.', Odoo.CONST.BANNER_TYPE_PASS)
           return true
         })
     },
@@ -41,9 +42,6 @@ export default {
     },
     archive () {
       console.log('todo: archive record')
-    },
-    doBanner (message) {
-      this.record.error = message
     }
   }
 }

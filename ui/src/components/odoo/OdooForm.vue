@@ -4,7 +4,10 @@
     <!-- form header -->
     <div class="fit q-pa-none q-ma-none">
 
-      <q-banner v-if="bannerText" inline-actions dense rounded :class="'bg-' + (bannerColor || 'blue-1') + ' fit'">
+      <q-banner v-if="bannerText" dense rounded :class="'bg-' + (bannerColor || 'blue-1') + ' fit'">
+        <template v-slot:avatar>
+          <q-icon :name="bannerIcon" color="primary" />
+        </template>
         {{ bannerText }}
         <template v-slot:action>
           <q-btn flat color="white" class="bg-red" label="Close" @click="bannerText = ''; bannerColor = ''" />
@@ -82,6 +85,7 @@
 </template>
 
 <script>
+import Odoo from 'src/mixins/Odoo'
 
 export default {
   name: 'OdooForm',
@@ -96,6 +100,7 @@ export default {
       hideBtnSave: false,
       bannerText: '',
       bannerColor: '',
+      bannerIcon: '',
       click: {},
       record: false
     }
@@ -109,9 +114,9 @@ export default {
   },
   watch: {
     record () {
-      if (this.record.error) {
-        this.bannerText = this.record.error
-        this.bannerColor = 'red-1'
+      if (this.record.message) {
+        const { text, type } = this.record.message
+        this.showBannerText(text, type)
       }
     }
   },
@@ -144,6 +149,18 @@ export default {
         parent = parent.$parent
       }
       return component
+    },
+    showBannerText (text, type) {
+      if (text) {
+        this.bannerText = text
+        switch (type) {
+          case Odoo.CONST.BANNER_TYPE_PASS: this.bannerColor = 'green-3'; this.bannerIcon = 'done'; break
+          case Odoo.CONST.BANNER_TYPE_INFO: this.bannerColor = 'blue-3'; this.bannerIcon = 'info'; break
+          case Odoo.CONST.BANNER_TYPE_WARN: this.bannerColor = 'yellow-3'; this.bannerIcon = 'report_problem'; break
+          case Odoo.CONST.BANNER_TYPE_FAIL: this.bannerColor = 'red-3'; this.bannerIcon = 'bug_report'; break
+          default: this.bannerColor = 'grey-5'; this.bannerIcon = 'info'; break
+        }
+      }
     }
   }
 }
