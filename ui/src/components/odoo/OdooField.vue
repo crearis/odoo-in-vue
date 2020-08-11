@@ -17,7 +17,7 @@
 
     <!-- date -->
     <q-input v-if="schema.type === 'date'" outlined dense v-model="formValue" mask="date"
-             :rules="schema.required ? ['date'] : ''" :readonly="!editing || schema.readonly" :disable="!editing">
+             :rules="schema.required ? ['date'] : []" :readonly="!editing || schema.readonly" :disable="!editing">
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -29,7 +29,7 @@
 
     <!-- time -->
     <q-input v-if="widget === 'float_time'" outlined dense v-model="formValue" mask="time"
-             :rules="schema.required ? ['time'] : ''" :readonly="!editing || schema.readonly" :disable="!editing">
+             :rules="schema.required ? ['time'] : []" :readonly="!editing || schema.readonly" :disable="!editing">
       <template v-slot:append>
         <q-icon name="access_time" class="cursor-pointer">
           <q-popup-proxy ref="qTimeProxy" transition-show="scale" transition-hide="scale">
