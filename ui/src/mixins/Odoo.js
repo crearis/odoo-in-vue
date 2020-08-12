@@ -150,10 +150,47 @@ export default {
             return []
           } else {
             result.data = r.data.result.records
+            // for forms the `limit` is always set to 1, so set the resource (record) ID for use with forms
+            if (limit === 1) {
+              result.res_id = result.data[0].id
+            }
           }
           return result
         })
       })
+  },
+
+  /*
+  Creates a record in Odoo
+   */
+  create (modelStr, data, kwargs = {}, context = {}) {
+    return Odoo.call_kw('create', modelStr, [data], kwargs, context).then(r => {
+      if ('result' in r.data) { return r.data.result }
+      this.log('Odoo.write', r.data.error)
+      return false
+    })
+  },
+
+  /*
+  Updates a record in Odoo
+   */
+  write (modelStr, recID, data, kwargs = {}, context = {}) {
+    // recID = Number(recID)
+    return Odoo.call_kw('write', modelStr, [[recID]].concat(data), kwargs, context).then(r => {
+      if ('result' in r.data) { return r.data.result }
+      this.log('Odoo.write', r.data.error)
+      return false
+    })
+  },
+
+  /*
+  Deletes ("unlink") a record in Odoo
+   */
+  delete (modelStr, recID, kwargs = {}, context = {}) {
+    return Odoo.call_kw('unlink', modelStr, [[recID]], kwargs, context).then(r => {
+      if ('result' in r) { return r.result }
+      return false
+    })
   },
 
   /*

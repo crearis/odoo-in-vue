@@ -1,4 +1,3 @@
-import Odoo from 'src/mixins/Odoo'
 import OdooBaseData from './OdooBaseData'
 import OdooForm from '../odoo/OdooForm'
 import field from './OdooField'
@@ -10,6 +9,7 @@ export default {
     OdooForm,
     field
   },
+
   data () {
     return {
       title: '(set the "title"!)',
@@ -18,29 +18,29 @@ export default {
       form: false
     }
   },
+
   watch: {
     title () { this.$emit('title', this.title) }
   },
+
   methods: {
-    read () {
-      return Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
-        .then(r => {
-          if (r === []) {
-            this.setRecordMessage('Failed to read the record', Odoo.CONST.BANNER_TYPE_FAIL)
-            return false
-          }
-          this.record = r
-          return true
-        })
+    onFormClick (e) {
+      if (e.event === 'save') {
+        this.save()
+      }
     },
-    save () {
-      console.log('todo: save record')
+
+    saveCompleted () {
+      this.readOne()
     },
+
     unlink () {
       console.log('todo: unlink record')
     },
+
     archive () {
       console.log('todo: archive record')
     }
+  ///
   }
 }

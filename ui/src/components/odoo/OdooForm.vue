@@ -101,28 +101,40 @@ export default {
       bannerText: '',
       bannerColor: '',
       bannerIcon: '',
-      click: {},
-      record: false
+      click: {}
     }
   },
+
   props: {
     btnActions: {
       type: [Array, Boolean],
       required: false,
       default: false
+    },
+    record: {
+      type: Object,
+      required: true
+    },
+    banner: {
+      type: Object,
+      required: false,
+      default: null
     }
   },
+
   watch: {
-    record () {
-      if (this.record.message) {
-        const { text, type } = this.record.message
-        this.showBannerText(text, type)
+    banner: {
+      handler () {
+        if (this.banner) {
+          if ('text' in this.banner && 'type' in this.banner) {
+            const { text, type } = this.banner
+            this.showBannerText(text, type)
+          }
+        }
       }
     }
   },
-  created () {
-    this.record = this.getOdooForm().record
-  },
+
   methods: {
     onClick (btn, params = {}) {
       this.click = { event: btn, args: params === {} ? params : false }
@@ -139,18 +151,7 @@ export default {
         this.hideBtnCreate = this.hideBtnEdit = false
       }
     },
-    getOdooForm () {
-      let component = null
-      let parent = this.$parent
-      while (parent && !component) {
-        if (parent.$options.name.toLowerCase().startsWith('odooform_')) {
-          component = parent
-        }
-        parent = parent.$parent
-      }
-      return component
-    },
-    showBannerText (text, type) {
+    showBannerText (text, type = '') {
       if (text) {
         this.bannerText = text
         switch (type) {

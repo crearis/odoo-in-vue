@@ -77,12 +77,33 @@ export default {
     return {
       options: [],
       formValue: '',
+      rawValue: '',
       record: false,
       schema: false
     }
   },
   watch: {
-    formValue () { console.log('field `', this.name, '` set to', this.formValue) }
+    formValue () {
+      if (typeof this.formValue === 'object') {
+        if ('label' in this.formValue && 'value' in this.formValue) {
+          this.rawValue = this.formValue.value
+        }
+      } else {
+        this.rawValue = this.formValue
+      }
+      // console.log('field ', this.name, ' set to', this.rawValue, ' - changed?', this.changed)
+      if (this.changed) {
+        // create the upsert array if its not there
+        if (!('upsert' in this.record)) { this.record.upsert = [] }
+        this.record.upsert[this.name] = this.rawValue
+      } else {
+        if ('upsert' in this.record) {
+          if (this.name in this.record.upsert) {
+            delete this.record.upsert[this.name]
+          }
+        }
+      }
+    }
   },
   computed: {
     formMode () { return this.getOdooForm().click.event },
@@ -97,7 +118,14 @@ export default {
       return this.record.data[0][this.name]
     },
     editing () { return ['create', 'edit'].includes(this.formMode) && !this.schema.readOnly },
-    changed () { return this.formValue === this.recordValue }
+    changed () {
+      // q-select uses and object for the data which we must account for
+      if (this.schema.type === 'selection' || this.schema.type === 'many2one') {
+        return this.formValue.value !== this.recordValue.value
+      } else {
+        return this.formValue !== this.recordValue
+      }
+    }
   },
   created () {
     this.record = this.getOdooForm().record

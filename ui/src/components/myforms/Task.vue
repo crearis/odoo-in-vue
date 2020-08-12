@@ -1,5 +1,5 @@
 <template>
-  <OdooForm v-if="record || $route.params.id === '0'" @click="onFormClick">
+  <OdooForm v-if="record || $route.params.id === '0'" @click="onFormClick" :record="record" v-bind:banner="message">
     <q-card class="row">
 
       <q-card-section class="fit">
@@ -34,12 +34,7 @@ export default {
       'id', 'name', 'project_id', 'user_id', 'date_deadline', 'time_deadline',
       'duration_deadline', 'tag_ids', 'priority', 'kanban_state'
     ]
-    this.read()
-  },
-  methods: {
-    onFormClick (e) {
-      console.log('OdooContactForm.onFormClick', e)
-    }
+    this.readOne()
   }
 }
 </script>
