@@ -1,5 +1,5 @@
 <template>
-  <form v-if="record || $route.params.id === '0'" @click="onFormClick">
+  <OdooForm v-if="record || $route.params.id === '0'" @click="onFormClick" :record="record" :banner="message">
     <q-card class="row">
 
       <q-card-section class="fit">
@@ -14,7 +14,7 @@
       </q-card-section>
 
     </q-card>
-  </form>
+  </OdooForm>
 </template>
 
 <script>
@@ -28,11 +28,6 @@ export default {
     this.model = 'project.project'
     this.fields = ['id', 'name', 'label_tasks', 'user_id', 'partner_id', 'privacy_visibility']
     this.readOne()
-  },
-  methods: {
-    onFormClick (e) {
-      console.log('OdooProjectForm.onFormClick', e)
-    }
   }
 }
 </script>

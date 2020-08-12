@@ -1,5 +1,5 @@
 <template>
-  <OdooForm v-if="record || $route.params.id === '0'" @click="onFormClick" :record="record" v-bind:banner="message">
+  <OdooForm v-if="record || $route.params.id === '0'" @click="onFormClick" :record="record" :banner="message">
     <q-card class="row">
 
       <q-card-section class="fit">
