@@ -110,7 +110,8 @@ export default {
 
   /*
   "Fields to QTable Column Config"
-  Gets models field info from Odoo and converts it to a basic QTable column config
+  Gets models field info from Odoo and converts it to a basic QTable column config.
+  See: https://quasar.dev/vue-components/table
    */
   fields2QTableColConfig (model, fieldsArr, useStore = true) {
     const cacheId = this.cacheIdModelFields(model, fieldsArr)
@@ -147,7 +148,8 @@ export default {
                 relationFieldId: fieldInfo.relation_field_id,
                 help: fieldInfo.help,
                 label: fieldInfo.field_description,
-                align: 'left'
+                align: 'left',
+                sortable: true
               })
             }
           })

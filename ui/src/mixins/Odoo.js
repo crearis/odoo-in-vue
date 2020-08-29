@@ -147,7 +147,7 @@ export default {
         ).then(r => {
           if (r.data.error) {
             console.log(r.data.error)
-            return []
+            return false
           } else {
             result.data = r.data.result.records
             // for forms the `limit` is always set to 1, so set the resource (record) ID for use with forms
@@ -217,7 +217,7 @@ export default {
       } catch (e) {
         console.log(e, r)
       }
-      return []
+      return false
     })
   },
 
@@ -246,7 +246,7 @@ export default {
       } catch (e) {
         console.log(e, r)
       }
-      return []
+      return false
     })
   }
 }

@@ -83,8 +83,11 @@ export default {
         ['id', 'name', 'date_start'],
         'date_start, name'
       ).then(r => {
-        if (r.data.length) {
-          this.$refs.tableMyProjects.setData(r.data, r.cc)
+        if (r && r !== []) {
+          console.log('r is', r)
+          if (r.data.length) {
+            this.$refs.tableMyProjects.setData(r.data, r.cc)
+          }
         }
         this.$refs.tableMyProjects.isLoading = false
       }).catch(e => {
@@ -101,7 +104,9 @@ export default {
         this.calendarDataEnd,
         store.state.session.profile.uid
       ).then(r => {
-        this.calendarData = r
+        if (r) {
+          this.calendarData = r
+        }
       })
     },
     setTaskData () {
@@ -120,8 +125,11 @@ export default {
         ],
         'date_deadline'
       ).then(r => {
-        if (r.data.length) {
-          this.$refs.tableMyTasks.setData(r.data, r.cc)
+        console.log('r is', r)
+        if (r) {
+          if (r.data.length) {
+            this.$refs.tableMyTasks.setData(r.data, r.cc)
+          }
         }
         this.$refs.tableMyTasks.isLoading = false
       })

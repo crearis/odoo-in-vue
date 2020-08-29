@@ -20,28 +20,28 @@
             <q-btn
               push
               color="primary"
-              v-if="btnEdit && $route.params.res_id !== '0' && !hideBtnEdit"
+              v-if="record.rights.canWrite && $route.params.res_id !== '0' && !hideBtnEdit"
               @click="onClick('edit')"
             >Edit</q-btn>
 
             <q-btn
               push
               color="info"
-              v-if="btnCreate && $route.params.res_id !== '0' && !hideBtnCreate"
+              v-if="record.rights.canWrite && $route.params.res_id !== '0' && !hideBtnCreate"
               @click="onClick('create')"
             >Create</q-btn>
 
             <q-btn
               push
               color="info"
-              v-if="(btnCreate || btnEdit) && hideBtnCreate"
+              v-if="record.rights.canWrite && hideBtnCreate"
               @click="onClick('save')"
             >Save</q-btn>
 
             <q-btn
               push
               color="secondary"
-              v-if="(btnCreate || btnEdit) && hideBtnCreate"
+              v-if="record.rights.canWrite && hideBtnCreate"
               @click="onClick('discard')"
             >Discard</q-btn>
 
@@ -56,10 +56,10 @@
           <q-space/>
           <q-space/>
           <span class="q-pl-xs q-pr-sm">Rec #{{$route.params.res_id}}</span>
-          <q-btn-group>
-            <q-btn @click="onClick('previous')" icon="chevron_left" class="btn-divider-right"></q-btn>
-            <q-btn @click="onClick('next')" icon="chevron_right"></q-btn>
-          </q-btn-group>
+<!--          <q-btn-group>-->
+<!--            <q-btn @click="onClick('previous')" icon="chevron_left" class="btn-divider-right"></q-btn>-->
+<!--            <q-btn @click="onClick('next')" icon="chevron_right"></q-btn>-->
+<!--          </q-btn-group>-->
         </q-card-actions>
         <div v-if="showRibbon" class="form-header-bottom-border">
           <div class="q-ml-sm">
@@ -91,8 +91,6 @@ export default {
   name: 'OdooForm',
   data () {
     return {
-      btnEdit: true,
-      btnCreate: true,
       showRibbon: false,
       showFooter: false,
       hideBtnEdit: false,
@@ -135,6 +133,10 @@ export default {
     }
   },
 
+  created () {
+    console.log('canWrite', this.record.rights.canWrite)
+  },
+
   methods: {
     onClick (btn, params = {}) {
       this.click = { event: btn, args: params === {} ? params : false }
@@ -147,6 +149,8 @@ export default {
         this.hideBtnSave = true
         this.hideBtnCreate = this.hideBtnEdit = false
       } else if (btn === 'next' || btn === 'previous') {
+        this.record.canWrite = (this.record.canWrite === false)
+        console.log('r', this.record)
         this.hideBtnSave = true
         this.hideBtnCreate = this.hideBtnEdit = false
       }

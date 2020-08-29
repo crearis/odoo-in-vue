@@ -13,34 +13,34 @@ export default {
       context: {}, // Odoo context to send with search_read
       /** dont modify this - it will be set by read() method */
       record: false,
-      canRead: false,
-      canWrite: false,
-      canDelete: false,
       /** dont modify this directly - call setMessage */
-      message: null
+      message: null,
+      rights: { canRead: false, canWrite: false, canDelete: false }
     }
   },
-  mounted () {
-    // first we make sure the session is OK - this will also update profile data in Vuex store
-    Odoo.checkSession().then(r => {
-      if (!r) {
-        this.$router.push('/')
-        return
-      }
-      // session is OK so next we can check permissions based model and on data in Vuex Store
-      Odoo.check_access_rights(this.model, 'read').then(r => {
-        this.canRead = r
-        return Odoo.check_access_rights(this.model, 'write').then(r => {
-          this.canWrite = r
-          return Odoo.check_access_rights(this.model, 'unlink').then(r => {
-            this.canDelete = r
-            // console.log('permissions for', this.model, ':', this.canRead, this.canWrite, this.canDelete)
+
+  methods: {
+    getRights () {
+      // first we make sure the session is OK - this will also update profile data in Vuex store
+      return Odoo.checkSession().then(r => {
+        if (!r) {
+          this.$router.push('/')
+          return
+        }
+        // session is OK so next we can check permissions based model and on data in Vuex Store
+        return Odoo.check_access_rights(this.model, 'read').then(r => {
+          this.rights.canRead = r
+          return Odoo.check_access_rights(this.model, 'write').then(r => {
+            this.rights.canWrite = r
+            return Odoo.check_access_rights(this.model, 'unlink').then(r => {
+              this.rights.canDelete = r
+              return true
+            })
           })
         })
       })
-    })
-  },
-  methods: {
+    },
+
     /*
     Set a message object for the record which can be used by other components to display the message to the user.
      */
@@ -58,7 +58,6 @@ export default {
       if (result === false) {
         this.setMessage(callType + ' error. Check console for details', Odoo.CONST.BANNER_TYPE_FAIL)
       } else {
-        this.setMessage('Saved & record reloaded.')
         this.saveCompleted()
       }
     },
@@ -68,17 +67,23 @@ export default {
      */
     readOne () {
       this.record = null
-      return Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
-        .then(r => {
-          if (r === []) {
-            this.record = {}
-            this.setMessage('Failed to read the record', Odoo.CONST.BANNER_TYPE_FAIL)
-            return false
-          }
-          this.record = r
-          this.message = null
-          return true
-        })
+      this.getRights().then(r => {
+        if (this.rights.canRead) {
+          Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
+            .then(r => {
+              if (r === []) {
+                this.record = {}
+                this.setMessage('Failed to read the record', Odoo.CONST.BANNER_TYPE_FAIL)
+                return
+              }
+              this.record = r
+              this.record.rights = this.rights
+              this.message = null
+            })
+        } else {
+          this.setMessage('You need rights to read that data', Odoo.CONST.BANNER_TYPE_FAIL)
+        }
+      })
     },
 
     /*
