@@ -16,12 +16,12 @@
     />
 
     <!-- date -->
-    <q-input v-if="schema.type === 'date'" outlined dense v-model="formValue" mask="date"
+    <q-input v-if="schema.type === 'date'" outlined dense v-model="formValue"
              :rules="schema.required ? ['date'] : []" :readonly="!editing || schema.readonly" :disable="!editing">
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-            <q-date v-model="formValue" @input="() => $refs.qDateProxy.hide()" />
+            <q-date v-model="formValue" @input="() => $refs.qDateProxy.hide()" mask="YYYY-MM-DD"/>
           </q-popup-proxy>
         </q-icon>
       </template>
