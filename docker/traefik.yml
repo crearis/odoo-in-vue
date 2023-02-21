@@ -47,4 +47,4 @@ http:
     quasar:
       loadBalancer:
         servers:
-          - url: "http://quasar:8081"
+          - url: "http://quasar:8082"

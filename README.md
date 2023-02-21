@@ -1,3 +1,12 @@
+# NOTE - This project is no longer supported
+
+Odoo is just not popular enough here in the U.S. for it to have any economic significance for me.
+Consequently, I am no longer interested in supporting this project or anything else Odoo related.
+
+The support feature in Gitlab will be disabled for this project.
+
+---
+
 This is a project that provides a foundation for developing typical business apps with Odoo and Vue. It includes
 a very simple Vue prototype app that connects to the Odoo server through the Odoo JSON-RPC API.
 
