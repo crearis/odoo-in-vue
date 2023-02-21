@@ -36,7 +36,6 @@ export default {
 
   /*
   Authenticates against the Odoo server. If OK, stores the session_id in a cookie and profile in Vuex.
-  Requires the spa_support Odoo module installed
    */
   getSessionId (db, login, password) {
     return Odoo.authenticate(db, login, password)
