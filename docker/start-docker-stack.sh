@@ -24,4 +24,4 @@ fi
 echo
 
 ./reset-data.sh
-docker-compose up
+docker compose -f ./docker-compose.yml up
