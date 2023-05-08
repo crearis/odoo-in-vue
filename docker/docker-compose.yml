@@ -6,7 +6,7 @@ services:
 
   db:
     image: postgres:12
-    container_name: dev13_pg12
+    container_name: dev_pg12
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
@@ -21,8 +21,8 @@ services:
 
 
   odoo13:
-    image: odoo:13
-    container_name: dev13_odoo13
+    image: odoo:14
+    container_name: dev_odoo14
     depends_on:
       - db
     ports:
@@ -41,7 +41,7 @@ services:
 
 
 #  reverse-proxy:
-#    container_name: dev13_traefik
+#    container_name: dev_traefik
 #    networks:
 #      - odoodev
 #

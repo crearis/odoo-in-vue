@@ -9,7 +9,7 @@ date: 2020-01-26T04:15:05+09:00
 ---
 ' > ./content/_index.md
 echo '
-{{< figure src="https://gitlab.com/sylnsr/odoo-in-vue/-/raw/13/docs/hugo/static/img/odooinvue.png" >}}
+{{< figure src="https://gitlab.com/sylnsr/odoo-in-vue/-/raw/14/docs/hugo/static/img/odooinvue.png" >}}
 ' >> ./content/_index.md
 cat ../../README.md >> ./content/_index.md
 
@@ -35,7 +35,7 @@ date: 2020-01-11T14:09:21+09:00
 ---
 ' > ./content/doc/quasar.md
 cat ../../readme-ui.md >> ./content/doc/quasar.md
-cat ../../ui/README.md >> ./content/doc/quasar.md
+cat ../../vue/README.md >> ./content/doc/quasar.md
 
 ######
 

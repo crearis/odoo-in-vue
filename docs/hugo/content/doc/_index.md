@@ -75,7 +75,7 @@ that on QCalendar.
 
 ## Vue concepts for this project
 
-In the Vue/Quasar sub-project in the `/ui` directory, I provide components; mixins and a store that bridges the knowledge
+In the Vue/Quasar sub-project in the `/vue` directory, I provide components; mixins and a store that bridges the knowledge
 gap between Odoo and Vue/Quasar. The idea is that the UI developer can use these to easily create lists and forms that
 connect to Odoo in the back-end, with minimal effort and just basic knowledge of Odoo. The UI developer should only need
 minimal attentiveness concerning schema's of the various Odoo models because that information is already stored in Odoo

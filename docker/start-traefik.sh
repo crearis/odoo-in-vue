@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
 CWD=$(pwd)
-docker run --rm -it --name dev13_traefik \
+docker run --rm -it --name dev_traefik \
 --network="host" \
 --add-host="odoo13:127.0.0.1" \
 --add-host="quasar:127.0.0.1" \

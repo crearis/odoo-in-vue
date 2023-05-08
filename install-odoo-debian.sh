@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
 
-ODOO_VERSION="13.0"
-ODOO_RELEASE="20200417"
-ODOO_SHA="db29fbcebf63f9f656e9445f462190ac775ee533"
+ODOO_VERSION="14.0"
+ODOO_RELEASE="20230430"
+ODOO_SHA="06586ebb9902fa4840fb177f5e45f98d19dadf6d"
 
 curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
 && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \

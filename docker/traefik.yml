@@ -39,11 +39,11 @@ http:
     odoo:
       loadBalancer:
         servers:
-          - url: "http://odoo13:8069"
+          - url: "http://odoo:8069"
     odoochat:
       loadBalancer:
         servers:
-          - url: "http://odoo13:8072"
+          - url: "http://odoo:8072"
     quasar:
       loadBalancer:
         servers:

@@ -36,8 +36,8 @@ cp_repo_sub_dir () {
 rm_tmp_unzip
 
 
-SD="project-13.0"
-get_repo_code "https://github.com/OCA/project" "13.0"
+SD="project-14.0"
+get_repo_code "https://github.com/OCA/project" "14.0"
 cp_repo_sub_dir project_category $SD
 cp_repo_sub_dir project_key $SD
 cp_repo_sub_dir project_status $SD
@@ -48,13 +48,4 @@ cp_repo_sub_dir project_task_add_very_high $SD
 rm_tmp_unzip
 
 
-get_repo_code "https://github.com/sylnsr/project_tools" "13.0"
-cp_repo_dir project_tools-13.0/project_ledger project_ledger
-cp_repo_dir project_tools-13.0/project_contact project_contact
-rm_tmp_unzip
-
-
-get_repo_code "https://github.com/idazco/odoo-addons" "13"
-cp_repo_dir odoo-addons-13/tagged_notes tagged_notes
-cp_repo_dir odoo-addons-13/project_task_plan project_task_plan
 rm_tmp_unzip

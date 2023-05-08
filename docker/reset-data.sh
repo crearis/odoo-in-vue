@@ -2,8 +2,8 @@
 cd "$(dirname "$0")"
 
 echo "======================"
-echo ">stop dev13_g12"
-docker stop dev13_pg12 > /dev/null 2>&1
+echo ">stop dev_pg12"
+docker stop dev_pg12 > /dev/null 2>&1
 echo ">set ownership of data"
 sudo chown -R $USER:$USER ./pg-data
 sudo chown -R $USER:$USER ./var-lib-odoo

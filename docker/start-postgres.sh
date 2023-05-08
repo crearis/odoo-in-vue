@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
-docker run --rm -it --name dev13_pg12 \
+docker run --rm -it --name dev_pg12 \
 -e POSTGRES_PASSWORD=odoo \
 -e POSTGRES_USER=odoo \
 -e POSTGRES_DB=postgres \
