@@ -12,3 +12,4 @@ debug-odoo.conf
 __pycache__
 docs/hugo/resources
 scratch
+./node_modules
