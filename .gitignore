@@ -1,6 +1,6 @@
 .idea
 !.idea/runConfigurations/odoo_bin.xml
-ui/node_modules
+vue/node_modules
 venv/*
 13
 tmp_unzip
@@ -12,4 +12,3 @@ debug-odoo.conf
 __pycache__
 docs/hugo/resources
 scratch
-./node_modules
