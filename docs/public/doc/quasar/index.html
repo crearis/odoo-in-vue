@@ -2,8 +2,10 @@
 <html><head>
 
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="Introduction/ Vue Setup">
+    
     <link rel="canonical" href="https://www.odooinvue.org/doc/quasar/">
 
     <title>
@@ -19,6 +21,8 @@
     <link rel="stylesheet" href="https://www.odooinvue.org/css/ace.min.css">
 
     
+
+    
     
         
     
@@ -28,12 +32,13 @@
     <div class="container">
         <div>
             <a class="navbar-brand" href="/">
+                
                 Odoo In Vue
             </a>
         </div>
         
     </div>
-</nav>
+    </nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -43,36 +48,52 @@
     </button>
 
      <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
          <ul class="navbar-nav flex-column pt-3">
     <li data-nav-id="/doc/" class="nav-item my-1 parent haschildren
         ">
         
-        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
+          <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
         <ul class="list-unstyled ml-2">
         <li data-nav-id="/doc/docker/" class="nav-item my-1">
                 
-                 <a href="/doc/docker/" class="nav-link p-0">
+                
+                  <a href="/doc/docker/" class="nav-link p-0">
                     Docker
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/development/" class="nav-item my-1">
                 
-                 <a href="/doc/development/" class="nav-link p-0">
+                
+                  <a href="/doc/development/" class="nav-link p-0">
                     Odoo Development
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/quasar/" class="nav-item my-1 active">
                 
-                 <a href="/doc/quasar/" class="nav-link p-0">
+                
+                  <a href="/doc/quasar/" class="nav-link p-0">
                     Vue / Quasar / Odoo
-                </a>
+                  </a>
+                
         </li>
         </ul>
     </li>
     <li data-nav-id="/about/" class="nav-item my-1
         ">
         
-        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
+          <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
     </li>
         </ul>
     </div>
@@ -88,6 +109,15 @@
         <li><a href="#quasar-setup-basics">Quasar setup basics</a></li>
       </ul>
     </li>
+    <li><a href="#install-the-dependencies">Install the dependencies</a>
+      <ul>
+        <li><a href="#start-the-app-in-development-mode-hot-code-reloading-error-reporting-etc">Start the app in development mode (hot-code reloading, error reporting, etc.)</a></li>
+        <li><a href="#lint-the-files">Lint the files</a></li>
+        <li><a href="#format-the-files">Format the files</a></li>
+        <li><a href="#build-the-app-for-production">Build the app for production</a></li>
+        <li><a href="#customize-the-configuration">Customize the configuration</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div>
@@ -95,62 +125,79 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Vue / Quasar / Odoo</h1>
+<div class="d-flex flex-column">
+    <h1 class="js-title">Vue / Quasar / Odoo</h1>
+    <div class="d-flex align-items-center">
+        
+    </div>
+</div>
+
+<hr>
+
 
 <h2 id="about-the-quasarvue-project">About the Quasar/Vue project</h2>
 <p>Using VueJS with Odoo is an established paradigm that we borrow from older projects in the public domain. The Quasar/Vue
-app in this project is obviously not meant to be complete since its just a functional sample that demonstrates how to
+app in this project is obviously not meant to be complete since it&rsquo;s just a functional sample that demonstrates how to
 use VueJS with Odoo as the backend.</p>
 <p>Because the VueJS interface is built using <a href="https://quasar.dev">Quasar</a> .. the <a href="https://quasar.dev/start/quasar-cli">Quasar CLI</a>
 is required.</p>
-<p>The root directory for the Quasar/Vue project is <code>/ui</code></p>
+<p>The root directory for the Quasar/Vue project is <code>/vue</code></p>
 <hr>
 <h3 id="quasar-setup-basics">Quasar setup basics</h3>
 <ul>
 <li><a href="https://classic.yarnpkg.com/en/docs/install/#debian-stable">Yarn</a> for dependencies</li>
-<li>Vuex to manage data state</li>
+<li>Pinia to manage data state</li>
 <li>Axios for async queries</li>
+<li>Sass with SCSS syntax for the CSS preprocessor</li>
+<li>ESLint with Prettier</li>
 <li>Project uses JSON-RPC to communicate with the Odoo backend</li>
-<li>Server interfacing is managed as a mixin</li>
+<li>Server interfacing is managed as a mixin
+<strong>Before you run the Quasar/Vue sub-project follow these steps (as needed).</strong></li>
 </ul>
-<hr>
-<p><strong>Before you run the Quasar/Vue sub-project follow these steps (as needed).</strong></p>
-<p>Install the dependencies:</p>
-<p><code>yarn</code></p>
-<p>Start the app in development mode (hot-code reloading, error reporting, etc.):</p>
-<p><code>quasar dev</code></p>
-<p>Lint the files:</p>
-<p><code>yarn run lint</code></p>
-<p>Build the app for production:</p>
-<p><code>quasar build</code></p>
-<p>Customize the configuration:</p>
-<p>See <a href="https://quasar.dev/quasar-cli/quasar-conf-js">Configuring quasar.conf.js</a>.</p>
+<h2 id="install-the-dependencies">Install the dependencies</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yarn
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or</span>
+</span></span><span style="display:flex;"><span>npm install
+</span></span></code></pre></div><h3 id="start-the-app-in-development-mode-hot-code-reloading-error-reporting-etc">Start the app in development mode (hot-code reloading, error reporting, etc.)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>quasar dev
+</span></span></code></pre></div><h3 id="lint-the-files">Lint the files</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yarn lint
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or</span>
+</span></span><span style="display:flex;"><span>npm run lint
+</span></span></code></pre></div><h3 id="format-the-files">Format the files</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yarn format
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or</span>
+</span></span><span style="display:flex;"><span>npm run format
+</span></span></code></pre></div><h3 id="build-the-app-for-production">Build the app for production</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>quasar build
+</span></span></code></pre></div><h3 id="customize-the-configuration">Customize the configuration</h3>
+<p>See <a href="https://v2.quasar.dev/quasar-cli-vite/quasar-config-js">Configuring quasar.config.js</a>.</p>
+<p>(end of autogenerated content)</p>
 <hr>
 <h1 id="project-directories-and-files">Project Directories and Files</h1>
 <p>All of the core Odoo files in the Vue project which provide Odoo specific functions and features, have their file name
 prefixed with <code>Odoo</code>. These files are explained as follows:</p>
 <p><strong>Components:</strong></p>
 <ul>
-<li><code>/ui/src/components/odoo/OdooBaseData.js</code>: Provides core data features for other Odoo components</li>
-<li><code>/ui/src/components/odoo/OdooBaseForm.js</code>: Base form component to extend to create your own Quasar/Odoo forms</li>
-<li><code>/ui/src/components/odoo/OdooField.vue</code>: Provides field for your Quasar/Odoo form based on field schema data</li>
-<li><code>/ui/src/components/odoo/OdooForms.vue</code>: Provides a standard container for your Quasar/Odoo forms with standard buttons</li>
+<li><code>/vue/src/components/odoo/OdooBaseData.js</code>: Provides core data features for other Odoo components</li>
+<li><code>/vue/src/components/odoo/OdooBaseForm.js</code>: Base form component to extend to create your own Quasar/Odoo forms</li>
+<li><code>/vue/src/components/odoo/OdooField.vue</code>: Provides field for your Quasar/Odoo form based on field schema data</li>
+<li><code>/vue/src/components/odoo/OdooForms.vue</code>: Provides a standard container for your Quasar/Odoo forms with standard buttons</li>
 </ul>
 <p><strong>Mixins:</strong></p>
 <ul>
-<li><code>/ui/src/mixins/Odoo.js</code>: Mixin for Odoo server interaction</li>
-<li><code>/ui/src/mixins/OdooQUtils.js</code>: Mixin for features that pertain to Quasar and Odoo, e.g. Odoo to Quasar data conversion</li>
-<li><code>/ui/src/mixins/OdooRpc.js</code>: Mixin for RPC calls made to Odoo</li>
+<li><code>/vue/src/mixins/Odoo.js</code>: Mixin for Odoo server interaction</li>
+<li><code>/vue/src/mixins/OdooQUtils.js</code>: Mixin for features that pertain to Quasar and Odoo, e.g. Odoo to Quasar data conversion</li>
+<li><code>/vue/src/mixins/OdooRpc.js</code>: Mixin for RPC calls made to Odoo</li>
 </ul>
 <p><strong>Vuex (Store):</strong></p>
 <ul>
-<li><code>/ui/src/store/odoo.js</code>: Vuex file for Odoo stuff</li>
+<li><code>/vue/src/store/odoo.js</code>: Vuex file for Odoo stuff</li>
 </ul>
 <p>Currently these are all the files you need to create your own Quasar-Odoo project and eventually these will be files put
-into an NPM package. The other files of interest are in <code>/ui/src/components/myforms</code>, which are example Vue components
-that use the files listed above and demonstrate how simple it is to create Quasar-Odoo forms. Lastly, the <code>/ui/src/pages</code>
+into an NPM package. The other files of interest are in <code>/vue/src/components/myforms</code>, which are example Vue components
+that use the files listed above and demonstrate how simple it is to create Quasar-Odoo forms. Lastly, the <code>/vue/src/pages</code>
 directory can be reviewed to give a broad level example of how one might setup their own Quasar-Odoo project in Vue.</p>
-<hr>
 
 
     
@@ -158,7 +205,15 @@ directory can be reviewed to give a broad level example of how one might setup t
 
                     
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
-                          
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/doc/development/" title="Odoo Development"><i class="fas fa-chevron-left p-1"></i>Odoo Development</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/about/" title="About">About<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
 
                         </div></div> 
 
@@ -182,6 +237,8 @@ directory can be reviewed to give a broad level example of how one might setup t
   
 </script>
 <script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
 
 
 <script type="text/javascript" src="/plugins/clipboard.js"></script>

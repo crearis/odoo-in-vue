@@ -2,8 +2,11 @@
 <html><head>
 
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="test doc index">
+    
+    <link rel="alternate" type="application/rss+xml" href="https://www.odooinvue.org/about/index.xml" title="Odoo In Vue" />
     <link rel="canonical" href="https://www.odooinvue.org/about/">
 
     <title>
@@ -19,6 +22,8 @@
     <link rel="stylesheet" href="https://www.odooinvue.org/css/ace.min.css">
 
     
+
+    
     
         
     
@@ -28,12 +33,16 @@
     <div class="container">
         <div>
             <a class="navbar-brand" href="/">
+                
                 Odoo In Vue
             </a>
         </div>
         
     </div>
-</nav>
+    <div class="feed-icons">
+            <a href="https://www.odooinvue.org/about/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
+        </div>
+    </nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -43,36 +52,52 @@
     </button>
 
      <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
          <ul class="navbar-nav flex-column pt-3">
     <li data-nav-id="/doc/" class="nav-item my-1 haschildren
         ">
         
-        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
+          <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
         <ul class="list-unstyled ml-2">
         <li data-nav-id="/doc/docker/" class="nav-item my-1">
                 
-                 <a href="/doc/docker/" class="nav-link p-0">
+                
+                  <a href="/doc/docker/" class="nav-link p-0">
                     Docker
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/development/" class="nav-item my-1">
                 
-                 <a href="/doc/development/" class="nav-link p-0">
+                
+                  <a href="/doc/development/" class="nav-link p-0">
                     Odoo Development
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/quasar/" class="nav-item my-1">
                 
-                 <a href="/doc/quasar/" class="nav-link p-0">
+                
+                  <a href="/doc/quasar/" class="nav-link p-0">
                     Vue / Quasar / Odoo
-                </a>
+                  </a>
+                
         </li>
         </ul>
     </li>
-    <li data-nav-id="/about/" class="nav-item my-1 parent active
+    <li data-nav-id="/about/" class="nav-item my-1 active
         ">
         
-        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
+          <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
     </li>
         </ul>
     </div>
@@ -98,7 +123,15 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>About</h1>
+<div class="d-flex flex-column">
+    <h1 class="js-title">About</h1>
+    <div class="d-flex align-items-center">
+        
+    </div>
+</div>
+
+<hr>
+
 
 <h3 id="maintainer">Maintainer:</h3>
 <p><a href="https://www.linkedin.com/in/michaelmugge/">Mike Mugge</a></p>
@@ -120,7 +153,15 @@ Both financial and coding support is welcome.</p>
 
                     
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
-                          
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/doc/quasar/" title="Vue / Quasar / Odoo"><i class="fas fa-chevron-left p-1"></i>Vue / Quasar / Odoo</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/doc/" title="Introduction">Introduction<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
 
                         </div></div> 
 
@@ -144,6 +185,8 @@ Both financial and coding support is welcome.</p>
   
 </script>
 <script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
 
 
 <script type="text/javascript" src="/plugins/clipboard.js"></script>

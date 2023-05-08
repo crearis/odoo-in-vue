@@ -2,8 +2,11 @@
 <html><head>
 
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="Project concepts for the Odoo modules and the Vue project together">
+    
+    <link rel="alternate" type="application/rss+xml" href="https://www.odooinvue.org/doc/index.xml" title="Odoo In Vue" />
     <link rel="canonical" href="https://www.odooinvue.org/doc/">
 
     <title>
@@ -19,6 +22,8 @@
     <link rel="stylesheet" href="https://www.odooinvue.org/css/ace.min.css">
 
     
+
+    
     
         
     
@@ -28,12 +33,16 @@
     <div class="container">
         <div>
             <a class="navbar-brand" href="/">
+                
                 Odoo In Vue
             </a>
         </div>
         
     </div>
-</nav>
+    <div class="feed-icons">
+            <a href="https://www.odooinvue.org/doc/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
+        </div>
+    </nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -43,36 +52,52 @@
     </button>
 
      <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/doc/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/doc/" class="nav-item my-1 active haschildren
         ">
         
-        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
+          <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
         <ul class="list-unstyled ml-2">
         <li data-nav-id="/doc/docker/" class="nav-item my-1">
                 
-                 <a href="/doc/docker/" class="nav-link p-0">
+                
+                  <a href="/doc/docker/" class="nav-link p-0">
                     Docker
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/development/" class="nav-item my-1">
                 
-                 <a href="/doc/development/" class="nav-link p-0">
+                
+                  <a href="/doc/development/" class="nav-link p-0">
                     Odoo Development
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/quasar/" class="nav-item my-1">
                 
-                 <a href="/doc/quasar/" class="nav-link p-0">
+                
+                  <a href="/doc/quasar/" class="nav-link p-0">
                     Vue / Quasar / Odoo
-                </a>
+                  </a>
+                
         </li>
         </ul>
     </li>
     <li data-nav-id="/about/" class="nav-item my-1
         ">
         
-        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
+          <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
     </li>
         </ul>
     </div>
@@ -105,7 +130,15 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Introduction</h1>
+<div class="d-flex flex-column">
+    <h1 class="js-title">Introduction</h1>
+    <div class="d-flex align-items-center">
+        
+    </div>
+</div>
+
+<hr>
+
 
 <h2 id="inspiration-for-this-project">Inspiration for this project</h2>
 <h4 id="what-are-the-challenged-with-qweb">What are the challenged with QWeb?</h4>
@@ -164,7 +197,7 @@ the QCalendar component because project tasks have deadlines, which is fine for 
 that on QCalendar.</p>
 <hr>
 <h2 id="vue-concepts-for-this-project">Vue concepts for this project</h2>
-<p>In the Vue/Quasar sub-project in the <code>/ui</code> directory, I provide components; mixins and a store that bridges the knowledge
+<p>In the Vue/Quasar sub-project in the <code>/vue</code> directory, I provide components; mixins and a store that bridges the knowledge
 gap between Odoo and Vue/Quasar. The idea is that the UI developer can use these to easily create lists and forms that
 connect to Odoo in the back-end, with minimal effort and just basic knowledge of Odoo. The UI developer should only need
 minimal attentiveness concerning schema&rsquo;s of the various Odoo models because that information is already stored in Odoo
@@ -218,7 +251,15 @@ yet another web framework. Also, OWL, still has many of the same problems as QWe
 
                     
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
-                          
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/" title="Odoo In Vue"><i class="fas fa-chevron-left p-1"></i>Odoo In Vue</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/doc/docker/" title="Docker">Docker<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
 
                         </div></div> 
 
@@ -242,6 +283,8 @@ yet another web framework. Also, OWL, still has many of the same problems as QWe
   
 </script>
 <script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
 
 
 <script type="text/javascript" src="/plugins/clipboard.js"></script>

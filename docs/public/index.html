@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html><head>
-	<meta name="generator" content="Hugo 0.74.3" />
+	<meta name="generator" content="Hugo 0.111.3">
 
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="Odoo In Vue landing page">
+    
+    <link rel="alternate" type="application/rss+xml" href="https://www.odooinvue.org/index.xml" title="Odoo In Vue" />
     <link rel="canonical" href="https://www.odooinvue.org/">
 
     <title>
@@ -20,6 +23,8 @@
     <link rel="stylesheet" href="https://www.odooinvue.org/css/ace.min.css">
 
     
+
+    
     
         
     
@@ -29,12 +34,16 @@
     <div class="container">
         <div>
             <a class="navbar-brand" href="/">
+                
                 Odoo In Vue
             </a>
         </div>
         
     </div>
-</nav>
+    <div class="feed-icons">
+            <a href="https://www.odooinvue.org/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
+        </div>
+    </nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -44,36 +53,52 @@
     </button>
 
      <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
          <ul class="navbar-nav flex-column pt-3">
     <li data-nav-id="/doc/" class="nav-item my-1 haschildren
         ">
         
-        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
+          <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
         <ul class="list-unstyled ml-2">
         <li data-nav-id="/doc/docker/" class="nav-item my-1">
                 
-                 <a href="/doc/docker/" class="nav-link p-0">
+                
+                  <a href="/doc/docker/" class="nav-link p-0">
                     Docker
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/development/" class="nav-item my-1">
                 
-                 <a href="/doc/development/" class="nav-link p-0">
+                
+                  <a href="/doc/development/" class="nav-link p-0">
                     Odoo Development
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/quasar/" class="nav-item my-1">
                 
-                 <a href="/doc/quasar/" class="nav-link p-0">
+                
+                  <a href="/doc/quasar/" class="nav-link p-0">
                     Vue / Quasar / Odoo
-                </a>
+                  </a>
+                
         </li>
         </ul>
     </li>
     <li data-nav-id="/about/" class="nav-item my-1
         ">
         
-        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
+          <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
     </li>
         </ul>
     </div>
@@ -91,17 +116,20 @@
 
 	<h1>Odoo In Vue</h1>
 
-	<figure>
-    <img src="https://gitlab.com/sylnsr/odoo-in-vue/-/raw/13/docs/hugo/static/img/odooinvue.png"/> 
+	<figure><img src="https://gitlab.com/sylnsr/odoo-in-vue/-/raw/14/docs/hugo/static/img/odooinvue.png"/>
 </figure>
 
+<h1 id="note---this-project-is-no-longer-supported">NOTE - This project is no longer supported</h1>
+<p>Odoo is not vary popular here in the U.S. - at least, for it to have any economic significance for me.
+Consequently, and for the time being, I am limiting my support for this project free opensource project.</p>
+<hr>
 <p>This is a project that provides a foundation for developing typical business apps with Odoo and Vue. It includes
 a very simple Vue prototype app that connects to the Odoo server through the Odoo JSON-RPC API.</p>
 <p>The Vue framework is built upon using the <a href="https://quasar.dev/">Quasar Framework</a>, which means that you can easily
 convert your Vue app to a mobile app using Cordova or a desktop app using Electron. Using the Quasar framework also
 means that you have a rich set of modern Vue components needed to build a very robust custom UI for Odoo, with Vue.</p>
-<p>Just download this repo and start customizing the Vue app in the <code>/ui</code> directory. Alternatively, if you already have
-your Odoo development environment setup, then just download the <code>ui</code> directory from this project to get a basis for your
+<p>Just download this repo and start customizing the Vue app in the <code>/vue</code> directory. Alternatively, if you already have
+your Odoo development environment setup, then just download the <code>vue</code> directory from this project to get a basis for your
 Quasar/Vue project that connects to Odoo.</p>
 <p>Everything is available on <strong>Gitlab</strong>: <a href="https://gitlab.com/sylnsr/odoo-in-vue">https://gitlab.com/sylnsr/odoo-in-vue</a></p>
 <p>The stand-alone documentation is here: <a href="https://www.odooinvue.org">https://www.odooinvue.org</a></p>
@@ -111,7 +139,14 @@ Quasar/Vue project that connects to Odoo.</p>
 
                     
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
-                          
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/doc/" title="Introduction">Introduction<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
 
                         </div></div> 
 
@@ -135,6 +170,8 @@ Quasar/Vue project that connects to Odoo.</p>
   
 </script>
 <script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
 
 
 <script type="text/javascript" src="/plugins/clipboard.js"></script>

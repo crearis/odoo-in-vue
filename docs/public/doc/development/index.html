@@ -2,8 +2,10 @@
 <html><head>
 
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="Introduction / Odoo Development">
+    
     <link rel="canonical" href="https://www.odooinvue.org/doc/development/">
 
     <title>
@@ -19,6 +21,8 @@
     <link rel="stylesheet" href="https://www.odooinvue.org/css/ace.min.css">
 
     
+
+    
     
         
     
@@ -28,12 +32,13 @@
     <div class="container">
         <div>
             <a class="navbar-brand" href="/">
+                
                 Odoo In Vue
             </a>
         </div>
         
     </div>
-</nav>
+    </nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -43,36 +48,52 @@
     </button>
 
      <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
          <ul class="navbar-nav flex-column pt-3">
     <li data-nav-id="/doc/" class="nav-item my-1 parent haschildren
         ">
         
-        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
+          <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
         <ul class="list-unstyled ml-2">
         <li data-nav-id="/doc/docker/" class="nav-item my-1">
                 
-                 <a href="/doc/docker/" class="nav-link p-0">
+                
+                  <a href="/doc/docker/" class="nav-link p-0">
                     Docker
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/development/" class="nav-item my-1 active">
                 
-                 <a href="/doc/development/" class="nav-link p-0">
+                
+                  <a href="/doc/development/" class="nav-link p-0">
                     Odoo Development
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/quasar/" class="nav-item my-1">
                 
-                 <a href="/doc/quasar/" class="nav-link p-0">
+                
+                  <a href="/doc/quasar/" class="nav-link p-0">
                     Vue / Quasar / Odoo
-                </a>
+                  </a>
+                
         </li>
         </ul>
     </li>
     <li data-nav-id="/about/" class="nav-item my-1
         ">
         
-        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
+          <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
     </li>
         </ul>
     </div>
@@ -97,14 +118,22 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Odoo Development</h1>
+<div class="d-flex flex-column">
+    <h1 class="js-title">Odoo Development</h1>
+    <div class="d-flex align-items-center">
+        
+    </div>
+</div>
+
+<hr>
+
 
 <h2 id="setup-basics">Setup Basics</h2>
 <p>Assumptions:</p>
 <ul>
 <li>You are a Python developer</li>
 <li>You have at least basic Odoo development knowledge</li>
-<li>You are using Ubuntu 18.04 for development (or similar)</li>
+<li>You are using Ubuntu for development (or similar)</li>
 </ul>
 <p>Pre-requisites:</p>
 <ul>
@@ -113,27 +142,27 @@
 </ul>
 <ol>
 <li>
-<p>Get Odoo 13 one of 2 ways (choose just one, unless you know what you are doing):</p>
+<p>Get Odoo one of 2 ways (choose just one, unless you know what you are doing):</p>
 <ul>
-<li>Clone the Odoo <strong>13</strong> source code to a directory of your choice. You can use the following script to do this.
+<li>Clone the Odoo source code to a directory of your choice. You can use the following script to do this.
 Be sure to read the <a href="https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh">source code</a>
-if you have security concerns. Just run the this command in a directory where you want to download the source code
-(be sure to choose Odoo <strong>13</strong> when prompted): <br>
+if you have security concerns. Just run this command in a directory where you want to download the source code
+(be sure to choose Odoo <strong>14</strong> when prompted): <br>
 <code>source &lt;(curl -s https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)</code></li>
-<li>Install Odoo 13 using the .deb installer file - just run <code>install-odoo-debian.sh</code></li>
+<li>Install Odoo using the .deb installer file - just run <code>install-odoo-debian.sh</code></li>
 </ul>
 </li>
 <li>
-<p>Setup your Python 3.6 virtual environment by running the following in the root directory of the project:<br>
+<p>Setup your Python virtual environment by running the following in the root directory of the project:<br>
 <code>python3 -m venv ./venv</code></p>
 </li>
 <li>
-<p>Activate the Python 3 virtual environment:<br>
+<p>Activate the Python virtual environment:<br>
 <code>source ./venv/bin/activate</code></p>
 </li>
 <li>
 <p>Install the Odoo requirements into the virtual environment:
-<code>pip3 install -r &lt;path-where-you-cloned-odoo-13&gt;/requirements.txt</code></p>
+<code>pip3 install -r &lt;path-where-you-cloned-odoo-14&gt;/requirements.txt</code></p>
 </li>
 <li>
 <p>Copy <code>debug-odoo.conf.dist</code> to <code>debug-odoo.conf</code> and update it so that <code>data_dir</code> and <code>addons_path</code>
@@ -143,9 +172,9 @@ are correct paths for your file system.</p>
 <p>Run <code>./docker/start-postgres.sh</code> and <code>./docker/start-traefik.sh</code>. Then start debugging Odoo in your IDE.</p>
 </li>
 <li>
-<p>Finally, from the <code>./ui/</code> folder, run <code>quasar dev</code> to start Quasar in development mode. Now going to,
-http://localhost/vue gets you into the custom UI app and http://localhost/web will get you into Odoo 13. Direct
-access to Odoo 13 via http://localhost:8069 will also work for that.</p>
+<p>Finally, from the <code>./vue/</code> folder, run <code>quasar dev</code> to start Quasar in development mode. Now going to,
+http://localhost/vue gets you into the custom UI app and http://localhost/web will get you into Odoo. Direct
+access to Odoo via http://localhost:8069 will also work for that.</p>
 </li>
 </ol>
 <p><strong>Note:</strong> if you install Odoo from the installer AND THEN you try to run it from source, you will probably get an error
@@ -153,20 +182,18 @@ indicating that port 8069 is already in use. This is because the installer start
 will already be occupied.</p>
 <hr>
 <h3 id="external-addons-for-odoo">External Addons for Odoo</h3>
-<p><strong>(This section does not apply if you are only downloading the Quasar/Vue code in the <code>/ui</code> dir)</strong></p>
+<p><strong>(This section does not apply if you are only downloading the Quasar/Vue code in the <code>/vue</code> dir)</strong></p>
 <p>This project already includes (via download) some free add-on modules from the Odoo community (OCA and others).
 These are the external modules that are downloaded to this project when running the <code>update-other-addons.sh</code> script.</p>
 <ul>
-<li><a href="https://github.com/OCA/project/tree/13.0/project_category">project_category</a>: For categorization of projects (formally named Project Types)</li>
-<li><a href="https://github.com/sylnsr/project_tools/tree/13.0/project_contact">project_contact</a>: Contextually link contacts to projects</li>
-<li><a href="https://github.com/OCA/project/tree/13.0/project_key">project_key</a>: Unique project key generation</li>
-<li><a href="https://github.com/sylnsr/project_tools/tree/13.0/project_ledger">project_ledger</a>: Adds project ledger features</li>
-<li><a href="https://github.com/OCA/project/tree/13.0/project_status">project_status</a>: Provides status management on projects</li>
-<li><a href="https://github.com/OCA/project/tree/13.0/project_task_add_very_high">project_task_add_very_high</a>: Adds two new levels of priority for tasks on projects</li>
-<li><a href="https://github.com/OCA/project/tree/13.0/project_task_dependency">project_task_dependency</a>: Define dependencies (other tasks) of a task</li>
-<li><a href="https://github.com/OCA/project/tree/13.0/project_task_material">project_task_material</a>: Enables tracking of expenses for a project</li>
-<li><a href="https://github.com/idazco/odoo-addons/tree/13/project_task_plan">project_task_plan</a>: Adds features for aiding with task planning</li>
-<li><a href="https://github.com/idazco/odoo-addons/tree/13/tagged_notes">tagged_notes</a>: Link notes to other records and tag them</li>
+<li><a href="https://github.com/OCA/project/tree/14.0/project_category">project_category</a>: For categorization of projects (formally named Project Types)</li>
+<li><a href="https://github.com/sylnsr/project_tools/tree/14.0/project_contact">project_contact</a>: Contextually link contacts to projects</li>
+<li><a href="https://github.com/OCA/project/tree/14.0/project_key">project_key</a>: Unique project key generation</li>
+<li><a href="https://github.com/sylnsr/project_tools/tree/14.0/project_ledger">project_ledger</a>: Adds project ledger features</li>
+<li><a href="https://github.com/OCA/project/tree/14.0/project_status">project_status</a>: Provides status management on projects</li>
+<li><a href="https://github.com/OCA/project/tree/14.0/project_task_add_very_high">project_task_add_very_high</a>: Adds two new levels of priority for tasks on projects</li>
+<li><a href="https://github.com/OCA/project/tree/14.0/project_task_dependency">project_task_dependency</a>: Define dependencies (other tasks) of a task</li>
+<li><a href="https://github.com/OCA/project/tree/14.0/project_task_material">project_task_material</a>: Enables tracking of expenses for a project</li>
 </ul>
 <p>This project will strive to incorporate all the UI features/objective from these Odoo modules in the Vue project.</p>
 <hr>
@@ -175,13 +202,6 @@ These are the external modules that are downloaded to this project when running 
 <a href="./.idea/runConfigurations/odoo_bin.xml">provided with this project</a>, AFTER you correct the &ldquo;Script path&rdquo;; &ldquo;Parameters&rdquo;;
 &ldquo;Working directory&rdquo; and &ldquo;Python Interpreter&rdquo; so that they are correct for your environment. Note, the Python Interpreter
 MUST point to the Python binary in the project&rsquo;s Python virtual environment.</p>
-<p>If you get the following error when debugging: <code>greenlet.error: cannot switch to a different thread</code> and the long-polling
-port is not working, then look at this: <a href="https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994">https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994</a>
-&ndash; USE CAUTION WHEN IMPLEMENTING THIS FIX - IT MAY CAUSE BREAKPOINTS TO STOP WORKING! - The problem with using that fix,
-is that the &ldquo;Gevent compatible&rdquo; setting in PyCharm <a href="https://youtrack.jetbrains.com/issue/PY-43676">does not always work</a>,
-but YMMV.</p>
-<p>I have not found any issues with debugging with the &ldquo;Gevent compatible&rdquo; option unchecked and the console throwing that
-error, so just ignore that error when debugging and longpolling is not working.</p>
 <p>When longpolling stops working, or is disabled by setting <code>workers = 0</code>, the Odoo UI will be annoying by continually
 putting up the &ldquo;Trying to connect&rdquo; message, followed by the &ldquo;You are back online&rdquo; message .. in a continual loop. Just
 ignore it.</p>
@@ -215,7 +235,15 @@ for testing your class methods that are accessible over Odoo&rsquo;s built-in JS
 
                     
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
-                          
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/doc/docker/" title="Docker"><i class="fas fa-chevron-left p-1"></i>Docker</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/doc/quasar/" title="Vue / Quasar / Odoo">Vue / Quasar / Odoo<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
 
                         </div></div> 
 
@@ -239,6 +267,8 @@ for testing your class methods that are accessible over Odoo&rsquo;s built-in JS
   
 </script>
 <script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
 
 
 <script type="text/javascript" src="/plugins/clipboard.js"></script>

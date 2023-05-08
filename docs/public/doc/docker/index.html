@@ -2,8 +2,10 @@
 <html><head>
 
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="Introduction / Docker">
+    
     <link rel="canonical" href="https://www.odooinvue.org/doc/docker/">
 
     <title>
@@ -19,6 +21,8 @@
     <link rel="stylesheet" href="https://www.odooinvue.org/css/ace.min.css">
 
     
+
+    
     
         
     
@@ -28,12 +32,13 @@
     <div class="container">
         <div>
             <a class="navbar-brand" href="/">
+                
                 Odoo In Vue
             </a>
         </div>
         
     </div>
-</nav>
+    </nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -43,36 +48,52 @@
     </button>
 
      <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
          <ul class="navbar-nav flex-column pt-3">
     <li data-nav-id="/doc/" class="nav-item my-1 parent haschildren
         ">
         
-        <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
+          <a class="nav-link p-0" href="/doc/"><h6>Introduction</h6></a>
+        
         <ul class="list-unstyled ml-2">
         <li data-nav-id="/doc/docker/" class="nav-item my-1 active">
                 
-                 <a href="/doc/docker/" class="nav-link p-0">
+                
+                  <a href="/doc/docker/" class="nav-link p-0">
                     Docker
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/development/" class="nav-item my-1">
                 
-                 <a href="/doc/development/" class="nav-link p-0">
+                
+                  <a href="/doc/development/" class="nav-link p-0">
                     Odoo Development
-                </a>
+                  </a>
+                
         </li>
         <li data-nav-id="/doc/quasar/" class="nav-item my-1">
                 
-                 <a href="/doc/quasar/" class="nav-link p-0">
+                
+                  <a href="/doc/quasar/" class="nav-link p-0">
                     Vue / Quasar / Odoo
-                </a>
+                  </a>
+                
         </li>
         </ul>
     </li>
     <li data-nav-id="/about/" class="nav-item my-1
         ">
         
-        <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
+          <a class="nav-link p-0" href="/about/"><h6>About</h6></a>
+        
     </li>
         </ul>
     </div>
@@ -96,7 +117,15 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Docker</h1>
+<div class="d-flex flex-column">
+    <h1 class="js-title">Docker</h1>
+    <div class="d-flex align-items-center">
+        
+    </div>
+</div>
+
+<hr>
+
 
 <h2 id="starting-backend-services-in-docker">Starting backend services in Docker</h2>
 <hr>
@@ -112,15 +141,15 @@ reset <code>docker</code> folder data and if you want to preserve your demo data
 <p>Once logged in, go to the main menu and click <code>Apps</code> and install the <code>project_task_plan</code> module. This will install the
 base module for this project and load all its dependencies. <strong>Because there are a lot of dependencies to install, this
 process can take a while.</strong> The <code>cpu_time_limit</code> config in
-<a href="https://gitlab.com/sylnsr/odoo-in-vue/-/tree/13/docker/odoo.conf"><code>/docker/odoo.conf</code></a> is deliberately set to a large
+<a href="https://gitlab.com/sylnsr/odoo-in-vue/-/tree/14/docker/odoo.conf"><code>/docker/odoo.conf</code></a> is deliberately set to a large
 value so that the installation should not time out, provided that you have a reasonably fast machine.</p>
 <p>Once all the modules are installed, you can navigate to <code>Projects</code>.</p>
 <p>Note: Using Docker with Odoo is an established paradigm and Odoo themselves provide the Docker images and Docker files.
-Whether or not you use this paradigm and how you might use it, is up to you.</p>
+Whether you use this paradigm and how you might use it, is up to you.</p>
 <hr>
 <h4 id="if-are-an-odoo-developer">If are an Odoo developer:</h4>
 <p>Alternatively, you might want to run the stack for development purposes in which case you might only want the reverse
-proxy (Traefik) and DB (Postgres 12) Docker containers. For this purpose, the individual scripts are:</p>
+proxy (Traefik) and DB (Postgres) Docker containers. For this purpose, the individual scripts are:</p>
 <ul>
 <li><code>/docker/start-traefik.sh</code></li>
 <li><code>/docker/start-postgres.sh</code></li>
@@ -139,10 +168,9 @@ debugging again, you will also need to reinstall the Odoo modules.</p>
 <p>The <code>/docker</code> directory has pre-existing <code>pg-data</code> and <code>var-lib-odoo</code> directories for convenience however the
 .gitignore file omits all their contents from being part of the repo.</p>
 <p>When the containers start, they will set the permissions of these directories to be owned by root.
-The <a href="https://gitlab.com/sylnsr/odoo-in-vue/-/tree/13/docker/start-docker-stack.sh">/docker/start-docker-stack.sh</a> and
-<a href="https://gitlab.com/sylnsr/odoo-in-vue/-/tree/13/docker/reset-data.sh">/docker/reset-data.sh</a> scripts will use <code>sudo</code> to
-reset these and you can read those scripts and confirm it, to know that nothing evil is going on when your sudo
-password is prompted.</p>
+The <a href="/docker/start-docker-stack.sh">/docker/start-docker-stack.sh</a> and <a href="/docker/reset-data.sh">/docker/reset-data.sh</a>
+scripts will use <code>sudo</code> to reset these. You can read those scripts and confirm the code, to know that nothing evil is
+going on when your sudo password is prompted.</p>
 <hr>
 
 
@@ -151,7 +179,15 @@ password is prompted.</p>
 
                     
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
-                          
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/doc/" title="Introduction"><i class="fas fa-chevron-left p-1"></i>Introduction</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/doc/development/" title="Odoo Development">Odoo Development<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
 
                         </div></div> 
 
@@ -175,6 +211,8 @@ password is prompted.</p>
   
 </script>
 <script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
 
 
 <script type="text/javascript" src="/plugins/clipboard.js"></script>

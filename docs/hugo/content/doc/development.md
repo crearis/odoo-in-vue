@@ -10,7 +10,7 @@ date: 2020-01-11T14:09:21+09:00
 Assumptions:
  - You are a Python developer
  - You have at least basic Odoo development knowledge
- - You are using Ubuntu/Debian/Centos/Fedora (or similar)
+ - You are using Ubuntu for development (or similar)
 
 Pre-requisites:
 
@@ -22,18 +22,18 @@ Pre-requisites:
     - Clone the Odoo source code to a directory of your choice. You can use the following script to do this.
     Be sure to read the [source code](https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)
     if you have security concerns. Just run this command in a directory where you want to download the source code
-    (be sure to choose the correct version of Odoo when prompted):    
+    (be sure to choose Odoo **14** when prompted):    
     `source <(curl -s https://gitlab.com/sylnsr/linux-stuff/-/raw/master/dev/scripts/odoo/thin-clone-odoo.sh)`
     - Install Odoo using the .deb installer file - just run `install-odoo-debian.sh`  
  
- 2. Create your Python 3 virtual environment by running the following in the root directory of the project:  
+ 2. Setup your Python virtual environment by running the following in the root directory of the project:  
     `python3 -m venv ./venv`
  
- 3. Activate the Python 3 virtual environment:  
+ 3. Activate the Python virtual environment:  
     `source ./venv/bin/activate`
  
  4. Install the Odoo requirements into the virtual environment:
-    `pip3 install -r <path-where-you-cloned-odoo>/requirements.txt`
+    `pip3 install -r <path-where-you-cloned-odoo-14>/requirements.txt`
     
  5. Copy `debug-odoo.conf.dist` to `debug-odoo.conf` and update it so that `data_dir` and `addons_path`
     are correct paths for your file system.
@@ -76,15 +76,6 @@ After setting up your environment, you should be able to just run the `odoo-bin`
 [provided with this project](./.idea/runConfigurations/odoo_bin.xml), AFTER you correct the "Script path"; "Parameters";
 "Working directory" and "Python Interpreter" so that they are correct for your environment. Note, the Python Interpreter
 MUST point to the Python binary in the project's Python virtual environment.
-
-If you get the following error when debugging: `greenlet.error: cannot switch to a different thread` and the long-polling
-port is not working, then look at this: https://github.com/miguelgrinberg/Flask-SocketIO/issues/65#issuecomment-294375994
--- USE CAUTION WHEN IMPLEMENTING THIS FIX - IT MAY CAUSE BREAKPOINTS TO STOP WORKING! - The problem with using that fix,
-is that the "Gevent compatible" setting in PyCharm [does not always work](https://youtrack.jetbrains.com/issue/PY-43676),
-but YMMV.
-
-I have not found any issues with debugging with the "Gevent compatible" option unchecked and the console throwing that
-error, so just ignore that error when debugging and longpolling is not working.
 
 When longpolling stops working, or is disabled by setting `workers = 0`, the Odoo UI will be annoying by continually
 putting up the "Trying to connect" message, followed by the "You are back online" message .. in a continual loop. Just
