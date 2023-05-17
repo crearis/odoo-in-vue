@@ -24,16 +24,9 @@ http:
     odoochat:
       rule: "Host(`localhost`) && PathPrefix(`/longpolling`)"
       service: odoochat
-    quasar:
-      rule: "Host(`localhost`) && PathPrefix(`/vue`, `/sockjs-node`)"
-      service: quasar
-
-#  middlewares:
-#    quasar:
-#      stripPrefix:
-#        prefixes:
-#          - "/sockjs-node"
-#        forceSlash: false
+    vue:
+      rule: "Host(`localhost`) && PathPrefix(`/vue/`, `/sockjs-node`)"
+      service: vue
 
   services:
     odoo:
@@ -44,7 +37,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://odoo:8072"
-    quasar:
+    vue:
       loadBalancer:
         servers:
-          - url: "http://quasar:8082"
+          - url: "http://host.docker.internal:9000"

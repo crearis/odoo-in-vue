@@ -20,7 +20,7 @@ services:
       - odoodev
 
 
-  odoo14:
+  odoo:
     image: odoo:14
     container_name: dev_odoo14
     depends_on:
@@ -40,23 +40,25 @@ services:
       - odoodev
 
 
-#  reverse-proxy:
-#    container_name: dev_traefik
-#    networks:
-#      - odoodev
-#
-#    # The official v2 Traefik docker image
-#    image: traefik:v2.2
-#    # Enables the web UI and tells Traefik to listen to docker
-#    command: --providers.file
-#    ports:
-#      # The HTTP port
-#      - "80:80"
-#      # The Web UI (enabled by --api.insecure=true)
-#      - "8081:8080"
-#    expose: ["80"]
-#    volumes:
-#      # So that Traefik can listen to the Docker events
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      # config file used for traefik
-#      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+  reverse-proxy:
+    container_name: dev_traefik
+    networks:
+      - odoodev
+
+    # The official v2 Traefik docker image
+    image: traefik:v2.2
+    # Enables the web UI and tells Traefik to listen to docker
+    command: --providers.file
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8081:8080"
+    expose: ["80"]
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      # config file used for traefik
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

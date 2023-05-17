@@ -1,7 +1,7 @@
 **Before you run the Quasar/Vue sub-project follow these steps (as needed).**
 
-Make sure you are in the `vue` directory in this project.
-
+Make sure you are in the `vue` directory in this project, and have the server containers running,
+before continuing.
 
 ### Install the dependencies
 ```bash
@@ -10,16 +10,12 @@ yarn
 npm install
 ```
 
-### Add quasar to your path
+### Run a script to add quasar to your path, and start quasar
 ```bash
-export PATH="$PATH:$(pwd)/node_modules/.bin"
+source start-quasar.sh
 ```
 
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+---
 
 
 ### Lint the files

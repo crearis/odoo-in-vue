@@ -94,10 +94,10 @@ The `requirements.txt` file already includes `odoo-rpc-client`. So assuming you:
     
 Now you can start using the Odoo JSON-RPC API, for example:
 
-    odoo['res.partner'].browse(1).email
+    odoo['res.partner'].browse(1).name
 
 ... which results in:
     
-    Out[6]: 'info@yourcompany.example.com'
+    Out[6]: 'My Company'
 
 ---
