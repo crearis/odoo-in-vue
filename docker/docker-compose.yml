@@ -20,7 +20,7 @@ services:
       - odoodev
 
 
-  odoo13:
+  odoo14:
     image: odoo:14
     container_name: dev_odoo14
     depends_on:

@@ -1,11 +1,20 @@
 **Before you run the Quasar/Vue sub-project follow these steps (as needed).**
 
-## Install the dependencies
+Make sure you are in the `vue` directory in this project.
+
+
+### Install the dependencies
 ```bash
 yarn
 # or
 npm install
 ```
+
+### Add quasar to your path
+```bash
+export PATH="$PATH:$(pwd)/node_modules/.bin"
+```
+
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
@@ -60,12 +69,12 @@ prefixed with `Odoo`. These files are explained as follows:
 - `/vue/src/mixins/OdooQUtils.js`: Mixin for features that pertain to Quasar and Odoo, e.g. Odoo to Quasar data conversion
 - `/vue/src/mixins/OdooRpc.js`: Mixin for RPC calls made to Odoo
 
-**Vuex (Store):**
+**~~Vuex~~ Pinia (Store):**
 
-- `/vue/src/store/odoo.js`: Vuex file for Odoo stuff
+- `/vue/src/store/odoo.js`: ~~Vuex~~ Pinia file for local Odoo data
 
-Currently these are all the files you need to create your own Quasar-Odoo project and eventually these will be files put
+Currently, these are all the files you need to create your own Quasar-Odoo project and eventually these will be files put
 into an NPM package. The other files of interest are in `/vue/src/components/myforms`, which are example Vue components
 that use the files listed above and demonstrate how simple it is to create Quasar-Odoo forms. Lastly, the `/vue/src/pages`
-directory can be reviewed to give a broad level example of how one might setup their own Quasar-Odoo project in Vue.
+directory can be reviewed to give a broad level example of how one might set up their own Quasar-Odoo project in Vue.
 
