@@ -26,7 +26,7 @@
                 lazy-rules
                 :rules="[ val => val && val.length > 4 || 'Please type something']"
               >
-                <template v-slot:append>
+                <template>
                   <q-icon
                     :name="isPwd ? 'visibility_off' : 'visibility'"
                     class="cursor-pointer"

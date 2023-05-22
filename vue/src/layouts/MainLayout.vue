@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Odoo In Vue
+          Odoo In Vue {{ subpage ? " -> " + subpage : "" }}
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -35,6 +35,7 @@
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
+          @click="this.subpage = link.title"
         />
       </q-list>
     </q-drawer>
@@ -52,9 +53,15 @@ import EssentialLink from 'components/EssentialLink.vue'
 const linksList = [
   {
     title: 'Troubleshooting',
-    caption: 'Troublshooting',
-    icon: 'school',
+    caption: 'Troubleshooting guide',
+    icon: 'healing',
     link: '#/troubleshooting'
+  },
+  {
+    title: 'Debug',
+    caption: 'Debug screen',
+    icon: 'adb',
+    link: '#/debug'
   },
   {
     title: 'Quasar',
@@ -75,6 +82,12 @@ export default defineComponent({
 
   components: {
     EssentialLink
+  },
+
+  data() {
+    return {
+      subpage: ""
+    }
   },
 
   setup () {
