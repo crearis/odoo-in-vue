@@ -37,7 +37,7 @@ export default {
   },
 
   /*
-  Authenticates against the Odoo server. If OK, stores the session_id in a cookie and profile in Vuex.
+  Authenticates against the Odoo server. If OK, stores the session_id in a cookie and profile in store.
    */
   getSessionId (db, login, password) {
     return Odoo.authenticate(db, login, password)
@@ -122,7 +122,7 @@ export default {
     data: {},   // the data from the DB
     cc: []      // the column config for QTable
   }
-  "ccUseStoreBool" means "Column Config [loading] Uses [Vuex] Store? (TRUE/false)"
+  "ccUseStoreBool" means "Column Config [loading] Uses [data] Store? (TRUE/false)"
    */
   search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80,
                contextObj = {}, ccUseStoreBool = true) {
@@ -135,7 +135,7 @@ export default {
         } else {
           // if cant get the column config:
           result.cc = false
-          this.log('failed to get column config for ', modelStr)
+          this.log('failed to get column config for ' + modelStr)
         }
         // get the data
         return Odoo.search_read(

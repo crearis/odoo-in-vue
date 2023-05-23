@@ -3,14 +3,12 @@
       <q-card-section>
         <div class="row text-center">
 
-          <div class="q-pa-sm q-pr-sm q-gutter-md"
-               style="min-width: 400px; max-width: 500px; overflow: hidden;">
+          <div class="q-pa-sm q-pr-sm q-gutter-md" style="min-width: 400px; max-width: 500px; overflow: hidden;">
             <div class="my-title">My Projects</div>
             <QTable ref="tableMyProjects" />
           </div>
 
-          <div class="q-pa-sm q-gutter-md"
-               style="min-width: 400px; max-width: 500px; overflow: hidden;">
+          <div class="q-pa-sm q-gutter-md" style="min-width: 400px; max-width: 500px; overflow: hidden;">
             <div class="my-title">My Deadlines</div>
 <!--            <QCalendar-->
 <!--              viewMode="month"-->
@@ -67,33 +65,34 @@ export default {
         this.$router.push('/')
         return
       }
-      console.log('mounted')
-      // this.setProjectData()
+      this.setProjectData()
       // this.setCalendarData()
       // this.setTaskData()
     })
   },
   methods: {
-    // setProjectData () {
-    //   this.$refs.tableMyProjects.isLoading = true
-    //   Odoo.search_read(
-    //     'project.project',
-    //     [
-    //       ['user_id', '=', session.profile.uid],
-    //       ['active', '=', true]
-    //     ],
-    //     ['id', 'name', 'date_start'],
-    //     'date_start, name'
-    //   ).then(r => {
-    //     if (r.data.length) {
-    //       this.$refs.tableMyProjects.setData(r.data, r.cc)
-    //     }
-    //     this.$refs.tableMyProjects.isLoading = false
-    //   }).catch(e => {
-    //     console.log(e) // todo
-    //     this.$refs.tableMyProjects.isLoading = false
-    //   })
-    // },
+    setProjectData () {
+      this.$refs.tableMyProjects.isLoading = true
+      Odoo.search_read(
+        'project.project',
+        [
+          ['user_id', '=', session.profile.uid],
+          ['active', '=', true]
+        ],
+        ['id', 'name', 'date_start'],
+        'date_start, name'
+      ).then(r => {
+        console.log(r.cc)
+        if (r.data.length) {
+          this.$refs.tableMyProjects.setData(r.data, r.cc)
+        }
+        this.$refs.tableMyProjects.isLoading = false
+      }).catch(e => {
+        console.log(e) // todo
+        this.$refs.tableMyProjects.isLoading = false
+      })
+    },
+
     // setCalendarData () {
     //   const d = new Date()
     //   this.calendarDataStart = date.startOfDate(d, 'month')

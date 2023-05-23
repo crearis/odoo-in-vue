@@ -18,7 +18,9 @@ export default {
       {
         headers: { 'content-type': 'application/json' },
         withCredentials: true
-      })
+      }).catch(e => {
+        console.log("Odoo RPC error: " + e.toString())
+    })
   },
 
   /*

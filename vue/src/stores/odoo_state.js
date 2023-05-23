@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
 
-export const useStateStore = defineStore('state', {
+export const useOdooStateStore = defineStore('odoostate', {
   state: () => ({
     ir_model_fields: {},
     ir_model_fields_selection: {}
   }),
 
   actions: {
-    setCacheIrModelFields: (cache) => {
-      this.ir_model_fields[cache.id] = cache.data
+    setCacheIrModelFields (cache_id, field_data) {
+      this.ir_model_fields[cache_id] = field_data
     },
     // cache_ir_model_fields_selection
     // setCacheIrModelFieldsSelection: (fieldId, options) => {

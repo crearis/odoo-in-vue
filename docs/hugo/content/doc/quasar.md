@@ -91,7 +91,7 @@ prefixed with `Odoo`. These files are explained as follows:
 
 **Vuex (Store):**
 
-- `/vue/src/store/odoo.js`: Vuex file for Odoo stuff
+- `/vue/src/store/odoo_state.js`: Vuex file for Odoo stuff
 
 Currently these are all the files you need to create your own Quasar-Odoo project and eventually these will be files put
 into an NPM package. The other files of interest are in `/vue/src/components/myforms`, which are example Vue components

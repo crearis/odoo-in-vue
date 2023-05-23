@@ -1,23 +1,23 @@
 <template>
   <div>
-    QTable here:
-<!--    <q-table-->
-<!--      :title="title"-->
-<!--      :data="data"-->
-<!--      :columns="columns"-->
-<!--      :row-key="rowKey"-->
-<!--      :loading="isLoading"-->
-<!--      :no-data-label="'No data to show.'"-->
-<!--    />-->
+    <q-table
+      :title="title"
+      :row-key="rowKey"
+      :rows="rows"
+      :columns="columns"
+    />
   </div>
 </template>
 
 <script>
 
+
+
 export default {
   props: {
     title: {
-      type: String
+      type: String,
+      default: "Table"
     },
     rowKey: {
       type: String,
@@ -28,19 +28,22 @@ export default {
       default: false
     }
   },
+
   mounted () {
     if (this.initData) {
-      this.data = this.initData.data
+      this.rows = this.initData.data
       this.columns = this.initData.cc
     }
   },
+
   data () {
     return {
       isLoading: false,
-      data: [],
+      rows: [],
       columns: []
     }
   },
+
   methods: {
     /*
     We extend the standard q-table so that we can handle Odoo specific formatting rules
@@ -60,8 +63,12 @@ export default {
       }
       return val
     },
-    setData (data, columns = false) {
-      this.data = data
+
+    /*
+    This method takes the data for the table and the configuration of columns at the same time
+     */
+    setData (data, columns = []) {
+      this.rows = data
       if (columns) {
         this.columns = columns
         this.columns.forEach((c, i) => {
@@ -71,6 +78,7 @@ export default {
         })
       }
     },
+
     rowClick (evt, row) {
       this.$emit('row-click', evt, row)
     }

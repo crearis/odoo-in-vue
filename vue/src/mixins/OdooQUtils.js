@@ -1,5 +1,7 @@
-import { useStateStore } from '../stores/odoo'
+import {useOdooStateStore} from 'stores/odoo_state'
 import Odoo from './OdooRpc.js'
+
+const odooState = useOdooStateStore()
 
 export default {
   /*
@@ -53,7 +55,7 @@ export default {
   },
 
   /*
-  Creates a cache ID for a set of field data from ir_model_fields that we store in Vuex.
+  Creates a cache ID for a set of field data from ir_model_fields that we store in store.
   Format: <model-name>/<fields-count>-<fields-hash (number)>
    */
   cacheIdModelFields (model, fieldsArr) {
@@ -64,10 +66,10 @@ export default {
   Gets the options for selection fields
    */
   fieldSelectionOptions (fieldId) {
-    // return it from Vuex if its there
-    if (store.state.odoo.ir_model_fields_selection[fieldId]) {
+    // return it from store if it's there
+    if (odooState.ir_model_fields_selection[fieldId]) {
       return new Promise((resolve) => {
-        return resolve(store.state.odoo.ir_model_fields_selection[fieldId])
+        return resolve(odooState.ir_model_fields_selection[fieldId])
       })
     }
     return Odoo.search_read(
@@ -90,7 +92,7 @@ export default {
   Gets the options for selection fields
    */
   fieldRelationOptions (relation, domain = [], relationField = '') {
-    // don't use Vuex store here because the source data changes more frequently
+    // don't use store here because the source data changes more frequently
     return Odoo.search_read(
       relation,
       domain,
@@ -114,13 +116,15 @@ export default {
   fields2QTableColConfig (model, fieldsArr, useStore = true) {
     const cacheId = this.cacheIdModelFields(model, fieldsArr)
     if (useStore) {
-      // return it from Vuex if its there
-      if (store.state.odoo.ir_model_fields[cacheId]) {
+      // return it from store if it's there
+      if (odooState.ir_model_fields[cacheId]) {
         return new Promise((resolve) => {
-          resolve(store.state.odoo.ir_model_fields[cacheId])
+          resolve(odooState.ir_model_fields[cacheId])
         })
       }
     }
+    // console.log('Column config for ' + model  + ' not in data store. Retrieving from Odoo.')
+
     // else get it, store it, return it
     return Odoo.search_read(
       'ir.model.fields', [['model', '=', model], ['name', 'in', fieldsArr]],
@@ -153,13 +157,14 @@ export default {
         })
         if (useStore) {
           // save the column config in data-store
-          useStateStore().setCacheIrModelFields(cacheId, result)
-          // store.commit('cache_ir_model_fields', { id: cacheId, data: result }) //old vuex
+          odooState.setCacheIrModelFields(cacheId, result)
+          // console.log("Saving field info for model `" + model + "` to local data store")
         }
         return result
       }
       return false
     }).catch(e => {
+      console.log("[error @fields2QTableColConfig]: " + e.toString())
       return false
     })
   },
