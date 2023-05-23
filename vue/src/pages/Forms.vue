@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Dialog from 'components/q/Dialog.vue'
+import Dialog from 'components/extended/Dialog.vue'
 import Project from 'components/myforms/Project.vue'
 import Contact from 'components/myforms/Contact.vue'
 import Task from 'components/myforms/Task.vue'

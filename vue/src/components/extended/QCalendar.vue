@@ -10,9 +10,8 @@
   >
     <!-- MONTH view template -->
     <template #day="{ timestamp }">
-      <template v-for="(event, index) in getEventsByDate(timestamp.date)">
+      <template v-for="(event, index) in getEventsByDate(timestamp.date)" :key="index">
         <q-badge
-          :key="index"
           @click.stop.prevent="onEventClick(event)"
           style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
           class="q-event"
@@ -196,7 +195,7 @@ export default {
 }
 </script>
 
-<style src="@quasar/quasar-ui-qcalendar/dist/index.css" />
+<!--<style src="@quasar/quasar-ui-qcalendar/dist/index.css" />-->
 <style>
 /*.calendar-container {*/
 /*  position: relative*/

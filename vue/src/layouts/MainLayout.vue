@@ -52,6 +52,12 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
+    title: 'Main',
+    caption: 'My stuff',
+    icon: 'home',
+    link: '#/main'
+  },
+  {
     title: 'Troubleshooting',
     caption: 'Troubleshooting guide',
     icon: 'healing',

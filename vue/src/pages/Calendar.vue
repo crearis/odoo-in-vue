@@ -46,8 +46,8 @@
 
 <script>
 import Odoo from '../mixins/Odoo'
-import Table from 'components/q/Table.vue'
-import Calendar from 'components/q/Calendar.vue'
+import Table from 'components/extended/Table.vue'
+import Calendar from 'components/extended/Calendar.vue'
 import { date } from 'quasar'
 
 

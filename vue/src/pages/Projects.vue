@@ -4,7 +4,7 @@
 
 <script>
 import Odoo from '../mixins/Odoo'
-import Table from 'components/q/Table.vue'
+import Table from 'components/extended/Table.vue'
 
 export default {
   name: 'PageProjects',

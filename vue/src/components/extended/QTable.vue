@@ -1,22 +1,20 @@
 <template>
   <div>
-    <q-table
-      :title="title"
-      :data="data"
-      :columns="columns"
-      :row-key="rowKey"
-      :loading="isLoading"
-      :no-data-label="'No data to show.'"
-      @row-click="rowClick"
-    />
+    QTable here:
+<!--    <q-table-->
+<!--      :title="title"-->
+<!--      :data="data"-->
+<!--      :columns="columns"-->
+<!--      :row-key="rowKey"-->
+<!--      :loading="isLoading"-->
+<!--      :no-data-label="'No data to show.'"-->
+<!--    />-->
   </div>
 </template>
 
 <script>
 
 export default {
-  components: {
-  },
   props: {
     title: {
       type: String
@@ -45,7 +43,7 @@ export default {
   },
   methods: {
     /*
-    We wrap the standard q-table with own so that we can handle Odoo specific formatting rules
+    We extend the standard q-table so that we can handle Odoo specific formatting rules
      */
     formatTableVal (val, row, colIndex) {
       const colInfo = this.columns[parseInt(colIndex)]
