@@ -5,8 +5,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '/main', component: () => import('pages/Main.vue') },
-      { path: '/qtable', component: () => import('pages/QTable.vue') },
-      { path: '/debug', component: () => import('pages/Debug.vue') }
+      { path: '/debug', component: () => import('pages/Debug.vue') },
+      { path: '/scratch', component: () => import('pages/ScratchPage.vue') },
     ]
   },
 

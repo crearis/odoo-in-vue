@@ -4,20 +4,17 @@
         <div class="row text-center">
 
           <div class="q-pa-sm q-pr-sm q-gutter-md" style="min-width: 400px; max-width: 500px; overflow: hidden;">
-            <div class="my-title">My Projects</div>
-            <QTable ref="tableMyProjects" />
+            <QTable ref="tableMyProjects" title="My Projects" />
           </div>
 
           <div class="q-pa-sm q-gutter-md" style="min-width: 400px; max-width: 500px; overflow: hidden;">
-            <div class="my-title">My Deadlines</div>
-<!--            <QCalendar-->
-<!--              viewMode="month"-->
-<!--              v-bind:events="calendarData"-->
-<!--              v-bind:selectedDate="new Date()"-->
-<!--              v-bind:miniMode="true"-->
-<!--            >-->
-<!--              <template></template>-->
-<!--            </QCalendar>-->
+            <div class="my-title">Agenda for Today</div>
+            <QCalendar
+              viewMode="day"
+              v-bind:events="calendarData"
+              v-bind:selectedDate="new Date()"
+            >
+            </QCalendar>
           </div>
 
         </div>
@@ -25,8 +22,7 @@
 
       <q-card-section>
         <div>
-            <div class="q-mb-sm my-title">My Tasks</div>
-<!--            <QTable ref="tableMyTasks" />-->
+            <QTable ref="tableMyTasks" title="My Tasks" />
         </div>
       </q-card-section>
     </q-card>
@@ -36,8 +32,8 @@
 import Odoo from '../mixins/Odoo'
 import {useSessionStore} from "stores/sessions";
 import QTable from 'components/extended/QTable.vue'
-// import QCalendar from 'components/extended/QCalendar.vue'
-// import { date } from 'quasar'
+import QCalendar from 'components/extended/QCalendar.vue'
+import { date } from 'quasar'
 
 const session = useSessionStore()
 
@@ -45,7 +41,7 @@ export default {
   name: 'PageMain',
   components: {
     QTable,
-    // QCalendar
+    QCalendar
   },
   data () {
     return {
@@ -66,11 +62,12 @@ export default {
         return
       }
       this.setProjectData()
+      this.setTaskData()
       // this.setCalendarData()
-      // this.setTaskData()
     })
   },
   methods: {
+
     setProjectData () {
       this.$refs.tableMyProjects.isLoading = true
       Odoo.search_read(
@@ -82,7 +79,6 @@ export default {
         ['id', 'name', 'date_start'],
         'date_start, name'
       ).then(r => {
-        console.log(r.cc)
         if (r.data.length) {
           this.$refs.tableMyProjects.setData(r.data, r.cc)
         }
@@ -93,43 +89,48 @@ export default {
       })
     },
 
-    // setCalendarData () {
-    //   const d = new Date()
-    //   this.calendarDataStart = date.startOfDate(d, 'month')
-    //   this.calendarDataEnd = date.endOfDate(d, 'month')
-    //   Odoo.getTaskEventData(
-    //     this.calendarDataStart,
-    //     this.calendarDataEnd,
-    //     session.profile.uid
-    //   ).then(r => {
-    //     this.calendarData = r
-    //   })
-    // },
-    // setTaskData () {
-    //   this.$refs.tableMyTasks.isLoading = true
-    //   Odoo.search_read(
-    //     'project.task',
-    //     [
-    //       ['user_id', '=', session.profile.uid],
-    //       ['stage_id', '=', 5]
-    //     ],
-    //     [
-    //       'name',
-    //       'project_id',
-    //       'date_deadline',
-    //       'stage_id'
-    //     ],
-    //     'date_deadline'
-    //   ).then(r => {
-    //     if (r.data.length) {
-    //       this.$refs.tableMyTasks.setData(r.data, r.cc)
-    //     }
-    //     this.$refs.tableMyTasks.isLoading = false
-    //   })
-    // }
+
+    setTaskData () {
+      this.$refs.tableMyTasks.isLoading = true
+      Odoo.search_read(
+        'project.task',
+        [
+          ['user_id', '=', session.profile.uid]
+        ],
+        [
+          'name',
+          'project_id',
+          'date_deadline',
+          'stage_id'
+        ],
+        'date_deadline'
+      ).then(r => {
+        if (r.data.length) {
+          this.$refs.tableMyTasks.setData(r.data, r.cc)
+        }
+        this.$refs.tableMyTasks.isLoading = false
+      })
+    },
+
+
+    setCalendarData () {
+      const d = new Date()
+      this.calendarDataStart = date.startOfDate(d, 'month')
+      this.calendarDataEnd = date.endOfDate(d, 'month')
+      Odoo.getTaskEventData(
+        this.calendarDataStart,
+        this.calendarDataEnd,
+        session.profile.uid
+      ).then(r => {
+        this.calendarData = r
+      })
+    },
+
+
   }
 }
 </script>
+
 <style>
 .my-title {
   font-weight: bold;

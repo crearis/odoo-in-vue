@@ -124,8 +124,7 @@ export default {
   }
   "ccUseStoreBool" means "Column Config [loading] Uses [data] Store? (TRUE/false)"
    */
-  search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80,
-               contextObj = {}, ccUseStoreBool = true) {
+  search_read (modelStr, domainArr = [], fieldsArr = [], sort = '', limit = 80, contextObj = {}, ccUseStoreBool = true){
     const result = { data: {}, cc: [] }
     return OdooQUtils.fields2QTableColConfig(modelStr, fieldsArr, ccUseStoreBool)
       .then(r => {
@@ -186,7 +185,8 @@ export default {
   },
 
   /*
-  Returns a standard format of data from project.task model to be used with QCalendar component
+  Returns a standard format of data from project.task model to be used with QCalendar component.
+  Note, this REQUIRES that the `project_task_plan` Odoo module is installed for the extra fields.
    */
   getTaskEventData (start, end, userId = 0) {
     const domain = [

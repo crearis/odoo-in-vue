@@ -2,9 +2,12 @@
   <div>
     <q-table
       :title="title"
-      :row-key="rowKey"
       :rows="rows"
       :columns="columns"
+      :row-key="rowKey"
+      :loading="isLoading"
+      :no-data-label="'No data to show.'"
+      @row-click="rowClick"
     />
   </div>
 </template>
@@ -23,17 +26,6 @@ export default {
       type: String,
       default: 'id'
     },
-    initData: {
-      type: [Boolean, Object],
-      default: false
-    }
-  },
-
-  mounted () {
-    if (this.initData) {
-      this.rows = this.initData.data
-      this.columns = this.initData.cc
-    }
   },
 
   data () {
@@ -65,10 +57,10 @@ export default {
     },
 
     /*
-    This method takes the data for the table and the configuration of columns at the same time
+    This method takes the rows for the table and the config of columns at the same time
      */
-    setData (data, columns = []) {
-      this.rows = data
+    setData (rows, columns = []) {
+      this.rows = rows
       if (columns) {
         this.columns = columns
         this.columns.forEach((c, i) => {

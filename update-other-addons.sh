@@ -47,5 +47,8 @@ cp_repo_sub_dir project_task_material $SD
 cp_repo_sub_dir project_task_add_very_high $SD
 rm_tmp_unzip
 
+get_repo_code "https://github.com/idazco/odoo-addons" "13"
+cp_repo_dir odoo-addons-13/tagged_notes tagged_notes
+cp_repo_dir odoo-addons-13/project_task_plan project_task_plan
 
 rm_tmp_unzip
