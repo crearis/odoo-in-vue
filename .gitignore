@@ -13,3 +13,4 @@ __pycache__
 docs/hugo/resources
 scratch
 docs/hugo/.hugo_build.lock
+vue-debug
