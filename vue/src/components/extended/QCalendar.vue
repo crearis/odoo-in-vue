@@ -2,14 +2,12 @@
     <div className="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
         <q-calendar-agenda
+          v-if="viewMode == 'day' || viewMode == 'week'"
           ref="calendar"
           v-model="selectedDate"
-          view="week"
-          :weekdays="[1,2,3,4,5,6,0]"
-          column-options-id="id"
-          column-options-label="label"
-          :day-min-height="200"
-          animated
+          :view="viewMode"
+          :weekdays="[1,2,3,4,5]"
+          :day-min-height="100"
           bordered
           @change="onChange"
           @moved="onMoved"
@@ -35,6 +33,16 @@ export default defineComponent({
   name: 'DayFirstDayMonday',
   components: {
     QCalendarAgenda
+  },
+  props: {
+    viewMode: {
+      type: String,
+      default: 'week'
+    },
+    miniMode: {
+      default: 'auto',
+      required: false
+    },
   },
   data() {
     return {

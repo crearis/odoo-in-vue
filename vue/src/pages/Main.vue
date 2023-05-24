@@ -10,7 +10,7 @@
           <div class="q-pa-sm q-gutter-md" style="min-width: 400px; max-width: 500px; overflow: hidden;">
             <div class="my-title">Agenda for Today</div>
             <QCalendar
-              viewMode="day"
+              viewMode="week"
               v-bind:events="calendarData"
               v-bind:selectedDate="new Date()"
             >
@@ -63,7 +63,7 @@ export default {
       }
       this.setProjectData()
       this.setTaskData()
-      // this.setCalendarData()
+      this.setCalendarData()
     })
   },
   methods: {
@@ -114,9 +114,8 @@ export default {
 
 
     setCalendarData () {
-      const d = new Date()
-      this.calendarDataStart = date.startOfDate(d, 'month')
-      this.calendarDataEnd = date.endOfDate(d, 'month')
+      this.calendarDataStart = date.startOfDate(new Date(), 'month')
+      this.calendarDataEnd = date.endOfDate(new Date(), 'month')
       Odoo.getTaskEventData(
         this.calendarDataStart,
         this.calendarDataEnd,
