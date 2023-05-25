@@ -1,15 +1,15 @@
 <template>
-  <Table ref="tableProjects" title="Projects" @row-click="projectOpen" />
+  <QTable ref="tableProjects" title="Projects" @row-click="projectOpen" />
 </template>
 
 <script>
 import Odoo from '../mixins/Odoo'
-import Table from 'components/extended/Table.vue'
+import QTable from 'components/extended/QTable.vue'
 
 export default {
   name: 'PageProjects',
   components: {
-    Table
+    QTable
   },
   data () {
     return {

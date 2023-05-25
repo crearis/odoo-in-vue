@@ -26,7 +26,7 @@
     </q-card-actions>
 
     <q-card-section class="q-pa-none q-card--bordered">
-      <Calendar
+      <QCalendar
         ref="calendar"
         v-if="viewMode !== 'list'"
         v-bind:viewMode="viewMode"
@@ -35,7 +35,7 @@
         />
     </q-card-section>
 
-    <Table
+    <QTable
       v-if="viewMode === 'list' && tableInitData !== false"
       title="All Events"
       v-bind:initData="tableInitData"
@@ -46,16 +46,16 @@
 
 <script>
 import Odoo from '../mixins/Odoo'
-import Table from 'components/extended/Table.vue'
-import Calendar from 'components/extended/Calendar.vue'
+import QTable from 'components/extended/QTable.vue'
+import QCalendar from 'components/extended/QCalendar.vue'
 import { date } from 'quasar'
 
 
 export default {
   name: 'PageCalendar',
   components: {
-    Table,
-    Calendar
+    QTable,
+    QCalendar
   },
   data () {
     return {
@@ -81,10 +81,11 @@ export default {
       this.$router.push('/tasks/record/' + e.res_id + '?returnTo=/calendar')
     },
     changeViewMode (mode) {
-      console.log(`pages/calendar.changeView(${mode})`)
+      // console.log(`pages/calendar.changeView(${mode})`)
       this.viewMode = mode
       if (mode === 'list') {
-        this.setListData()
+        // this.setListData()
+        console.log("Unsupported view mode (list)")
       } else {
         this.setCalendarData(mode)
       }

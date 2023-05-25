@@ -1,15 +1,15 @@
 <template>
-  <Table ref="tableTasks" title="All Tasks" @row-click="taskOpen"/>
+  <QTable ref="tableTasks" title="All Tasks" @row-click="taskOpen"/>
 </template>
 
 <script>
 import Odoo from '../mixins/Odoo'
-import Table from 'components/extended/Table.vue'
+import QTable from 'components/extended/QTable.vue'
 
 export default {
   name: 'PageTasks',
   components: {
-    Table
+    QTable
   },
   data () {
     return {
@@ -32,9 +32,7 @@ export default {
       this.$refs.tableTasks.isLoading = true
       Odoo.search_read(
         'project.task',
-        [
-          ['stage_id', '=', 5]
-        ],
+        [],
         [
           'name',
           'project_id',

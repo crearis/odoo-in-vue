@@ -58,6 +58,30 @@ const linksList = [
     link: '#/main'
   },
   {
+    title: 'Contacts',
+    caption: 'Company contacts',
+    icon: 'people',
+    link: '#/contacts'
+  },
+  {
+    title: 'Projects',
+    caption: 'Projects',
+    icon: 'build',
+    link: '#/projects'
+  },
+  {
+    title: 'Tasks',
+    caption: 'Tasks',
+    icon: 'task',
+    link: '#/tasks'
+  },
+  {
+    title: 'Calendar',
+    caption: 'Calendar',
+    icon: 'event',
+    link: '#/calendar'
+  },
+  {
     title: 'Troubleshooting',
     caption: 'Troubleshooting guide',
     icon: 'healing',
@@ -73,13 +97,15 @@ const linksList = [
     title: 'Quasar',
     caption: 'quasar.dev',
     icon: 'school',
-    link: 'https://quasar.dev'
+    link: 'https://quasar.dev',
+    target: "_blank"
   },
   {
     title: 'Github',
     caption: 'github.com/quasarframework',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: 'https://github.com/quasarframework',
+    target: "_blank"
   },
 ]
 

@@ -8,7 +8,7 @@
           </div>
 
           <div class="q-pa-sm q-gutter-md" style="min-width: 400px; max-width: 500px; overflow: hidden;">
-            <div class="my-title">Agenda for Today</div>
+            <div class="my-title">Deadlines</div>
             <QCalendar
               viewMode="week"
               v-bind:events="calendarData"

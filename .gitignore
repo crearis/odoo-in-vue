@@ -14,3 +14,4 @@ docs/hugo/resources
 scratch
 docs/hugo/.hugo_build.lock
 vue-debug
+./yarn.lock
