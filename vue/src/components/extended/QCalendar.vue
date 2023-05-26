@@ -1,11 +1,9 @@
 <template>
-    <div className="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
-
+    <div className="row justify-center" >
+      <div style="display: flex; max-width: 800px; width: 100%; height: 100%;">
 
         <q-calendar-agenda
-          ref="calendar-agenda"
-          enable-outside-days
+          ref="agenda"
           v-if="viewMode == 'day' || viewMode == 'week'"
           v-model="selectedDate"
           :view="viewMode"
@@ -13,8 +11,8 @@
           :day-min-height="100"
           bordered
         >
-          <template #day="{ scope: { timestamp } }">
-            <template v-for="(event, index) in getEventsByDate(timestamp.date)" :key="index">
+          <template #day="{ scope: { timestamp } }" v-if="viewMode == 'day' || viewMode == 'week'" >
+            <template v-for="(event, i) in eventsMap[timestamp.date]" :key="i">
               <div class="col-12 q-px-sm" style="font-size: 10px;">
                 {{event.title}}
               </div>
@@ -23,23 +21,50 @@
         </q-calendar-agenda>
 
 
+        <q-calendar-month
+          ref="calendar"
+          v-if="viewMode == 'month'"
+          v-model="selectedDate"
+          date-type="square"
+          :day-min-height="40"
+          bordered
+        >
+          <template #day="{ scope: { timestamp } }" v-if="viewMode == 'month'">
+            <template
+              v-for="(event, i) in eventsMap[timestamp.date]" :key="i">
+              <div class="col-12 q-px-sm" style="font-size: 10px;">
+                {{event.title}}
+              </div>
+            </template>
+          </template>
+        </q-calendar-month>
+
+
 
       </div>
     </div>
 </template>
 
 <script>
-import {QCalendarAgenda, today} from '@quasar/quasar-ui-qcalendar/src/index.js'
+import {
+  QCalendarAgenda,
+  QCalendarMonth,
+  today,
+  addToDate,
+  parseTimestamp,
+} from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
-import OdooQUtils from '../../mixins/OdooQUtils'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
 import {defineComponent} from 'vue'
+
 
 export default defineComponent({
   name: 'DayFirstDayMonday',
   components: {
-    QCalendarAgenda
+    QCalendarAgenda,
+    QCalendarMonth,
   },
   props: {
     viewMode: {
@@ -62,47 +87,47 @@ export default defineComponent({
   computed: {
     eventsMap () {
       const map = {}
-      this.events.forEach((event) => (map[event.date] = map[event.date] || []).push(event))
+      if (this.events.length > 0) {
+        this.events.forEach(event => {
+          (map[ event.date ] = (map[ event.date ] || [])).push(event)
+          if (event.days !== undefined) {
+            let timestamp = parseTimestamp(event.date)
+            let days = event.days
+            // add a new event for each day
+            // skip 1st one which would have been done above
+            do {
+              timestamp = addToDate(timestamp, { day: 1 })
+              if (!map[ timestamp.date ]) {
+                map[ timestamp.date ] = []
+              }
+              map[ timestamp.date ].push(event)
+              // already accounted for 1st day
+            } while (--days > 1)
+          }
+        })
+      }
+      console.log(map)
       return map
     }
   },
   methods: {
 
-    getEventsByDate (matchDate) {
-      const returns = []
-      const overlaps = []
-      let counter = 0
-      if (typeof this.events === 'object') {
-        this.events.forEach(event => {
-          if (event.date === matchDate) {
-            event.number = counter++
-            returns.push(event)
-          }
-        })
-      }
-      // look for time overlaps
-      for (let i1 = 0; i1 < returns.length; ++i1) {
-        const start1 = Date.parse(returns[i1].date + ' ' + returns[i1].time)
-        const end1 = Math.round(start1 + (returns[i1].duration * 60000))
-        overlaps[i1] = 0
-        for (let i2 = 0; i2 < returns.length; ++i2) {
-          if (i1 !== i2) {
-            const start2 = Date.parse(returns[i2].date + ' ' + returns[i2].time)
-            const end2 = Math.round(start2 + (returns[i2].duration * 60000))
-            if (OdooQUtils.Date.isOverlap(start1, end1, start2, end2)) {
-              overlaps[i1] = overlaps[i1] + 1
-            }
-          }
-        }
-      }
-      overlaps.forEach((o, i) => { returns[i].overlaps = o })
-      return returns
-    },
-
     getSelectedDate () {
       const parts = this.selectedDate.split('-')
       const retval = new Date(parts[0], parts[1] - 1, parts[2])
       return retval
+    },
+
+    getCurrentDisplayComponent() {
+      return this.viewMode == "month" ? this.$refs.calendar : this.$refs.agenda
+    },
+
+    move (amount = 0) {
+      if (amount === 0) {
+        this.selectedDate = today()
+      } else {
+        this.getCurrentDisplayComponent().move(amount)
+      }
     },
 
   }

@@ -36,9 +36,9 @@
     </q-card-section>
 
     <QTable
-      v-if="viewMode === 'list' && tableInitData !== false"
+      v-if="viewMode === 'list'"
+      ref="table"
       title="All Events"
-      v-bind:initData="tableInitData"
       @row-click="taskOpen"
     />
   </q-card>
@@ -64,7 +64,6 @@ export default {
       calendarData: [],
       calendarDataStart: null,
       calendarDataEnd: null,
-      tableInitData: false
     }
   },
   mounted () {
@@ -80,20 +79,23 @@ export default {
     onEventClick (e) {
       this.$router.push('/tasks/record/' + e.res_id + '?returnTo=/calendar')
     },
+
     changeViewMode (mode) {
       // console.log(`pages/calendar.changeView(${mode})`)
       this.viewMode = mode
       if (mode === 'list') {
-        // this.setListData()
-        console.log("Unsupported view mode (list)")
+        this.setListData()
       } else {
         this.setCalendarData(mode)
       }
     },
+
     moveCalendar (change) {
+      console.log("move calendar: " + change)
       this.$refs.calendar.move(change)
       this.setCalendarData()
     },
+
     setCalendarData (mode = this.viewMode) {
       const d = this.$refs.calendar ? this.$refs.calendar.getSelectedDate() : new Date()
       let sow = d // start of week
@@ -104,7 +106,7 @@ export default {
           break
         case 'day':
           this.calendarDataStart = d
-          this.calendarDataEnd = d
+          this.calendarDataEnd = d // todo: add the hours to make this the end of the day (?)
           break
         case 'week':
           sow = date.subtractFromDate(d, { days: date.getDayOfWeek(d) - 1 })
@@ -117,9 +119,11 @@ export default {
         this.calendarDataStart,
         this.calendarDataEnd
       ).then(r => {
+        console.log('calendar data range: ' + this.calendarDataStart + ' - ' + this.calendarDataEnd)
         this.calendarData = r
       })
     },
+
     setListData () {
       Odoo.search_read(
         'project.task',
@@ -128,10 +132,11 @@ export default {
         'date_deadline'
       ).then(r => {
         if (r.data.length) {
-          this.tableInitData = r
+          this.$refs.table.setData(r.data, r.cc)
         }
       })
     },
+
     getDisplayDate () {
       try {
         return date.formatDate(this.$refs.calendar.getSelectedDate(), 'MMMM YYYY')
@@ -139,6 +144,7 @@ export default {
         return ''
       }
     },
+
     taskOpen (e, row) {
       this.$router.push('/tasks/record/' + row.id)
     }

@@ -25,7 +25,7 @@ export default {
     rowKey: {
       type: String,
       default: 'id'
-    },
+    }
   },
 
   data () {
