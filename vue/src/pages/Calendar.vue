@@ -13,7 +13,7 @@
       </q-btn-group>
       <q-space />
       <q-banner>
-        <div v-if="viewMode !== 'list'">{{ getDisplayDate() }}</div>
+        <div v-if="viewMode == 'week'">{{ this.displayDate }}</div>
       </q-banner>
       <q-space />
       <q-btn-group v-if="viewMode !== 'list'">
@@ -32,6 +32,7 @@
         v-bind:viewMode="viewMode"
         v-bind:events="calendarData"
         @event-click="onEventClick"
+        @change="setCalendarData"
         />
     </q-card-section>
 
@@ -75,53 +76,51 @@ export default {
       this.changeViewMode('month')
     })
   },
+  computed: {
+    displayDate() {
+      return date.formatDate(this.calendarDataStart, 'YYYY-MM-DD') + ' to ' +
+            date.formatDate(this.calendarDataEnd, 'YYYY-MM-DD')
+    }
+  },
   methods: {
     onEventClick (e) {
       this.$router.push('/tasks/record/' + e.res_id + '?returnTo=/calendar')
     },
 
     changeViewMode (mode) {
-      // console.log(`pages/calendar.changeView(${mode})`)
       this.viewMode = mode
       if (mode === 'list') {
         this.setListData()
       } else {
-        this.setCalendarData(mode)
+        this.setCalendarData()
       }
     },
 
     moveCalendar (change) {
-      console.log("move calendar: " + change)
       this.$refs.calendar.move(change)
-      this.setCalendarData()
     },
 
-    setCalendarData (mode = this.viewMode) {
-      const d = this.$refs.calendar ? this.$refs.calendar.getSelectedDate() : new Date()
-      let sow = d // start of week
-      switch (mode) {
-        case 'month':
-          this.calendarDataStart = date.startOfDate(d, 'month')
-          this.calendarDataEnd = date.endOfDate(d, 'month')
-          break
-        case 'day':
-          this.calendarDataStart = d
-          this.calendarDataEnd = d // todo: add the hours to make this the end of the day (?)
-          break
-        case 'week':
-          sow = date.subtractFromDate(d, { days: date.getDayOfWeek(d) - 1 })
-          sow = new Date(sow.getFullYear(), sow.getMonth(), sow.getDate())
-          this.calendarDataStart = sow
-          this.calendarDataEnd = date.addToDate(sow, { days: 6 })
-          break
+    setCalendarData (range) {
+      if (range) {
+        let start = date.extractDate(range.start, 'YYYY-MM-DD')
+        let end = date.extractDate(range.end, 'YYYY-MM-DD')
+        if (this.calendarDataStart != start && this.calendarDataEnd != end) {
+          this.calendarDataStart = start
+          this.calendarDataEnd = end
+          Odoo.getTaskEventData(start, end).then(r => {
+            this.calendarData = r
+            if (this.calendarData.length) {
+              this.calendarData.forEach(function(i) {
+                i.date = date.extractDate(i.date, "YYYY-MM-DD")
+                // bug fix for backend time format issue (minutes only might only have 1 number)
+                if (i.time) {
+                  if (i.time.split(":")[1].length < 2) { i.time = i.time + "0" }
+                }
+              }) // end bug fix
+            }
+          })
+        }
       }
-      Odoo.getTaskEventData(
-        this.calendarDataStart,
-        this.calendarDataEnd
-      ).then(r => {
-        console.log('calendar data range: ' + this.calendarDataStart + ' - ' + this.calendarDataEnd)
-        this.calendarData = r
-      })
     },
 
     setListData () {
@@ -135,14 +134,6 @@ export default {
           this.$refs.table.setData(r.data, r.cc)
         }
       })
-    },
-
-    getDisplayDate () {
-      try {
-        return date.formatDate(this.$refs.calendar.getSelectedDate(), 'MMMM YYYY')
-      } catch {
-        return ''
-      }
     },
 
     taskOpen (e, row) {
