@@ -65,7 +65,8 @@ export default {
     },
     widget: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     mask: {
       type: String,
@@ -88,7 +89,6 @@ export default {
     formMode () { return this.getOdooForm().click.event },
     editing () { return ['create', 'edit'].includes(this.formMode) && !this.schema.readOnly },
     changed () { return this.formValue === this.rawValue },
-    // float2Time () {},
   },
   created () {
     let record = this.getOdooForm().record
@@ -101,11 +101,10 @@ export default {
       this.rawValue = this.formValue = 0
     } else if (this.schema.type === 'char' && this.rawValue === false) {
       this.rawValue = this.formValue = ''
+    } else if (this.widget === 'float_time' && this.rawValue){
+      this.formValue = OdooQUtils.Time.float2Display(this.rawValue)
     }
-    console.log("field", this.name)
-    console.log("schema", JSON.stringify(this.schema))
-    console.log("formValue", JSON.stringify(this.formValue))
-    console.log("rawValue", JSON.stringify(this.rawValue))
+
   },
   methods: {
     getOdooForm () {

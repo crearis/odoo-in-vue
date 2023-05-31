@@ -55,6 +55,35 @@ export default {
   },
 
   /*
+  Time functions.
+  - Odoo can store time as float which allows using float_time widget (https://www.google.com/search?q=odoo+float_time)
+   */
+  Time: {
+    float2Display(val) {
+      try {
+        let hr = Math.floor(val)
+        if (hr > 23) { hr = 23 }
+        hr = hr.toString()
+        let mn = Math.round(((val % 1).toFixed(2) * 100) * 0.6).toString().padStart(2, "0")
+        return hr + ":" + mn
+      } catch {
+        return "0:00"
+      }
+    },
+    toFloat(val) {
+      try {
+        let hr = parseInt(val.toString())
+        if (hr > 23) { hr = 23 }    // 23 hours is the max
+        let mn = ((parseFloat(val) % 1).toFixed(2) / 60 * 100).toFixed(2)
+        if (mn > 0.98) { mn = 0.98 }  // 59 minutes is the max
+        return hr + mn
+      } catch {
+        return 0
+      }
+    }
+  },
+
+  /*
   Creates a cache ID for a set of field data from ir_model_fields that we store in store.
   Format: <model-name>/<fields-count>-<fields-hash (number)>
    */
