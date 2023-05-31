@@ -11,6 +11,7 @@ const routes = [
       { path: '/calendar', component: () => import('pages/Calendar.vue') },
       { path: '/debug', component: () => import('pages/Debug.vue') },
       { path: '/scratch', component: () => import('pages/ScratchPage.vue') },
+      { path: '/:model/record/:res_id', component: () => import('pages/Forms.vue') },
     ]
   },
 

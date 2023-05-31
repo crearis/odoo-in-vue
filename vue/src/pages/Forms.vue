@@ -1,16 +1,16 @@
 <template>
-  <Dialog ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable" :title="title">
+  <FormModal ref="dialogComp" @dialogClosed="onDialogClosed" v-if="!noFormAvailable" :title="title">
 
       <Contact v-if="$route.params.model === 'contacts'" @title="onTitle"/>
       <Project v-if="$route.params.model === 'projects'" @title="onTitle"/>
       <Task v-if="$route.params.model === 'tasks'" @title="onTitle"/>
       <!-- register more forms here as needed, from src/components/forms -->
 
-  </Dialog>
+  </FormModal>
 </template>
 
 <script>
-import Dialog from 'components/extended/Dialog.vue'
+import FormModal from 'components/extended/FormModal.vue'
 import Project from 'components/myforms/Project.vue'
 import Contact from 'components/myforms/Contact.vue'
 import Task from 'components/myforms/Task.vue'
@@ -19,7 +19,7 @@ import Task from 'components/myforms/Task.vue'
 export default {
   name: 'PageForms',
   components: {
-    Dialog,
+    FormModal,
     Contact,
     Project,
     Task

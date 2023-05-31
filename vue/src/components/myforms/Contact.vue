@@ -3,15 +3,15 @@
     <q-card class="row">
 
       <q-card-section class="fit">
-        <field name="name" style="font-weight: bold"/>
-        <field name="parent_id"/>
+        <OdooField name="name" style="font-weight: bold"/>
+        <OdooField name="parent_id"/>
       </q-card-section>
 
       <q-card-section>
-        <field name="type"/>
-        <field name="street"/>
-        <field name="city"/>
-        <field name="zip"/>
+        <OdooField name="type"/>
+        <OdooField name="street"/>
+        <OdooField name="city"/>
+        <OdooField name="zip"/>
       </q-card-section>
 
     </q-card>
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     onFormClick (e) {
-      console.log('OdooProjectForm.onFormClick', e)
+      // console.log('OdooProjectForm.onFormClick', e)
     }
   }
 }

@@ -1,14 +1,14 @@
 import Odoo from 'src/mixins/Odoo'
 import OdooBaseData from './OdooBaseData'
 import OdooForm from '../odoo/OdooForm'
-import field from './OdooField'
+import OdooField from './OdooField'
 
 export default {
   name: 'OdooBaseForm',
   extends: OdooBaseData,
   components: {
     OdooForm,
-    field
+    OdooField
   },
   data () {
     return {

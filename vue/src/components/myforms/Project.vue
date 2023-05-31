@@ -3,14 +3,14 @@
     <q-card class="row">
 
       <q-card-section class="fit">
-        <field name="name" style="font-weight: bold"/>
-        <field name="partner_id"/>
-        <field name="label_tasks"/>
+        <OdooField name="name" style="font-weight: bold"/>
+        <OdooField name="partner_id"/>
+        <OdooField name="label_tasks"/>
       </q-card-section>
 
       <q-card-section>
-        <field name="user_id"/>
-        <field name="privacy_visibility"/>
+        <OdooField name="user_id"/>
+        <OdooField name="privacy_visibility"/>
       </q-card-section>
 
     </q-card>
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     onFormClick (e) {
-      console.log('OdooProjectForm.onFormClick', e)
+      // console.log('OdooProjectForm.onFormClick', e)
     }
   }
 }

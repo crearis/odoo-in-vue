@@ -1,5 +1,5 @@
 <template>
-  <div class="flex row q-mb-sm" v-if="record !== false">
+  <div class="flex row q-mb-sm" v-if="schema !== false">
     <!-- field label -->
     <q-badge :label="schema.label" color="white" text-color="black" style="min-width: 150px">
       <q-tooltip>{{schema.help}}</q-tooltip>
@@ -16,8 +16,8 @@
     />
 
     <!-- date -->
-    <q-input v-if="schema.type === 'date'" outlined dense v-model="formValue" mask="date"
-             :rules="schema.required ? ['date'] : ''" :readonly="!editing || schema.readonly" :disable="!editing">
+    <q-input v-if="schema.type === 'date'" outlined dense v-model="formValue" mask="date" :disable="!editing"
+             :rules="schema.required || [] ? ['date'] : ''" :readonly="!editing || schema.readonly">
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -28,8 +28,8 @@
     </q-input>
 
     <!-- time -->
-    <q-input v-if="widget === 'float_time'" outlined dense v-model="formValue" mask="time"
-             :rules="schema.required ? ['time'] : ''" :readonly="!editing || schema.readonly" :disable="!editing">
+    <q-input v-if="widget === 'float_time'" outlined dense v-model="formValue" mask="time" :disable="!editing"
+             :rules="schema.required || [] ? ['time'] : ''" :readonly="!editing || schema.readonly">
       <template v-slot:append>
         <q-icon name="access_time" class="cursor-pointer">
           <q-popup-proxy ref="qTimeProxy" transition-show="scale" transition-hide="scale">
@@ -77,41 +77,35 @@ export default {
     return {
       options: [],
       formValue: '',
-      record: false,
+      rawValue: '',
       schema: false
     }
   },
-  watch: {
-    formValue () { console.log('field `', this.name, '` set to', this.formValue) }
-  },
+  // watch: {
+  //   formValue () { console.log('field `', this.name, '` set to', this.formValue) }
+  // },
   computed: {
     formMode () { return this.getOdooForm().click.event },
-    recordValue () {
-      // select widget:
-      if (['many2one', 'selection'].includes(this.schema.type)) {
-        return { label: this.record.data[0][this.name][1], value: this.record.data[0][this.name][0] }
-      }
-      if (this.schema.type === 'float' && !this.record.data[0][this.name]) {
-        return ''
-      }
-      return this.record.data[0][this.name]
-    },
     editing () { return ['create', 'edit'].includes(this.formMode) && !this.schema.readOnly },
-    changed () { return this.formValue === this.recordValue }
+    changed () { return this.formValue === this.rawValue },
+    // float2Time () {},
   },
   created () {
-    this.record = this.getOdooForm().record
-    for (let i = 0; i < this.record.cc.length; ++i) {
-      if (this.record.cc[i].name === this.name) { // set the schema for this field based on its name
-        this.schema = this.record.cc[i]
-        if (['many2one', 'selection'].includes(this.schema.type)) {
-          this.setQSelectionData()
-        } else {
-          this.formValue = this.recordValue
-        }
-        break
-      }
+    let record = this.getOdooForm().record
+    this.formValue = this.rawValue = record.data[0][this.name]
+    this.schema = record.cc.filter(f => { return f.name === this.name })[0] // cc == column config
+    // adjust formValue for special fields according to field type
+    if (['many2one', 'selection'].includes(this.schema.type)) {
+      this.setQSelectionData()
+    } else if (this.schema.type === 'float' && !this.rawValue) {
+      this.rawValue = this.formValue = 0
+    } else if (this.schema.type === 'char' && this.rawValue === false) {
+      this.rawValue = this.formValue = ''
     }
+    console.log("field", this.name)
+    console.log("schema", JSON.stringify(this.schema))
+    console.log("formValue", JSON.stringify(this.formValue))
+    console.log("rawValue", JSON.stringify(this.rawValue))
   },
   methods: {
     getOdooForm () {
@@ -129,21 +123,20 @@ export default {
       if (this.schema.type === 'selection') {
         OdooQUtils.fieldSelectionOptions(this.schema.fieldId).then(r => {
           this.options = r
-          // For 'selection' Odoo gives data as a primitive value. It MUST be change to an array like a 'many2one' field
+          // For 'selection' Odoo gives data as a primitive value. It MUST be changed to an array like a 'many2one' field
           // That way, we have just one paradigm here to handle both in the same type of component
-          // The promise MUST resolve first, then we can set this.record.data[0][this.name] and recordValue works right
-          for (let i = 0; i < r.length; ++i) {
-            if (r[i].value === this.record.data[0][this.name]) { // (this.record.data[0][this.name] gives the record value)
-              this.record.data[0][this.name] = [r[i].value, r[i].label] // here we make it resemble a many2one value
-              this.formValue = this.recordValue // now we can set the formValue
-              break
+          // The promise MUST resolve first, then we can set this.rawValue and recordValue works right
+          r.forEach(i => {
+            if (i.value === this.rawValue) { // (this.rawValue gives the record value)
+              this.rawValue = [i.value, i.label] // here we make it resembles a many2one value
+              this.formValue = this.rawValue[1] // now we can set the formValue
             }
-          }
+          })
         })
       } else if (this.schema.type === 'many2one') {
         // for 'many2one' the recordValue is already an object and we don't need to know the options
         // (formValue does not depend on the promise)
-        this.formValue = this.recordValue
+        this.formValue = this.rawValue[1]
         OdooQUtils.fieldRelationOptions(this.schema.relation).then(r => { this.options = r })
       }
     }

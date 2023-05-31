@@ -3,18 +3,18 @@
     <q-card class="row">
 
       <q-card-section class="fit">
-        <field name="name" style="font-weight: bold"/>
-        <field name="priority"/>
-        <field name="kanban_state"/>
+        <OdooField name="name" style="font-weight: bold"/>
+        <OdooField name="priority"/>
+        <OdooField name="kanban_state"/>
       </q-card-section>
 
       <q-card-section>
-        <field name="project_id"/>
-        <field name="user_id"/>
-        <field name="date_deadline"/>
-        <field name="time_deadline" widget="float_time"/>
-        <field name="duration_deadline" widget="float_duration"/>
-        <field name="tag_ids"/>
+        <OdooField name="project_id"/>
+        <OdooField name="user_id"/>
+        <OdooField name="date_deadline"/>
+        <OdooField name="time_deadline" widget="float_time"/>
+        <OdooField name="duration_deadline" widget="float_duration"/>
+        <OdooField name="tag_ids"/>
       </q-card-section>
 
     </q-card>
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     onFormClick (e) {
-      console.log('OdooContactForm.onFormClick', e)
+      // console.log('OdooContactForm.onFormClick', e)
     }
   }
 }

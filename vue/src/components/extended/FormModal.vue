@@ -25,6 +25,7 @@
 
 <script>
 export default {
+  name: "FormModal",
   data () {
     return {
       showDialog: true
