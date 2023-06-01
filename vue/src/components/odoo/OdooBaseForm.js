@@ -13,9 +13,7 @@ export default {
   data () {
     return {
       title: '(set the "title"!)',
-      domain: [['id', '=', this.$route.params.res_id]], // to filter to one record
       click: {},
-      form: false
     }
   },
   watch: {
@@ -23,6 +21,7 @@ export default {
   },
   methods: {
     read () {
+      console.log("domain", this.domain)
       return Odoo.search_read(this.model, this.domain, this.fields, '', 1, this.context, true)
         .then(r => {
           if (r === []) {

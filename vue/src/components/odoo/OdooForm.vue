@@ -102,7 +102,7 @@ export default {
       bannerColor: '',
       bannerIcon: '',
       click: {},
-      record: false
+      form: false,
     }
   },
   props: {
@@ -114,6 +114,7 @@ export default {
   },
   watch: {
     record () {
+      console.log("watch: record")
       if (this.record.message) {
         const { text, type } = this.record.message
         this.showBannerText(text, type)
@@ -121,7 +122,8 @@ export default {
     }
   },
   created () {
-    this.record = this.getOdooForm().record
+    this.form = this.getOdooForm()
+    this.record = this.form.record
   },
   methods: {
     onClick (btn, params = {}) {
@@ -137,8 +139,26 @@ export default {
       } else if (btn === 'next' || btn === 'previous') {
         this.hideBtnSave = true
         this.hideBtnCreate = this.hideBtnEdit = false
+        this.navigatePrevOrNext(btn)
       }
     },
+
+    navigatePrevOrNext (direction) {
+      let resId = 0
+      try {
+        resId = parseInt(this.$route.params.res_id)
+      } catch {
+        console.log("#/nothing-here") // todo: improve
+      }
+      resId = Math.abs(direction === 'next' ? resId + 1 : resId - 1)
+      resId = resId === 0 ? 1 : resId
+      let path = "/" + this.$route.params.model + "/record/" + resId
+      this.$router.push(path)
+      this.form.domain = [['id', '=', resId]]
+      this.form.record = this.record = this.form.read()
+      console.log("record", this.form.record)
+    },
+
     getOdooForm () {
       let component = null
       let parent = this.$parent
@@ -150,6 +170,7 @@ export default {
       }
       return component
     },
+
     showBannerText (text, type) {
       if (text) {
         this.bannerText = text
