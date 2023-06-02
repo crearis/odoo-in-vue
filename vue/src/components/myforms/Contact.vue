@@ -1,5 +1,5 @@
 <template>
-  <OdooForm v-if="record || $route.params.id === '0'" @click="onFormClick">
+  <OdooFormFrame v-if="record || $route.params.id === '0'" @click="onFormClick">
     <q-card class="row">
 
       <q-card-section class="fit">
@@ -15,7 +15,7 @@
       </q-card-section>
 
     </q-card>
-  </OdooForm>
+  </OdooFormFrame>
 </template>
 
 <script>

@@ -79,45 +79,62 @@ export default {
       options: [],
       formValue: '',
       rawValue: '',
-      schema: false
+      schema: false,
+      odooForm: {} // we need a pointer to the parent form to know its state: i.e. edit / create etc
     }
   },
-  // watch: {
-  //   formValue () { console.log('field `', this.name, '` set to', this.formValue) }
-  // },
+
   computed: {
-    formMode () { return this.getOdooForm().click.event },
+    formMode () { return this.odooForm.click.event },
     editing () { return ['create', 'edit'].includes(this.formMode) && !this.schema.readOnly },
     changed () { return this.formValue === this.rawValue },
   },
-  created () {
-    let record = this.getOdooForm().record
-    this.formValue = this.rawValue = record.data[0][this.name]
-    this.schema = record.cc.filter(f => { return f.name === this.name })[0] // cc == column config
-    // adjust formValue for special fields according to field type
-    if (['many2one', 'selection'].includes(this.schema.type)) {
-      this.setQSelectionData()
-    } else if (this.schema.type === 'float' && !this.rawValue) {
-      this.rawValue = this.formValue = 0
-    } else if (this.schema.type === 'char' && this.rawValue === false) {
-      this.rawValue = this.formValue = ''
-    } else if (this.widget === 'float_time' && this.rawValue){
-      this.formValue = OdooQUtils.Time.float2Display(this.rawValue)
-    }
 
+  created () {
+    this.odooForm = this.getOdooForm()
+    let odooRecord = this.getOdooRecord()
+    if (odooRecord) {
+      this.formValue = this.rawValue = odooRecord.data[0][this.name]
+      this.schema = odooRecord.cc.filter(f => { return f.name === this.name })[0] // cc == column config
+      // adjust formValue for special fields according to field type
+      if (['many2one', 'selection'].includes(this.schema.type)) {
+        this.setQSelectionData()
+      } else if (this.schema.type === 'float' && !this.rawValue) {
+        this.rawValue = this.formValue = 0
+      } else if (this.schema.type === 'char' && this.rawValue === false) {
+        this.rawValue = this.formValue = ''
+      } else if (this.widget === 'float_time' && this.rawValue){
+        this.formValue = OdooQUtils.Time.float2Display(this.rawValue)
+      }
+    }
   },
+
   methods: {
-    getOdooForm () {
-      let component = null
+
+    getOdooRecord () {
       let parent = this.$parent
-      while (parent && !component) {
-        if (parent.$options.name === 'OdooForm') {
-          component = parent
+      while (parent) {
+        if (parent.$options.extends !== undefined) {
+          if (parent.$options.extends.name === 'OdooBaseForm') {
+            return parent.$data.record
+          }
         }
         parent = parent.$parent
       }
-      return component
+      return false
     },
+
+    getOdooForm () {
+      let parent = this.$parent
+      while (parent) {
+        if (parent.$options.name === 'OdooFormFrame') {
+          return parent
+        }
+        parent = parent.$parent
+      }
+      console.log('OdooField failed to get reference to parent OdooFormFrame!')
+    },
+
     setQSelectionData () {
       if (this.schema.type === 'selection') {
         OdooQUtils.fieldSelectionOptions(this.schema.fieldId).then(r => {

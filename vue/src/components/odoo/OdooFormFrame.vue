@@ -88,7 +88,7 @@
 import Odoo from 'src/mixins/Odoo'
 
 export default {
-  name: 'OdooForm',
+  name: 'OdooFormFrame',
   data () {
     return {
       btnEdit: true,
@@ -102,7 +102,6 @@ export default {
       bannerColor: '',
       bannerIcon: '',
       click: {},
-      form: false,
     }
   },
   props: {
@@ -110,21 +109,23 @@ export default {
       type: [Array, Boolean],
       required: false,
       default: false
+    },
+    recordMessage: {
+      type: [String, String],
+      required: false,
+      default: ''
     }
   },
+
   watch: {
     record () {
-      console.log("watch: record")
-      if (this.record.message) {
-        const { text, type } = this.record.message
+      if (this.recordMessage) {
+        const { text, type } = this.recordMessage
         this.showBannerText(text, type)
       }
     }
   },
-  created () {
-    this.form = this.getOdooForm()
-    this.record = this.form.record
-  },
+
   methods: {
     onClick (btn, params = {}) {
       this.click = { event: btn, args: params === {} ? params : false }
@@ -139,36 +140,17 @@ export default {
       } else if (btn === 'next' || btn === 'previous') {
         this.hideBtnSave = true
         this.hideBtnCreate = this.hideBtnEdit = false
-        this.navigatePrevOrNext(btn)
+        this.$emit('gotoResId', [this.nextResId()])
       }
     },
 
-    navigatePrevOrNext (direction) {
+    nextResId (direction) {
       let resId = 0
       try {
         resId = parseInt(this.$route.params.res_id)
-      } catch {
-        console.log("#/nothing-here") // todo: improve
-      }
+      } catch { }
       resId = Math.abs(direction === 'next' ? resId + 1 : resId - 1)
-      resId = resId === 0 ? 1 : resId
-      let path = "/" + this.$route.params.model + "/record/" + resId
-      this.$router.push(path)
-      this.form.domain = [['id', '=', resId]]
-      this.form.record = this.record = this.form.read()
-      console.log("record", this.form.record)
-    },
-
-    getOdooForm () {
-      let component = null
-      let parent = this.$parent
-      while (parent && !component) {
-        if (parent.$options.name.toLowerCase().startsWith('odooform_')) {
-          component = parent
-        }
-        parent = parent.$parent
-      }
-      return component
+      return resId === 0 ? 1 : resId
     },
 
     showBannerText (text, type) {
