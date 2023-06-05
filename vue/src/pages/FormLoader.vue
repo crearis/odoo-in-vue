@@ -1,12 +1,11 @@
 <template>
-  <q-dialog v-model="showDialog" full-width full-height>
     <q-card class="fit full-width">
       <div class="row no-wrap justify-between">
-        <div class="q-pt-md q-pl-sm q-pr-md q-pb-none q-mb-none">
+        <div class="q-pt-md q-pl-sm text-h5">
           {{ title }}
         </div>
-        <div>
-          <q-btn @click="closeDialog"
+        <div class="q-pa-sm">
+          <q-btn @click="closeForm"
                  icon="close"
                  color="negative"
                  size="sm"
@@ -15,12 +14,11 @@
         </div>
       </div>
       <q-card-section class="q-pl-xs q-pr-xs" data="div-slot-start">
-        <Contact v-if="$route.params.model === 'contacts'" @title="onTitle"/>
-        <Project v-if="$route.params.model === 'projects'" @title="onTitle"/>
-        <Task v-if="$route.params.model === 'tasks'" @title="onTitle"/>
+        <Contact v-if="$route.params.model === 'contacts'" :key="$route.params.res_id" @title="onTitle"/>
+        <Project v-if="$route.params.model === 'projects'" :key="$route.params.res_id" @title="onTitle"/>
+        <Task v-if="$route.params.model === 'tasks'" :key="$route.params.res_id" @title="onTitle"/>
       </q-card-section>
     </q-card>
-  </q-dialog>
 </template>
 
 <script>
@@ -38,16 +36,13 @@ export default {
   },
   data () {
     return {
-      showDialog: true,
       availableForms: ['projects', 'tasks', 'contacts'],
       noFormAvailable: false,
       title: ''
     }
   },
   methods: {
-    closeDialog () {
-      console.log('closeDialog')
-      this.showDialog = false
+    closeForm () {
       if (this.$route.query.returnTo) {
         this.$router.push(this.$route.query.returnTo.toString())
         return

@@ -55,11 +55,12 @@
           </q-btn-group>
           <q-space/>
           <q-space/>
-          <span class="q-pl-xs q-pr-sm">Rec #{{$route.params.res_id}}</span>
-          <q-btn-group>
-            <q-btn @click="onClick('previous')" icon="chevron_left" class="btn-divider-right"></q-btn>
-            <q-btn @click="onClick('next')" icon="chevron_right"></q-btn>
+          <q-btn-group v-if="btnEdit && !hideBtnEdit">
+            <q-btn @click="onClick('previous')" icon="chevron_left" class="btn-divider-right"/>
+            <q-btn @click="onClick('next')" icon="chevron_right"/>
           </q-btn-group>
+          <q-space/>
+          <span class="q-pl-xs q-pr-sm">Rec #{{$route.params.res_id}}</span>
         </q-card-actions>
         <div v-if="showRibbon" class="form-header-bottom-border">
           <div class="q-ml-sm">
@@ -140,7 +141,7 @@ export default {
       } else if (btn === 'next' || btn === 'previous') {
         this.hideBtnSave = true
         this.hideBtnCreate = this.hideBtnEdit = false
-        this.$emit('gotoResId', [this.nextResId()])
+        this.$router.push({name: 'record', params: { model: this.$route.params.model, res_id: this.nextResId(btn) }})
       }
     },
 

@@ -8,10 +8,10 @@ const routes = [
       { path: '/contacts', component: () => import('pages/Contacts.vue') },
       { path: '/projects', component: () => import('pages/Projects.vue') },
       { path: '/tasks', component: () => import('pages/Tasks.vue') },
+      { path: '/:model/record/:res_id(\\d+)', component: () => import('pages/FormLoader.vue'), name: 'record' },
       { path: '/calendar', component: () => import('pages/Calendar.vue') },
       { path: '/debug', component: () => import('pages/Debug.vue') },
       { path: '/scratch', component: () => import('pages/ScratchPage.vue') },
-      { path: '/:model/record/:res_id(\\d+)', component: () => import('pages/FormLoader.vue') },
     ]
   },
 
