@@ -17,7 +17,7 @@ export default {
     }
   },
   watch: {
-    title () { this.$emit('title', this.title) }
+    title () { this.$emit('title', this.title) },
   },
   methods: {
     read () {
@@ -27,6 +27,9 @@ export default {
         .then(r => {
           if (r === []) {
             this.setRecordMessage('Failed to read the record', Odoo.CONST.BANNER_TYPE_FAIL)
+            return false
+          } else if (r.data.length === 0) {
+            this.setRecordMessage('No record to show', Odoo.CONST.BANNER_TYPE_INFO)
             return false
           }
           this.record = r

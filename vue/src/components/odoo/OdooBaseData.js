@@ -14,7 +14,8 @@ export default {
       record: false,
       canRead: false,
       canWrite: false,
-      canDelete: false
+      canDelete: false,
+      recordMessage: '',
     }
   },
   mounted () {
@@ -39,11 +40,7 @@ export default {
   },
   methods: {
     setRecordMessage (text, CONST_BANNER_TYPE = '') {
-      // first reset the message
-      this.record.message = []
-      // then set it according to type
-      this.record.message = { text: text, type: CONST_BANNER_TYPE }
-      // now there will always be only one message type
+      this.recordMessage = CONST_BANNER_TYPE + ": " + text
     }
   }
 }

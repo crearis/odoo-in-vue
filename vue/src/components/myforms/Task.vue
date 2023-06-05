@@ -1,6 +1,6 @@
 <template>
-  <OdooFormFrame v-if="record || $route.params.id === '0'" @click="onFormClick">
-    <q-card class="row">
+  <OdooFormFrame v-if="record.data || recordMessage" :key="$route.params.res_id">
+    <q-card v-if="record.data" class="row">
 
       <q-card-section class="fit">
         <OdooField name="name" style="font-weight: bold"/>
@@ -35,11 +35,6 @@ export default {
       'duration_deadline', 'tag_ids', 'priority', 'kanban_state'
     ]
     this.read()
-  },
-  methods: {
-    onFormClick (e) {
-      // console.log('OdooContactForm.onFormClick', e)
-    }
   }
 }
 </script>

@@ -93,7 +93,7 @@ export default {
   created () {
     this.odooForm = this.getOdooForm()
     let odooRecord = this.getOdooRecord()
-    if (odooRecord) {
+    if (odooRecord.data.length) { // if the record has data then extract the data
       this.formValue = this.rawValue = odooRecord.data[0][this.name]
       this.schema = odooRecord.cc.filter(f => { return f.name === this.name })[0] // cc == column config
       // adjust formValue for special fields according to field type

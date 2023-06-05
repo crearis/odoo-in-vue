@@ -16,7 +16,7 @@
 
       <slot name="header">
         <q-card-actions class="q-ma-none form-header-bottom-border q-mb-lg">
-          <q-btn-group>
+          <q-btn-group v-if="hasData">
             <q-btn
               push
               color="primary"
@@ -72,7 +72,7 @@
       </slot>
     </div>
 
-    <!-- form body slot -->
+    <!-- form body slot where we place the fields (OdooField components) -->
     <div class="q-ma-none q-pa-none fit">
       <slot></slot>
     </div>
@@ -110,20 +110,22 @@ export default {
       type: [Array, Boolean],
       required: false,
       default: false
-    },
-    recordMessage: {
-      type: [String, String],
-      required: false,
-      default: ''
     }
   },
 
-  watch: {
-    record () {
-      if (this.recordMessage) {
-        const { text, type } = this.recordMessage
-        this.showBannerText(text, type)
+  computed: {
+    hasData () {
+      if (this.$parent.record) {
+        return this.$parent.record.data
       }
+      return false
+    }
+  },
+
+  mounted() {
+    if (this.$parent.recordMessage) {
+      let m = this.$parent.recordMessage.split(":")
+      this.showBannerText(m[1], m[0])
     }
   },
 
@@ -155,6 +157,7 @@ export default {
     },
 
     showBannerText (text, type) {
+      console.log(text)
       if (text) {
         this.bannerText = text
         switch (type) {
@@ -165,7 +168,8 @@ export default {
           default: this.bannerColor = 'grey-5'; this.bannerIcon = 'info'; break
         }
       }
-    }
+    },
+
   }
 }
 </script>
